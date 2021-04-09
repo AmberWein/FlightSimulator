@@ -9,6 +9,6 @@
       Title="FlightSimulatorView">
 
     <Grid>
-        
+        <TextBlock Text="page2" FontSize="50"/>
     </Grid>
 </Page>

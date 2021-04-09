@@ -20,7 +20,7 @@
                            VerticalAlignment="Center" Grid.Row="1" Margin="0,0,0,0" Grid.Column="2"/>
         <Button x:Name="startButton" Grid.Row="3" Content=" Start Simulator " VerticalAlignment="Top" HorizontalAlignment="Center" Margin="345,34.4,360,0" FontWeight="Bold"
                     IsEnabled="False" Click="startButton_Click"/>
-        <TextBox x:Name="pathBox" Grid.Row="2" DataContext="SetViewModel" Text="{Binding VM_Path, Mode=TwoWay}" FontSize="14" Height="30" Margin="0,0,0,0" HorizontalAlignment="Center" Width="300" BorderBrush="Black" BorderThickness="2"
+        <TextBox x:Name="pathBox" Grid.Row="2" DataContext="SetViewModel" Text="{Binding VM_CsvPath, Mode=TwoWay}" FontSize="14" Height="30" Margin="0,0,0,0" HorizontalAlignment="Center" Width="300" BorderBrush="Black" BorderThickness="2"
                      GotFocus="pathBox_GotFocus" TextChanged="pathBox_TextChanged" Grid.Column="2" />
         <TextBlock x:Name="invalidMessage" Text="path is invalid" Foreground="red" Margin="355,5.4,-355,44.6" Grid.Row="3" Visibility="Hidden"/>
     </Grid>
