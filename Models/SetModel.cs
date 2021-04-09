@@ -19,7 +19,7 @@ namespace FlightSimulator.Models
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-
+        // IsetModel
         private ArrayList headersList;
         public ArrayList HeadersList
         {
@@ -42,6 +42,8 @@ namespace FlightSimulator.Models
             }
             set
             {
+                // maybe should check if value = null?
+                // maybe parsing shouldnt be here, and if not, we should hold also lines.
                 if (FileParser.IsValidPath(value)) { 
                     csvPath = value;
                     NotifyPropertyChanged("CsvPath");
@@ -50,6 +52,7 @@ namespace FlightSimulator.Models
                         CSVParser csvParser = new CSVParser(csvPath, HeadersList);
                         csvParser.Parse();
                         DataMap = csvParser.Map;
+                        DataLines = csvParser.Lines;
                     }  
                 }
             }
@@ -65,9 +68,12 @@ namespace FlightSimulator.Models
             {
                 dataMap = value;
                 NotifyPropertyChanged("DataMap");
-
             }
         }
+        
+        private ArrayList dataLines;
+        public ArrayList DataLines { get {return dataLines;} set{dataLines = value; NotifyPropertyChanged("DataLines");/* should only occur once. do we need to notify anyone?*/}}
+
         public SetModel()
         {
             csvPath = null;

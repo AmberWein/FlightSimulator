@@ -27,6 +27,7 @@ namespace FlightSimulator.Views
         private SetViewModel vm;
         private bool isValidPath;
         private bool isFirstChange;
+        // constructor
         public SetView()
         {
             InitializeComponent();

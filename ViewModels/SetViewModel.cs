@@ -26,6 +26,7 @@ namespace FlightSimulator.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+        
         public string VM_CsvPath
         {
             get
@@ -37,7 +38,8 @@ namespace FlightSimulator.ViewModels
                 model.CsvPath = value;
             }
         }
-        public Dictionary<string, ArrayList> VM_DataMap
+        public Dictionary<string, ArrayList> VM_DataMap //might not be beeded here at all. depends where connection to Simulator happens(model or VM)
+            // if we keep then add CM_DataLines
         {
             get
             {
