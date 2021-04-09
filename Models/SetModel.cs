@@ -42,14 +42,16 @@ namespace FlightSimulator.Models
             }
             set
             {
-                csvPath = value;
-                NotifyPropertyChanged("CsvPath");
-                if (csvPath != null)
-                {
-                    CSVParser csvParser = new CSVParser(csvPath, HeadersList);
-                    csvParser.Parse();
-                    DataMap = csvParser.Map;
-                }  
+                if (FileParser.IsValidPath(value)) { 
+                    csvPath = value;
+                    NotifyPropertyChanged("CsvPath");
+                    if (csvPath != null)
+                    {
+                        CSVParser csvParser = new CSVParser(csvPath, HeadersList);
+                        csvParser.Parse();
+                        DataMap = csvParser.Map;
+                    }  
+                }
             }
         }
         private Dictionary<string, ArrayList> dataMap;
