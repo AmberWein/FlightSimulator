@@ -9,6 +9,19 @@
       Title="SetView">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="134*"/>
+            <RowDefinition Height="336*"/>
+            <RowDefinition Height="85*"/>
+            <RowDefinition Height="221*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Welcome to the Flight Simulator" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" Grid.Row="0" Margin="0,0,0,0" Grid.Column="2"/>
+        <TextBlock Text="explanation...........&#x0a; to begin please enter path to csv flight data" FontSize="20" HorizontalAlignment="Center"
+                           VerticalAlignment="Center" Grid.Row="1" Margin="0,0,0,0" Grid.Column="2"/>
+        <Button x:Name="startButton" Grid.Row="3" Content=" Start Simulator " VerticalAlignment="Top" HorizontalAlignment="Center" Margin="345,34.4,360,0" FontWeight="Bold"
+                    IsEnabled="False" Click="startButton_Click"/>
+        <TextBox x:Name="pathBox" Grid.Row="2" DataContext="SetViewModel" Text="{Binding VM_Path, Mode=TwoWay}" FontSize="14" Height="30" Margin="0,0,0,0" HorizontalAlignment="Center" Width="300" BorderBrush="Black" BorderThickness="2"
+                     GotFocus="pathBox_GotFocus" TextChanged="pathBox_TextChanged" Grid.Column="2" />
+        <TextBlock x:Name="invalidMessage" Text="path is invalid" Foreground="red" Margin="355,5.4,-355,44.6" Grid.Row="3" Visibility="Hidden"/>
     </Grid>
 </Page>
