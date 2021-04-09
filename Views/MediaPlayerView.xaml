@@ -6,7 +6,84 @@
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <Border BorderBrush="LightGray"
+        BorderThickness="1"
+        Background="LightGray"
+        CornerRadius="10">
+        <StackPanel HorizontalAlignment="Center" Margin="0,-1,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0,-1,0,0" Width="794">
+                <Button Width="39" Height="40" Margin="30,27,0,43" Click="Open_Media_Player_Click">
+                    <Image Source="Images\open_button.png"></Image>
+                </Button>
+                <Separator Width="50" Background="LightGray"></Separator>
+                <Button Width="38" Height="39" Margin="0,22,0,44" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Click="Backwards_Media_Player_Click">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Image Source="Images\forward_button.png"/>
+                </Button>
+                <Button Width="39" Height="39" Margin="0,22,0,44" VerticalAlignment="Bottom" Click="Play_Media_Player_Click">
+                    <Image Source="Images\play_button.jpg"/>
+                </Button>
+                <Button Width="39" Height="39" Margin="0,22,0,44" RenderTransformOrigin="0.551,0.038" VerticalAlignment="Bottom" Click="Pause_Media_Player_Click">
+                    <Image Source="Images\pause_button.png" Height="39"/>
+                </Button>
+                <Button Width="39" Height="40" RenderTransformOrigin="4.967,0.8" Margin="0,22,0,44" VerticalAlignment="Bottom" Click="Stop_Media_Player_Click">
+                    <Image Source="Images\stop_button.png" Height="36" Width="40"/>
+                </Button>
+                <Button Width="39" Height="40" Margin="0,22,0,40" Background="LightGray" Click="Forward_Media_Player_Click">
+                    <Image Source="Images\forward_button.png"/>
+                </Button>
+                <Separator></Separator>
+                <TextBlock VerticalAlignment="Center" Margin="70,10,0,30" FontSize="24">Play speed</TextBlock>
+                <ComboBox Name="Speed_Box" SelectedItem ="{Binding VM_Speed, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="100" Height="30" Margin="15,10,0,30" SelectionChanged="Speed_Changed_Click">
+                    <ComboBoxItem Content="1"></ComboBoxItem>
+                    <ComboBoxItem Content="1.25"></ComboBoxItem>
+                    <ComboBoxItem Content="1.75"></ComboBoxItem>
+                    <ComboBoxItem Content="2"></ComboBoxItem>
+                </ComboBox>
+
+                <StatusBarItem Margin="0,0,-246,0">
+
+                    <TextBlock x:Name="lblProgressStatus" HorizontalAlignment ="Center" Width="87" Height="50" RenderTransformOrigin="0.75,0.9" FontSize="24">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform><Run Text="00:00:00"/></TextBlock>
+
+                </StatusBarItem>
+            </StackPanel>
+
+            <MediaElement Name="mePlayer" Grid.Row="1" LoadedBehavior="Manual" Stretch="None" />
+
+            <StatusBar Grid.Row="2">
+                <StatusBar.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </StatusBar.ItemsPanel>
+
+                <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" Width="807" Height="100" Margin="-6,2,0,348" RenderTransformOrigin="0.511,0.838" Background="LightGray" >
+                    <Slider x:Name="sliProgress" Thumb.DragStarted="Drag_Started_Click"  Thumb.DragCompleted="Drag_Completed_Click" ValueChanged="Time_Changed_Click" Margin="194,0,98,0" Height="25" RenderTransformOrigin="0,3.5 "/>
+
+                </StatusBarItem>
+
+            </StatusBar>
+        </StackPanel>
+    </Border>
 </UserControl>

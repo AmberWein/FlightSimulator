@@ -59,6 +59,7 @@
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\FlightSimulatorModel.cs" />
     <Compile Include="Models\IFlightSimulatorModel.cs" />
+    <Compile Include="Models\IMediaPlayerModel.cs" />
     <Compile Include="Models\ISetModel.cs" />
     <Compile Include="Models\MediaPlayerModel.cs" />
     <Compile Include="Models\SetModel.cs" />

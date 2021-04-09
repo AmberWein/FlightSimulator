@@ -61,30 +61,38 @@ namespace FlightSimulator.IO
             this.properties = newProperties;
             this.numOfProperties = properties.Count;
             this.map = new Dictionary<string, ArrayList>();
+            initMap();
             this.lines = new ArrayList();
         }
 
+        private void initMap()
+        {
+            for (int i = 0; i < this.numOfProperties; i++)
+            {
+                map.Add(this.properties[i].ToString(), new ArrayList());
+            }
+        }
 
         public override void Parse()
         {
             var reader = new StreamReader(File.OpenRead(filePath));
             int i = 0;
+            int j;
 
-            while (i < this.numOfProperties)
+            while (!reader.EndOfStream)
             // maybe we should check validity- meaning if the amount of rows matches to the properties size
             {
+                j = 0;
                 string line = reader.ReadLine();
                 string[] valuesString = line.Split(',');
-                string key = properties[i].ToString();
+                Lines.Add(line);
                 i++;
-                ArrayList listOfValues = new ArrayList();
                 foreach (string value in valuesString)
                 {
-                    Lines.Add(line);
-                    float courrentValue = float.Parse(value, CultureInfo.InvariantCulture);
-                    listOfValues.Add(courrentValue);
+                    float currentValue = float.Parse(value, CultureInfo.InvariantCulture);
+                    this.map[properties[j].ToString()].Add(currentValue);
+                    j++;
                 }
-                this.map.Add(key, listOfValues);
             }
             reader.Dispose();
         }
