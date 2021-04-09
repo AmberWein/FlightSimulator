@@ -55,10 +55,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IO\XMLParser.cs" />
+    <Compile Include="Models\DashboardModel.cs" />
+    <Compile Include="Models\FlightSimulatorModel.cs" />
     <Compile Include="Models\MediaPlayerModel.cs" />
+    <Compile Include="Models\SetModel.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\FlightSimulatorViewModel.cs" />
     <Compile Include="ViewModels\MediaPlayerViewModel.cs" />
+    <Compile Include="ViewModels\SetViewModel.cs" />
+    <Compile Include="Views\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FlightSimulatorView.xaml.cs">
+      <DependentUpon>FlightSimulatorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MediaPlayerView.xaml.cs">
       <DependentUpon>MediaPlayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SetView.xaml.cs">
+      <DependentUpon>SetView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -74,7 +90,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\DashboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FlightSimulatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MediaPlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
