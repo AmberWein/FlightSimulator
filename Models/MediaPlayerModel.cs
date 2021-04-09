@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightSimulator.ViewModels
+namespace FlightSimulator.Models
 {
-    class Media_Player_ViewModel
+    class MediaPlayerModel
     {
     }
 }

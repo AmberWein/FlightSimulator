@@ -2,7 +2,7 @@
 
 namespace FlightSimulator.IO
 {
-    abstract class File_Parser
+    abstract class FileParser
     {
         protected string filePath;
         public string FilePath
@@ -17,7 +17,7 @@ namespace FlightSimulator.IO
             }
         }
 
-        public File_Parser(string filePath)
+        public FileParser(string filePath)
         {
             this.filePath = filePath;
         }

@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace FlightSimulator.IO
 {
-    class CSV_Parser: File_Parser
+    class CSVParser: FileParser
     {
         private ArrayList properties;
         private ArrayList lines;
@@ -56,7 +56,7 @@ namespace FlightSimulator.IO
                 map = value;
             }
         }
-        public CSV_Parser(string newFilePath, ArrayList newProperties) : base(newFilePath)
+        public CSVParser(string newFilePath, ArrayList newProperties) : base(newFilePath)
         {
             this.properties = newProperties;
             this.numOfProperties = properties.Count;
