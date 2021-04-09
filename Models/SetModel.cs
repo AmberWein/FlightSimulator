@@ -56,7 +56,18 @@ namespace FlightSimulator.Models
             }
         }
          private ArrayList dataLines;
-        public ArrayList DataLines { get {return dataLines;} set{dataLines = value;/* should only occur once. do we need to notify anyone?*/}}
+        public ArrayList DataLines 
+        {
+            get 
+            {
+                return dataLines;
+            }
+            set
+            {
+                dataLines = value;/* should only occur once. do we need to notify anyone?*/
+                NotifyPropertyChanged("DataLines");
+            }
+        }
         private Dictionary<string, ArrayList> dataMap;
         public Dictionary<string, ArrayList> DataMap
         {
