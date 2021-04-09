@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FlightSimulator.Views;
 
 namespace FlightSimulator
 {
@@ -20,9 +21,40 @@ namespace FlightSimulator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool isFirstPage;
         public MainWindow()
         {
+            isFirstPage = true;
             InitializeComponent();
+
+            Switcher.pageSwitcher = this;
+            Switcher.Switch();
+            //MainFrame.Content = entry;
+            //MainFrame.Content = simulator;
+        }
+        public void Navigate()
+        {
+            if (isFirstPage)
+            {
+                isFirstPage = false;
+                Page entry = new SetView();
+                this.Content = entry;
+            }
+            else
+            {
+                Page simulator = new FlightSimulatorView();
+                this.Content = simulator;
+            }
+        }
+    }
+
+    public static class Switcher
+    {
+        public static MainWindow pageSwitcher;
+
+        public static void Switch()
+        {
+            pageSwitcher.Navigate();
         }
     }
 }
