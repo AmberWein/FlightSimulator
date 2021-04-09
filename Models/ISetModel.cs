@@ -8,11 +8,12 @@ using System.Collections;
 
 namespace FlightSimulator.Models
 {
-    interface ISetModel : INotifyPropertyChanged
+    public interface ISetModel : INotifyPropertyChanged
     {
         ArrayList HeadersList { get; set; }
         string CsvPath { get; set; }
         Dictionary<string, ArrayList> DataMap { get; set; }
+        ArrayList DataLines { get; set;}
 
     }
 }

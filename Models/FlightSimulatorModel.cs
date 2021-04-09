@@ -31,10 +31,20 @@ namespace FlightSimulator.Models
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-
+        public void SettingsChanged (Object sender, PropertyChangedEventArgs e) {
+            if(string.Compare(e.PropertyName,"DataMap")==0)
+            {
+                DataMap = settings.DataMap;
+            }
+            else if(string.Compare(e.PropertyName, "DataLines")==0)
+            {
+                DataLines = settings.DataLines;
+            }
+        }
         public FlightSimulatorModel(ISetModel set)
         {
             settings = set;
+            settings.PropertyChanged += SettingsChanged;
             // should sign as listener only to changes of map and lines.
             //set.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e) {if (sender == set && )};// this should listen only to change in map
             lineNumber = 0;
@@ -44,5 +54,6 @@ namespace FlightSimulator.Models
             // also create other models and put.
         }
         // function start. will only after DataMap and lines will be set.
+
     }
 }

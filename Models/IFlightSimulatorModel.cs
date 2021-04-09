@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Models
 {
-    interface IFlightSimulatorModel : INotifyPropertyChanged
+    public interface IFlightSimulatorModel : INotifyPropertyChanged
     {
         Dictionary<string, ArrayList> DataMap { get; set;}
         ArrayList DataLines { get; set;}

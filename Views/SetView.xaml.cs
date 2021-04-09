@@ -25,6 +25,11 @@ namespace FlightSimulator.Views
     public partial class SetView : Page
     {
         private SetViewModel vm;
+        public SetViewModel Vm
+        {
+            get { return vm;}
+            set { vm = value;}
+        }
         private bool isValidPath;
         private bool isFirstChange;
         // constructor
@@ -32,6 +37,14 @@ namespace FlightSimulator.Views
         {
             InitializeComponent();
             vm = new SetViewModel(new SetModel());
+            DataContext = vm;
+            isValidPath = false;
+            isFirstChange = true;
+        }
+        public SetView(SetViewModel s)
+        {
+            InitializeComponent();
+            vm = s;
             DataContext = vm;
             isValidPath = false;
             isFirstChange = true;

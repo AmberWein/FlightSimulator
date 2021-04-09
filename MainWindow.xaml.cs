@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FlightSimulator.Views;
+using FlightSimulator.ViewModels;
 
 namespace FlightSimulator
 {
@@ -21,12 +22,32 @@ namespace FlightSimulator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private SetViewModel setVM;
+        public SetViewModel SetVM
+        {
+            get
+            {
+                return setVM;
+            }
+            set { setVM = value;}
+        }
+        private FlightSimulatorViewModel flightSimVM;
+        public FlightSimulatorViewModel FlightSimVM
+        {
+            get
+            {
+                return flightSimVM;
+            }
+            set { flightSimVM = value;}
+        }
         private bool isFirstPage;
-        public MainWindow()
+        //public MainWindow()
+        public MainWindow(SetViewModel sVM, FlightSimulatorViewModel fVM)
         {
             isFirstPage = true;
             InitializeComponent();
-
+            setVM = sVM;//added 
+            flightSimVM = fVM;//added
             Switcher.pageSwitcher = this;
             Switcher.Switch();
             //MainFrame.Content = entry;
@@ -37,12 +58,12 @@ namespace FlightSimulator
             if (isFirstPage)
             {
                 isFirstPage = false;
-                Page entry = new SetView();
+                Page entry = new SetView(setVM);
                 this.Content = entry;
             }
             else
             {
-                Page simulator = new FlightSimulatorView();
+                Page simulator = new FlightSimulatorView(flightSimVM);
                 this.Content = simulator;
             }
         }
