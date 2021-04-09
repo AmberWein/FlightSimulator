@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FlightSimulator.ViewModels;
+using FlightSimulator.Models;
 
 namespace FlightSimulator.Views
 {
@@ -36,6 +37,8 @@ namespace FlightSimulator.Views
             InitializeComponent();
             vm = f;
             DataContext = vm;
+            this.dash.DataContext = f.dashVM;
+            this.dash.SetVM(f.dashVM);
         }
     }
 }

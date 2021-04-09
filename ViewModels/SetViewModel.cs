@@ -24,7 +24,7 @@ namespace FlightSimulator.ViewModels
             if (this.PropertyChanged != null)
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
+            }   
         }
         
         public string VM_CsvPath

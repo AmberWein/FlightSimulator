@@ -12,5 +12,7 @@ namespace FlightSimulator.Models
     {
         Dictionary<string, ArrayList> DataMap { get; set;}
         ArrayList DataLines { get; set;}
+        bool IsPlay { get; set;}
+        float Yaw { get; set; }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FlightSimulator.ViewModels;
 
 namespace FlightSimulator.Views
 {
@@ -20,9 +21,15 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class DashboardView : UserControl
     {
+        private DashboardViewModel vm;
         public DashboardView()
         {
             InitializeComponent();
+        }
+        // Setting the control board view model
+        public void SetVM(DashboardViewModel dashVM)
+        {
+            this.vm = dashVM;
         }
     }
 }

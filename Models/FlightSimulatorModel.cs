@@ -5,11 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using FlightSimulator.ViewModels;
 
 namespace FlightSimulator.Models
 {
     class FlightSimulatorModel : IFlightSimulatorModel
     {
+        // trying this
+        private bool isPlay;
+        public bool IsPlay { get { return isPlay; } set { isPlay = value; startFlying(); } }
         private ISetModel settings;
         // private Imodel[] controllers;
         // private DataSender client;
@@ -52,8 +56,30 @@ namespace FlightSimulator.Models
             dataMap = null;
             dataLines = null;
             // also create other models and put.
+
         }
         // function start. will only after DataMap and lines will be set.
+        private float yaw;
+        public float Yaw
+        {
+            get
+            {
+                return yaw;
+            }
+            set
+            {
+                yaw = value;
+                NotifyPropertyChanged("Yaw");
+            }
+        }
+
+        public void startFlying()
+        {
+            Yaw = 155;
+            // should be a while and change all properties every time we move and also send line to client
+        }
+
+       
 
     }
 }
