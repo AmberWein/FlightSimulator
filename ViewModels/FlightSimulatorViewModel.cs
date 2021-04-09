@@ -9,7 +9,7 @@ using FlightSimulator.Models;
 
 namespace FlightSimulator.ViewModels
 {
-    class FlightSimulatorViewModel : INotifyPropertyChanged
+    public class FlightSimulatorViewModel : INotifyPropertyChanged
     {
         private IFlightSimulatorModel model;
         public FlightSimulatorViewModel(IFlightSimulatorModel m)

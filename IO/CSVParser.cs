@@ -69,18 +69,18 @@ namespace FlightSimulator.IO
         {
             var reader = new StreamReader(File.OpenRead(filePath));
             int i = 0;
-
-            while (i < this.numOfProperties)
+            while (!reader.EndOfStream)
+            //while (i < this.numOfProperties)
             // maybe we should check validity- meaning if the amount of rows matches to the properties size
             {
                 string line = reader.ReadLine();
+                Lines.Add(line);
                 string[] valuesString = line.Split(',');
                 string key = properties[i].ToString();
                 i++;
                 ArrayList listOfValues = new ArrayList();
                 foreach (string value in valuesString)
                 {
-                    Lines.Add(line);
                     float courrentValue = float.Parse(value, CultureInfo.InvariantCulture);
                     listOfValues.Add(courrentValue);
                 }

@@ -50,10 +50,13 @@ namespace FlightSimulator.Models
                         CSVParser csvParser = new CSVParser(csvPath, HeadersList);
                         csvParser.Parse();
                         DataMap = csvParser.Map;
+                        DataLines = csvParser.Lines;
                     }  
                 }
             }
         }
+         private ArrayList dataLines;
+        public ArrayList DataLines { get {return dataLines;} set{dataLines = value;/* should only occur once. do we need to notify anyone?*/}}
         private Dictionary<string, ArrayList> dataMap;
         public Dictionary<string, ArrayList> DataMap
         {
