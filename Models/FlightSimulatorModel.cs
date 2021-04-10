@@ -70,10 +70,10 @@ namespace FlightSimulator.Models
             {
                 DataLines = settings.DataLines;
             }
-            else if(string.Compare(e.PropertyName, "IsPlay")==0)
-            {
+         //   else if(string.Compare(e.PropertyName, "IsPlay")==0)
+           // {
            //     IsPlay= settings.IsPlay;
-            }
+            //}
         }
         public FlightSimulatorModel(ISetModel set)
         {
@@ -102,18 +102,82 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("Yaw");
             }
         }
-
+        private float pitch;
+        public float Pitch
+        {
+            get
+            {
+                return pitch;
+            }
+            set
+            {
+                pitch = value;
+                NotifyPropertyChanged("Pitch");
+            }
+        }
+        private float roll;
+        public float Roll
+        {
+            get
+            {
+                return roll;
+            }
+            set
+            {
+                roll = value;
+                NotifyPropertyChanged("Roll");
+            }
+        }
+        public float orientation;
+        public float Orientation
+        {
+            get
+            {
+                return orientation;
+            }
+            set
+            {
+                orientation = value;
+                NotifyPropertyChanged("Orientation");
+            }
+        }
+        public float altitude;
+        public float Altitude
+        {
+            get
+            {
+                return altitude;
+            }
+            set
+            {
+                altitude = value;
+                NotifyPropertyChanged("Altitude");
+            }
+        }
+        public float airSpeed;
+        public float AirSpeed
+        {
+            get
+            {
+                return airSpeed;
+            }
+            set
+            {
+                airSpeed = value;
+                NotifyPropertyChanged("AirSpeed");
+            }
+        }
         public void StartFlying()
         {
-           // string yawText="side-slip-deg";
             playingSpeed = 100;
-           /* Yaw = 50;
-            System.Threading.Thread.Sleep(playingSpeed);
-            Yaw = 200;
-            System.Threading.Thread.Sleep(playingSpeed);*/
            while (isPlay)
             {
                 Yaw =  float.Parse(DataMap["side-slip-deg"][lineNumber].ToString());
+                Pitch =  float.Parse(DataMap["pitch-deg"][lineNumber].ToString());
+                Roll =  float.Parse(DataMap["roll-deg"][lineNumber].ToString());
+                Orientation =  float.Parse(DataMap["heading-deg"][lineNumber].ToString());
+                Altitude =  float.Parse(DataMap["altitude-ft"][lineNumber].ToString());
+                AirSpeed =  float.Parse(DataMap["airspeed-kt"][lineNumber].ToString());
                 lineNumber++;
                 System.Threading.Thread.Sleep(playingSpeed);
             }

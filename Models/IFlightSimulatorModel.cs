@@ -14,5 +14,10 @@ namespace FlightSimulator.Models
         ArrayList DataLines { get; set;}
         bool IsPlay { get; set;}
         float Yaw { get; set; }
+        float Pitch { get;set;}
+        float Roll { get; set;}
+        float Orientation { get;set;}
+        float AirSpeed { get;set;}
+        float Altitude { get;set;}
     }
 }

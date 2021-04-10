@@ -60,12 +60,12 @@
 
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" Margin="0,0.2,43.2,0" Grid.ColumnSpan="3">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Center" Text="Roll" VerticalAlignment="Stretch" Width="75"/>
-            <TextBox x:Name="RollDataBox" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="246" />
+            <TextBox x:Name="RollDataBox" Text="{Binding VM_Roll}" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="246" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="2">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Center" Text="Pitch" VerticalAlignment="Stretch" Width="68" Margin="0,0,0,0.2"/>
-            <TextBox x:Name="PitchDataBox" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="246" />
+            <TextBox x:Name="PitchDataBox" Text="{Binding VM_Pitch}" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="246" />
         </StackPanel>
     </Grid>
 </UserControl>
