@@ -41,7 +41,7 @@ namespace FlightSimulator.Views
         {
             this.speeds = new List<double>();
 
-            for (double i = 1; i <= 2; i += 0.25)
+            for (double i = 0; i <= 2; i += 0.25)
             {
                 this.speeds.Add(i);
             }
