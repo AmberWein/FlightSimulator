@@ -14,6 +14,5 @@ namespace FlightSimulator.Models
         string CsvPath { get; set; }
         Dictionary<string, ArrayList> DataMap { get; set; }
         ArrayList DataLines { get; set; }
-        bool IsPlay { get; set; }
     }
 }

@@ -17,8 +17,6 @@ namespace FlightSimulator.ViewModels
             this.model = m;
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged("VM_" + e.PropertyName); };
         }
-        private bool isPlay;
-        public bool IsPlay { get { return model.IsPlay; } set { model.IsPlay = value; } }
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
         {

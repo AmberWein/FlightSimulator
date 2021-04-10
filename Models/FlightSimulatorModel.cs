@@ -22,6 +22,7 @@ namespace FlightSimulator.Models
 {
     class FlightSimulatorModel : IFlightSimulatorModel
     {
+        // need maximum line for media player
         // trying this
         private bool isPlay;
         public bool IsPlay 
@@ -104,7 +105,7 @@ namespace FlightSimulator.Models
 
         public void StartFlying()
         {
-            string yawText="side-slip-deg";
+           // string yawText="side-slip-deg";
             playingSpeed = 100;
            /* Yaw = 50;
             System.Threading.Thread.Sleep(playingSpeed);
@@ -112,7 +113,7 @@ namespace FlightSimulator.Models
             System.Threading.Thread.Sleep(playingSpeed);*/
            while (isPlay)
             {
-                Yaw =  float.Parse(DataMap[yawText][lineNumber].ToString());
+                Yaw =  float.Parse(DataMap["side-slip-deg"][lineNumber].ToString());
                 lineNumber++;
                 System.Threading.Thread.Sleep(playingSpeed);
             }
