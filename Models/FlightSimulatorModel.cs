@@ -169,7 +169,7 @@ namespace FlightSimulator.Models
         }
         public void StartFlying()
         {
-            playingSpeed = 100;
+            playingSpeed = 50;
            while (isPlay)
             {
                 Yaw =  float.Parse(DataMap["side-slip-deg"][lineNumber].ToString());
