@@ -64,8 +64,8 @@ namespace FlightSimulator
             else
             {
                 Page simulator = new FlightSimulatorView(flightSimVM);
-                flightSimVM.VM_IsPlay = true;
                 this.Content = simulator;
+              //  flightSimVM.VM_IsPlay = true;
             }
         }
     }

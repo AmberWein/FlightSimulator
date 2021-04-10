@@ -59,7 +59,9 @@ namespace FlightSimulator.Views
             {
                 Switcher.Switch();
                 // vm.VM_Csv(vm.VM_Path,)
+                vm.IsPlay = true;
                 //S
+           
             }
             else
             {

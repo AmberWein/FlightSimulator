@@ -11,6 +11,8 @@ namespace FlightSimulator.Models
 {
     class SetModel : ISetModel
     {
+        private bool isPlay;
+        public bool IsPlay { get { return isPlay; } set { isPlay = value;NotifyPropertyChanged("IsPlay"); } }
         // INotifyPropertyChanged 
         public event PropertyChangedEventHandler PropertyChanged;
 
