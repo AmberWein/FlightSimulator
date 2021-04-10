@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+			 xmlns:controls="using:Syncfusion.UI.Xaml.Gauges"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AntiqueWhite">
@@ -53,11 +54,11 @@
                                     Height="290" Grid.RowSpan="2" Width="354" Grid.Row="0" Grid.Column="1">
             <syncfusion:SfCircularGauge.Scales>
 
-                <syncfusion:CircularScale x:Name="OrientationScale" SweepAngle="360" StartAngle="270" StartValue="0" EndValue="16" 
-                                          Interval="2" RimStroke="LightGray" MinorTicksPerInterval="2" 
+                <syncfusion:CircularScale x:Name="OrientationScale" SweepAngle="360" StartAngle="270" StartValue="0" EndValue="360" 
+                                          Interval="22.5" RimStroke="LightGray" MinorTicksPerInterval="2" 
                                           ShowLastLabel="False" >
 					<syncfusion:CircularScale.Pointers>
-						<syncfusion:CircularPointer PointerType="NeedlePointer" Value="{Binding VM_Orientation}"/>
+						<syncfusion:CircularPointer Value="{Binding VM_Orientation}"/>
 					</syncfusion:CircularScale.Pointers>
                 </syncfusion:CircularScale>
 

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FlightSimulator.ViewModels;
+using Syncfusion.UI.Xaml.Gauges;
 
 namespace FlightSimulator.Views
 {
