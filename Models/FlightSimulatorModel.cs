@@ -24,6 +24,11 @@ namespace FlightSimulator.Models
 {
     class FlightSimulatorModel : IFlightSimulatorModel
     {
+        //flight gear
+        private float elevator;
+        private float aileron;
+        private float throttle;
+        private float rudder;
         private int maxLine;
         public int MaxLine
         {
@@ -170,7 +175,42 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("AirSpeed");
             }
         }
-        
+        public float Throttle
+        {
+            get { return throttle; }
+            set
+            {
+                throttle = value;
+                NotifyPropertyChanged("Throttle");
+            }
+        }
+        public float Aileron
+        {
+            get { return aileron; }
+            set
+            {
+                this.aileron = value;
+                this.NotifyPropertyChanged("Aileron");
+            }
+        }
+        public float Elevator
+        {
+            get { return elevator; }
+            set
+            {
+                this.elevator = value;
+                this.NotifyPropertyChanged("Elevator");
+            }
+        }
+        public float Rudder
+        {
+            get { return rudder; }
+            set
+            {
+                rudder = value;
+                NotifyPropertyChanged("Rudder");
+            }
+        }
         public void initData()
         {
             Yaw = 0;
@@ -179,6 +219,10 @@ namespace FlightSimulator.Models
             Orientation = 0;
             Altitude = 0;
             AirSpeed = 0;
+            Throttle = 0;
+            Rudder = 0; 
+            Aileron = 0; 
+            Elevator = 0; 
         }
         public void StartFlying()
         {
