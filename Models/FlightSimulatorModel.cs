@@ -181,10 +181,10 @@ namespace FlightSimulator.Models
             AirSpeed = 0;
         }
         public void StartFlying()
-        {
+        {/*
             int sign= client.Connect();
             if (sign !=1)
-                return;
+                return;*/
            while (isPlay)
             {
                 // we might need to get the proper lineNumber. check if this gets changes from mediaplayerview
@@ -194,7 +194,7 @@ namespace FlightSimulator.Models
                 Orientation =  float.Parse(DataMap["heading-deg"][lineNumber].ToString());
                 Altitude =  float.Parse(DataMap["altitude-ft"][lineNumber].ToString());
                 AirSpeed =  float.Parse(DataMap["airspeed-kt"][lineNumber].ToString());
-                client.Send(DataLines[lineNumber].ToString());
+               // client.Send(DataLines[lineNumber].ToString());
                 lineNumber++;
                 if (lineNumber >= maxLine)
                 {

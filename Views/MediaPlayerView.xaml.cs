@@ -37,7 +37,8 @@ namespace FlightSimulator.Views
                 this.speeds.Add(i);
             }
         }
-        private void Open_Media_Player_Click(object sender, RoutedEventArgs e)
+
+         private void Open_Media_Player_Click(object sender, RoutedEventArgs e)
         {
             // if(Open_CanExecute(e))
             //{
@@ -50,12 +51,13 @@ namespace FlightSimulator.Views
         //}
         private void Backwards_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            //if (vm.VM_Timer >= 0.1)
-            //vm.VM_Timer -= 0.1;
+            this.vm.VM_Timer -= 1;
+            lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
         }
         private void Play_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            this.vm.VM_Timer -= 0.1;
+            if (this.vm.VM_Speed == 0)
+                this.vm.VM_Speed = 1;
         }
         private void Stop_Media_Player_Click(object sender, RoutedEventArgs e)
         {
@@ -72,27 +74,29 @@ namespace FlightSimulator.Views
         }
         private void Forward_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            this.vm.VM_Timer += 0.1;
+            this.vm.VM_Timer += 1;
+            lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
         }
 
         private void Speed_Changed_Click(object sender, RoutedEventArgs e)
         {
-            ListBoxItem Speed_Box = ((sender as ListBox).SelectedItem as ListBoxItem);
-            this.vm.VM_Speed = Convert.ToDouble(Speed_Box.Content.ToString());
+            ListBoxItem speedBox = ((sender as ListBox).SelectedItem as ListBoxItem);
+            this.vm.VM_Speed = Convert.ToDouble(speedBox.Content.ToString());
         }
 
-        private void Drag_Started_Click(object sender, RoutedEventArgs e)
-        {
-            //vm.VM_UserIsDraggingSlider = true;
-        }
-        private void Drag_Completed_Click(object sender, RoutedEventArgs e)
-        {
-            //vm.VM_UserIsDraggingSlider = false;
-            //mePlayer.Position = TimeSpan.FromSeconds(sliProgress.Value);
-        }
         private void Time_Changed_Click(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            this.vm.VM_Speed = Convert.ToDouble(e.NewValue.ToString());
+            lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
+            this.vm.VM_Speed = Convert.ToDouble(sliProgress.Value.ToString());
         }
     }
 }
+
+
+ /*   private void Speed_Changed_Click(object sender, RoutedEventArgs e)
+    {
+        //this.vm.VM_Speed = Convert.ToDouble(Speed_Box.SelectedItem.);
+
+        ListBoxItem Speed_Box = ((sender as ListBox).SelectedItem as ListBoxItem);
+        this.vm.VM_Speed = Convert.ToDouble(Speed_Box.Content.ToString());
+    }*/

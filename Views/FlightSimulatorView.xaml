@@ -9,6 +9,11 @@
       Title="FlightSimulatorView">
 
     <Grid>
-        <local:DashboardView x:Name="dash"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <local:DashboardView x:Name="dash" Grid.Row="0" />
+        <local:MediaPlayerView x:Name="media" Grid.Row="1"/>
     </Grid>
 </Page>
