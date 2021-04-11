@@ -54,9 +54,9 @@
                                     Height="290" Grid.RowSpan="2" Width="354" Grid.Row="0" Grid.Column="1">
             <syncfusion:SfCircularGauge.Scales>
 
-                <syncfusion:CircularScale x:Name="OrientationScale" SweepAngle="360" StartAngle="270" StartValue="0" EndValue="360" 
-                                          Interval="22.5" RimStroke="LightGray" MinorTicksPerInterval="2" 
-                                          ShowLastLabel="False" >
+                <syncfusion:CircularScale x:Name="OrientationScale" SweepAngle="360" StartAngle="270" ShowLastLabel="False" StartValue="0" EndValue="360" 
+                                          Interval="90" RimStroke="LightGray" MinorTicksPerInterval="1" 
+                                          LabelCreated="OrientaitionGauge_LabelCreated">
 					<syncfusion:CircularScale.Pointers>
 						<syncfusion:CircularPointer Value="{Binding VM_Orientation}"/>
 					</syncfusion:CircularScale.Pointers>
