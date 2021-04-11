@@ -56,8 +56,19 @@ namespace FlightSimulator.Views
         //}
         private void Backwards_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            this.vm.VM_Timer -= 1;
-            lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
+            //this.vm.VM_Timer -= 0.1;
+           // lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
+
+            if (vm.VM_Timer >= 1)
+            {
+                this.vm.VM_Timer-= 1;
+            }
+            else { this.vm.VM_Timer=0; }
+            //this.vm.VM_LineNumber -= 10;
+            
+            //this.vm.VM_Timer += 1;
+            //lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
+            lblProgressStatus.Text = TimeSpan.FromSeconds(vm.VM_Timer).ToString(@"hh\:mm\:ss");
         }
         private void Play_Media_Player_Click(object sender, RoutedEventArgs e)
         {
@@ -72,6 +83,8 @@ namespace FlightSimulator.Views
                 this.vm.VM_IsPlay = false;
             if (this.vm.VM_Timer != 0)
                 this.vm.VM_Timer = 0;
+            //if (this.vm.VM_Timer != 0)
+              //  this.vm.VM_Timer = 0;
 
          //   if (this.vm.VM_PlayingSpeed != 0)
            //     this.vm.VM_PlayingSpeed = 0;
@@ -87,7 +100,11 @@ namespace FlightSimulator.Views
         }
         private void Forward_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            this.vm.VM_Timer += 0.1;
+            // should check if not over time?
+            this.vm.VM_Timer += 1;
+            
+            //this.vm.VM_Timer += 1;
+            //lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
             lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
         }
 
@@ -100,8 +117,10 @@ namespace FlightSimulator.Views
         private void Time_Changed_Click(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
-            this.vm.VM_PlayingSpeed = Convert.ToDouble(sliProgress.Value.ToString());
+            this.vm.VM_Timer = (Convert.ToDouble(sliProgress.Value.ToString())); // why this?
         }
+
+        
     }
 }
 

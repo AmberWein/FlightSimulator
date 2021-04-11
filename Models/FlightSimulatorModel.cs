@@ -24,14 +24,18 @@ namespace FlightSimulator.Models
 {
     class FlightSimulatorModel : IFlightSimulatorModel
     {
-        private int maxLine;
-        public int MaxLine
-        {
-            get {  return maxLine;}
-            set { maxLine=value; FinishTime = 0.1 * (double)maxLine; }
-        }
+        private ISetModel settings;
+        // private Imodel[] controllers;
+        private Client client;
+        /* private int maxLine;
+         public int MaxLine
+         {
+             get {  return maxLine;}
+             set { maxLine=value; //FinishTime = 0.1 * (double)maxLine;
+                                  }
+         }*/
         // need maximum line for media player
-        
+
         // indicates wheater simulator is on play mode.
         private bool isPlay;
         public bool IsPlay 
@@ -44,17 +48,24 @@ namespace FlightSimulator.Models
                 if (isPlay)
                 {
                     new Thread(StartFlying).Start();
+                    // notfy?
                 }
             } 
         }
-        private ISetModel settings;
-        // private Imodel[] controllers;
-        private Client client;
-        private int lineNumber;
-        public int LineNumber { get { return lineNumber;} set { lineNumber = value; Timer += 0.1;/* change loop*/} }
         private double playingSpeed;
-        public double PlayingSpeed { get { return playingSpeed;} set {
-                playingSpeed = value; /* need to check. if getting 1.5 from media player, should be 100/1.5?*/} }
+        public double PlayingSpeed
+        {
+            get { return playingSpeed; }
+            set
+            {
+                playingSpeed = value; /* need to check. if getting 1.5 from media player, should be 100/1.5?*/
+                // i dont need to norify anyone because no change from model itself?
+            }
+        }
+        /*private int lineNumber;
+        public int LineNumber { get { return lineNumber;} set { lineNumber = value; //Timer += 0.1;/* change loop*/
+            
+        
         private Dictionary<string, ArrayList> dataMap;
         public Dictionary<string, ArrayList> DataMap { get{return dataMap;} 
             set
@@ -63,7 +74,15 @@ namespace FlightSimulator.Models
             }
         }
         private ArrayList dataLines;
-        public ArrayList DataLines { get {return dataLines;} set{dataLines = value; MaxLine = dataLines.Count;/* should only occur once. do we need to notify anyone?*/}}
+        public ArrayList DataLines 
+        {
+            get {return dataLines;} 
+            set
+            {
+                dataLines = value;
+                FinishTime = 0.1*(double)dataLines.Count;/* should only occur once. do we need to notify anyone?*/
+            }
+        }
 
         private double timer;
         public double Timer
@@ -71,17 +90,13 @@ namespace FlightSimulator.Models
             get { return timer; }
             set { 
                 timer = value;
-               /* if (timer == 0)
-                    LineNumber = 0;
-                else
-                {
-                    LineNumber =(int) timer * 10;
-                }*/
+                NotifyPropertyChanged("Timer");
             }
         }
 
         private double finishTime;
-        public double FinishTime { get { return finishTime; } set { finishTime = value; } }
+        public double FinishTime { get { return finishTime; } set { finishTime = value; 
+                NotifyPropertyChanged("FinishTime"); } }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged(string propName)
@@ -106,8 +121,8 @@ namespace FlightSimulator.Models
             settings = set;
             settings.PropertyChanged += SettingsChanged;
             // initialize members
-            maxLine = 0;
-            lineNumber = 0;
+            //maxLine = 0;
+            //lineNumber = 0;
             playingSpeed = 1;
             dataMap = null;
             dataLines = null;
@@ -206,7 +221,7 @@ namespace FlightSimulator.Models
         }
         public void StartFlying()
         {
-            int sleepingTime =(int) (100 / PlayingSpeed);
+            int sleepingTime, lineNumber;
             /*
           * 
             int sign= client.Connect();
@@ -214,6 +229,7 @@ namespace FlightSimulator.Models
                 return;*/
            while (isPlay)
             {
+                lineNumber = (int)(Timer * 10.0);
                 sleepingTime = (int)(100 / PlayingSpeed);
                 // we might need to get the proper lineNumber. check if this gets changes from mediaplayerview
                 Yaw =  float.Parse(DataMap["side-slip-deg"][lineNumber].ToString());
@@ -223,8 +239,9 @@ namespace FlightSimulator.Models
                 Altitude =  float.Parse(DataMap["altitude-ft"][lineNumber].ToString());
                 AirSpeed =  float.Parse(DataMap["airspeed-kt"][lineNumber].ToString());
                // client.Send(DataLines[lineNumber].ToString());
-                lineNumber++;
-                if (lineNumber >= maxLine)
+                Timer+=0.1;
+                if (Timer>=FinishTime)
+                //if (lineNumber >= maxLine)
                 {
                     IsPlay = false;
                     initData();

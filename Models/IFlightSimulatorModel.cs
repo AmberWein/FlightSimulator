@@ -22,5 +22,8 @@ namespace FlightSimulator.Models
         double PlayingSpeed { get; set; }
         double Timer { get; set; }
         double FinishTime { get; set; }
+        //int MaxLine { get; set; }
+        //int LineNumber { get; set; }
+        
     }
 }

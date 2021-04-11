@@ -48,7 +48,7 @@
 
                 <StatusBarItem Margin="0,0,-246,0">
 
-                    <TextBlock x:Name="lblProgressStatus" HorizontalAlignment ="Center" Width="98" Height="50" RenderTransformOrigin="0.75,0.9" FontSize="24"><Run Text="00:00:00"/></TextBlock>
+                    <TextBlock x:Name="lblProgressStatus" HorizontalAlignment ="Center" Width="98" Height="50" RenderTransformOrigin="0.75,0.9" FontSize="24" ><Run Text="{Binding VM_Timer}"/></TextBlock>
 
                 </StatusBarItem>
             </StackPanel>
@@ -67,17 +67,8 @@
                 </StatusBar.ItemsPanel>
 
                 <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" Width="807" Height="100" Margin="-6,2,0,348" RenderTransformOrigin="0.511,0.838" Background="LightGray" >
-                    <Slider x:Name="sliProgress" Minimum="0" Maximum="{Binding VM_FinishTime}"
-                             Margin="691,0,-434.4,0" Height="25" RenderTransformOrigin="0,3.5" ValueChanged="Time_Changed_Click" >
-                        <Slider.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleX="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Slider.RenderTransform>
-                    </Slider>
+                    <Slider x:Name="sliProgress" Minimum="0" Maximum="{Binding VM_FinishTime}" Value="{Binding VM_Timer}"
+                             Margin="156,0,100.6,0" Height="25" RenderTransformOrigin="0,3.5" ValueChanged="Time_Changed_Click" />
 
                 </StatusBarItem>
 
