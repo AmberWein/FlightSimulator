@@ -40,8 +40,8 @@ namespace FlightSimulator.Views
         {
 
         }
-     
 
+       
     }
 }
 

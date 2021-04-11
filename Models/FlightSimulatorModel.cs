@@ -237,6 +237,9 @@ namespace FlightSimulator.Models
                 AirSpeed =  float.Parse(DataMap["airspeed-kt"][lineNumber].ToString());
                 Rudder = float.Parse(DataMap["rudder"][lineNumber].ToString());
                 Throttle = float.Parse(DataMap["throttle"][lineNumber].ToString());
+                Aileron = float.Parse(DataMap["aileron"][lineNumber].ToString());
+                Elevator= float.Parse(DataMap["elevator"][lineNumber].ToString());
+
 
                 lineNumber++;
                 if (lineNumber >= maxLine)

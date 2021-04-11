@@ -74,7 +74,7 @@ namespace FlightSimulator.ViewModels
         {
             get
             {
-                return model.Aileron;
+                return (200 * (model.Elevator) + 125);
             }
             set
             {
@@ -86,7 +86,7 @@ namespace FlightSimulator.ViewModels
         {
             get
             {
-                return model.Aileron * 60;
+                return 60*(model.Aileron) + 125;
             }
             set
             {
