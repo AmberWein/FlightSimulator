@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FlightSimulator.IO;
+using FlightSimulator.Communication;
 
 namespace FlightSimulator.Models
 {
@@ -48,7 +49,7 @@ namespace FlightSimulator.Models
         }
         private ISetModel settings;
         // private Imodel[] controllers;
-       // private LocalServerClient client;
+        private Client client;
         private int lineNumber;
         public int LineNumber { get { return lineNumber;} set { lineNumber = value; /* change loop*/} }
         private int playingSpeed;
@@ -89,7 +90,7 @@ namespace FlightSimulator.Models
             dataMap = null;
             dataLines = null;
             // also create other models and put.??
-            client = new LocalServerClient();
+            client = new Client();
         }
         private float yaw;
         public float Yaw
