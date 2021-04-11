@@ -83,7 +83,7 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("DataMap");
             }
         }
-        
+
         public SetModel()
         {
             csvPath = null;

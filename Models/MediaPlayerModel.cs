@@ -45,7 +45,16 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("Timer");
             }
         }
-
+        public double FinishTime
+        {
+            get { return timer; }
+            set
+            {
+                timer = value;
+                NotifyPropertyChanged("FinishTime");
+            }
+        }
+        
         public bool UserIsDraggingSlider
         {
             get { return userIsDraggingSlide; }
