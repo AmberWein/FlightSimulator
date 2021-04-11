@@ -4,18 +4,37 @@ using FlightSimulator.Models;
 
 namespace FlightSimulator.ViewModels
 {
-    class MediaPlayerViewModel: INotifyPropertyChanged
+    public class MediaPlayerViewModel: INotifyPropertyChanged
     {
-        private IMediaPlayerModel model;
+        //private IMediaPlayerModel model;
+        private IFlightSimulatorModel model;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public MediaPlayerViewModel(IMediaPlayerModel model)
+        //public MediaPlayerViewModel(IMediaPlayerModel model)
+        public MediaPlayerViewModel(IFlightSimulatorModel model)
         {
             this.model = model;
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
-                NotifyPropertyChanged("VM_" + e.PropertyName);
+                if (string.Compare(e.PropertyName, "Timer") == 0)
+                {
+                    VM_Timer = model.Timer;
+                    NotifyPropertyChanged("VM_Timer");
+                    return;
+                }
+                if (string.Compare(e.PropertyName, "PlayingSpeed") == 0)
+                {
+                    VM_PlayingSpeed = model.PlayingSpeed;
+                    NotifyPropertyChanged("VM_PlayingSpeed");
+                    return;
+                }
+                if (string.Compare(e.PropertyName, "FinishTime") == 0)
+                {
+                    VM_FinishTime = model.FinishTime;
+                    NotifyPropertyChanged("VM_FinishTime");
+                    return;
+                };
             };
         }
 
@@ -25,12 +44,12 @@ namespace FlightSimulator.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public double VM_Speed
+        public double VM_PlayingSpeed
         {
-            get { return model.Speed; }
+            get { return model.PlayingSpeed; }
             set
             {
-                model.Speed = value;
+                model.PlayingSpeed = value;
             }
         }
 
@@ -49,16 +68,14 @@ namespace FlightSimulator.ViewModels
         public double VM_FinishTime
         {
             get { return model.FinishTime; }
+            set{ } 
+        }
+        public bool VM_IsPlay
+        {
+            get { return model.IsPlay; }
+            set { model.IsPlay = value; }
         }
 
-        public bool VM_UserIsDraggingSlider
-        {
-            get { return model.UserIsDraggingSlider; }
-            set
-            {
-                model.UserIsDraggingSlider = value;
-            }
-        }
     }
 }
 

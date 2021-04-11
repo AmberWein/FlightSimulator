@@ -19,5 +19,8 @@ namespace FlightSimulator.Models
         float Orientation { get;set;}
         float AirSpeed { get;set;}
         float Altitude { get;set;}
+        double PlayingSpeed { get; set; }
+        double Timer { get; set; }
+        double FinishTime { get; set; }
     }
 }

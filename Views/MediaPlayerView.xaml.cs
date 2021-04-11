@@ -20,14 +20,19 @@ namespace FlightSimulator.Views
         {
             FillList();
             InitializeComponent();
-            vm = new MediaPlayerViewModel(new MediaPlayerModel());
-            DataContext = vm;
+           // vm = new MediaPlayerViewModel(new MediaPlayerModel());
+            //DataContext = vm;
             Binding dict = new Binding
             {
                 Source = speeds
             };
             speedBox.SetBinding(ComboBox.ItemsSourceProperty, dict);
         }
+        public void SetVM(MediaPlayerViewModel mediaVM)
+        {
+            this.vm = mediaVM;
+        }
+
         private void FillList()
         {
             this.speeds = new List<double>();
@@ -56,21 +61,29 @@ namespace FlightSimulator.Views
         }
         private void Play_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            if (this.vm.VM_Speed == 0)
-                this.vm.VM_Speed = 1;
+            //  if (this.vm.VM_PlayingSpeed == 0)
+            //      this.vm.VM_PlayingSpeed = 1;
+            if (!this.vm.VM_IsPlay)
+                this.vm.VM_IsPlay = true;
         }
         private void Stop_Media_Player_Click(object sender, RoutedEventArgs e)
         {
+            if (this.vm.VM_IsPlay)
+                this.vm.VM_IsPlay = false;
             if (this.vm.VM_Timer != 0)
                 this.vm.VM_Timer = 0;
 
-            if (this.vm.VM_Speed != 0)
-                this.vm.VM_Speed = 0;
+         //   if (this.vm.VM_PlayingSpeed != 0)
+           //     this.vm.VM_PlayingSpeed = 0;
+
         }
         private void Pause_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            if (this.vm.VM_Speed != 0)
-                this.vm.VM_Speed = 0;
+         //   if (this.vm.VM_PlayingSpeed != 0)
+          //      this.vm.VM_PlayingSpeed = 0;
+          if (this.vm.VM_IsPlay)
+                this.vm.VM_IsPlay = false;
+            
         }
         private void Forward_Media_Player_Click(object sender, RoutedEventArgs e)
         {
@@ -81,13 +94,13 @@ namespace FlightSimulator.Views
         private void Speed_Changed_Click(object sender, RoutedEventArgs e)
         {
             ListBoxItem speedBox = ((sender as ListBox).SelectedItem as ListBoxItem);
-            this.vm.VM_Speed = Convert.ToDouble(speedBox.Content.ToString());
+            this.vm.VM_PlayingSpeed = Convert.ToDouble(speedBox.Content.ToString());
         }
 
         private void Time_Changed_Click(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
-            this.vm.VM_Speed = Convert.ToDouble(sliProgress.Value.ToString());
+            this.vm.VM_PlayingSpeed = Convert.ToDouble(sliProgress.Value.ToString());
         }
     }
 }

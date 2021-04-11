@@ -31,6 +31,8 @@ namespace FlightSimulator.Views
             DataContext = vm;
             this.dash.DataContext = f.dashVM;
             this.dash.SetVM(f.dashVM);
+            this.media.DataContext = f.mediaVM;
+            this.media.SetVM(f.mediaVM);
                         Loaded += StartSim;
             
         }

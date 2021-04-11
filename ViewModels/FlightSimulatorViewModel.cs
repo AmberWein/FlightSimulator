@@ -15,12 +15,14 @@ namespace FlightSimulator.ViewModels
         private IFlightSimulatorModel model;
         public bool VM_IsPlay { get { return model.IsPlay; } set { model.IsPlay = true; } }
         public DashboardViewModel dashVM { get; internal set; }
+        public MediaPlayerViewModel mediaVM { get; internal set; }
         public FlightSimulatorViewModel(IFlightSimulatorModel m)
         {
             this.model = m;
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged("VM_" + e.PropertyName); };
 
             dashVM = new DashboardViewModel(this.model);
+            mediaVM = new MediaPlayerViewModel(this.model);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

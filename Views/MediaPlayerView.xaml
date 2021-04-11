@@ -43,7 +43,7 @@
                 <TextBlock VerticalAlignment="Center" Margin="70,10,0,30" FontSize="24">Play speed</TextBlock>
 
                 <ComboBox x:Name="speedBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="10, 5, 10, 5"
-                 SelectedValue="{Binding VM_Speed}"/>
+                 SelectedValue="{Binding VM_PlayingSpeed}"/>
 
 
                 <StatusBarItem Margin="0,0,-246,0">

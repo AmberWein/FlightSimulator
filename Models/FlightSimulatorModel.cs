@@ -52,14 +52,27 @@ namespace FlightSimulator.Models
         private Client client;
         private int lineNumber;
         public int LineNumber { get { return lineNumber;} set { lineNumber = value; /* change loop*/} }
-        private int playingSpeed;
-        public int PlayingSpeed { get { return playingSpeed;} set { playingSpeed = value; /* need to check. if getting 1.5 from media player, should be 100/1.5?*/} }
+        private double playingSpeed;
+        public double PlayingSpeed { get { return playingSpeed;} set {
+                playingSpeed = value; /* need to check. if getting 1.5 from media player, should be 100/1.5?*/} }
         private Dictionary<string, ArrayList> dataMap;
-        public Dictionary<string, ArrayList> DataMap { get{return dataMap;} set{dataMap = value; /* should only occur once and make prog start. do we need to notify anyone?*/}}
+        public Dictionary<string, ArrayList> DataMap { get{return dataMap;} 
+            set
+            {
+                dataMap = value; /* should only occur once and make prog start. do we need to notify anyone?*/ 
+            }
+        }
         private ArrayList dataLines;
         public ArrayList DataLines { get {return dataLines;} set{dataLines = value; MaxLine = dataLines.Count;/* should only occur once. do we need to notify anyone?*/}}
 
-
+        private double timer;
+        public double Timer
+        {
+            get { return timer; }
+            set { timer = value; }
+        }
+        private double finishTime;
+        public double FinishTime { get { return finishTime; } set { finishTime = value; } }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged(string propName)
@@ -86,11 +99,13 @@ namespace FlightSimulator.Models
             // initialize members
             maxLine = 0;
             lineNumber = 0;
-            playingSpeed = 50;
+            playingSpeed = 1;
             dataMap = null;
             dataLines = null;
             // also create other models and put.??
             client = new Client();
+            timer = 0;
+            finishTime = 0;
         }
         private float yaw;
         public float Yaw
@@ -181,12 +196,16 @@ namespace FlightSimulator.Models
             AirSpeed = 0;
         }
         public void StartFlying()
-        {/*
+        {
+            int sleepingTime =(int) (100 / PlayingSpeed);
+            /*
+          * 
             int sign= client.Connect();
             if (sign !=1)
                 return;*/
            while (isPlay)
             {
+                sleepingTime = (int)(100 / PlayingSpeed);
                 // we might need to get the proper lineNumber. check if this gets changes from mediaplayerview
                 Yaw =  float.Parse(DataMap["side-slip-deg"][lineNumber].ToString());
                 Pitch =  float.Parse(DataMap["pitch-deg"][lineNumber].ToString());
@@ -202,7 +221,7 @@ namespace FlightSimulator.Models
                     initData();
                    // break;
                 }
-                System.Threading.Thread.Sleep(playingSpeed);
+                System.Threading.Thread.Sleep(sleepingTime);
             }
             // should be a wl(hile and change all properties every time we move and also send line to client
         }
