@@ -13,7 +13,6 @@ namespace FlightSimulator.Models
         ArrayList HeadersList { get; set; }
         string CsvPath { get; set; }
         Dictionary<string, ArrayList> DataMap { get; set; }
-        ArrayList DataLines { get; set;}
-
+        ArrayList DataLines { get; set; }
     }
 }
