@@ -41,11 +41,7 @@
                 </Button>
                 <Separator></Separator>
                 <TextBlock VerticalAlignment="Center" Margin="70,10,0,30" FontSize="24">Play speed</TextBlock>
-                <ComboBox Name="Speed_Box" SelectedItem ="{Binding VM_Speed, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="100" Height="30" Margin="15,10,0,30" SelectionChanged="Speed_Changed_Click">
-                    <ComboBoxItem Content="1"></ComboBoxItem>
-                    <ComboBoxItem Content="1.25"></ComboBoxItem>
-                    <ComboBoxItem Content="1.75"></ComboBoxItem>
-                    <ComboBoxItem Content="2"></ComboBoxItem>
+                <ComboBox x:Name="speedBox" SelectedItem ="{Binding VM_Speed, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="100" Height="30" Margin="15,10,0,30" SelectionChanged="Speed_Changed_Click">
                 </ComboBox>
 
                 <StatusBarItem Margin="0,0,-246,0">

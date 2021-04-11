@@ -4,15 +4,13 @@ namespace FlightSimulator.Models
 {
     class MediaPlayerModel : IMediaPlayerModel
     {
-        private bool isPlay;
         private double speed;
         private double timer;
         private bool userIsDraggingSlide;
 
         public MediaPlayerModel()
         {
-            this.isPlay = false;
-            this.speed = 1;
+            this.speed = 0;
             this.timer = 0;
             this.userIsDraggingSlide = false;
 
@@ -25,16 +23,6 @@ namespace FlightSimulator.Models
             if (this.PropertyChanged != null)
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public bool IsPlay
-        {
-            get { return isPlay; }
-            set
-            {
-                isPlay = value;
-                NotifyPropertyChanged("IsPlay");
             }
         }
 

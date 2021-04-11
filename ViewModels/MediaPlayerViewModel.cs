@@ -25,15 +25,6 @@ namespace FlightSimulator.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public bool VM_IsPlay
-        {
-            get { return model.IsPlay; }
-            set
-            {
-                model.IsPlay = value;
-            }
-        }
-
         public double VM_Speed
         {
             get { return model.Speed; }
