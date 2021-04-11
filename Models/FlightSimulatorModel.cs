@@ -28,7 +28,7 @@ namespace FlightSimulator.Models
         public int MaxLine
         {
             get {  return maxLine;}
-            set { maxLine=value;}
+            set { maxLine=value; FinishTime = 0.1 * (double)maxLine; }
         }
         // need maximum line for media player
         
@@ -51,7 +51,7 @@ namespace FlightSimulator.Models
         // private Imodel[] controllers;
         private Client client;
         private int lineNumber;
-        public int LineNumber { get { return lineNumber;} set { lineNumber = value; /* change loop*/} }
+        public int LineNumber { get { return lineNumber;} set { lineNumber = value; Timer += 0.1;/* change loop*/} }
         private double playingSpeed;
         public double PlayingSpeed { get { return playingSpeed;} set {
                 playingSpeed = value; /* need to check. if getting 1.5 from media player, should be 100/1.5?*/} }
@@ -69,8 +69,17 @@ namespace FlightSimulator.Models
         public double Timer
         {
             get { return timer; }
-            set { timer = value; }
+            set { 
+                timer = value;
+               /* if (timer == 0)
+                    LineNumber = 0;
+                else
+                {
+                    LineNumber =(int) timer * 10;
+                }*/
+            }
         }
+
         private double finishTime;
         public double FinishTime { get { return finishTime; } set { finishTime = value; } }
         public event PropertyChangedEventHandler PropertyChanged;

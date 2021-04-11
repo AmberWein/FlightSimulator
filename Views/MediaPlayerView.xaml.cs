@@ -37,7 +37,7 @@ namespace FlightSimulator.Views
         {
             this.speeds = new List<double>();
 
-            for (double i = 0; i <= 2; i += 0.25)
+            for (double i = 0.25; i <= 2; i += 0.25)
             {
                 this.speeds.Add(i);
             }
@@ -87,7 +87,7 @@ namespace FlightSimulator.Views
         }
         private void Forward_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            this.vm.VM_Timer += 1;
+            this.vm.VM_Timer += 0.1;
             lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
         }
 
