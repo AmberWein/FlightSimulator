@@ -19,5 +19,10 @@ namespace FlightSimulator.Models
         float Orientation { get;set;}
         float AirSpeed { get;set;}
         float Altitude { get;set;}
+        //properties for gear control
+        float Throttle { set; get; }
+        float Rudder { set; get; }
+        float Aileron { set; get; }
+        float Elevator { set; get; }
     }
 }
