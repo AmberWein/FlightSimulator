@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FlightSimulator.ViewModels;
+using FlightSimulator.Models;
+using System.Threading;
 
 namespace FlightSimulator.Views
 {
@@ -21,9 +23,14 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class FlightSimulatorView : Page
     {
+        public void StartSim(object sender, RoutedEventArgs e) {
+            //ThreadPool.QueueUserWorkItem(_ => { Dispatcher.BeginInvoke(new Action(()=>{vm.VM_IsPlay = true;}));});
+            vm.VM_IsPlay = true;
+        }
         public FlightSimulatorView()
         {
             InitializeComponent();
+
         }
         private FlightSimulatorViewModel vm;
         public FlightSimulatorViewModel Vm
@@ -36,6 +43,11 @@ namespace FlightSimulator.Views
             InitializeComponent();
             vm = f;
             DataContext = vm;
+            this.dash.DataContext = f.dashVM;
+            this.dash.SetVM(f.dashVM);
+                        Loaded += StartSim;
+            
         }
+
     }
 }
