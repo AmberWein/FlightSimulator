@@ -7,9 +7,19 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FlightSimulatorView">
+    
 
     <Grid>
-        <local:DashboardView x:Name="dash"/>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="497*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+
+        <local:DashboardView x:Name="dash" Grid.Column="0"/>
+        <local:GearControlView x:Name="gear" />
+
+
+
     </Grid>
 </Page>

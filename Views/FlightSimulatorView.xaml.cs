@@ -45,8 +45,10 @@ namespace FlightSimulator.Views
             DataContext = vm;
             this.dash.DataContext = f.dashVM;
             this.dash.SetVM(f.dashVM);
-                        Loaded += StartSim;
-            
+            this.gear.DataContext = f.gearVM;
+            this.gear.SetVM(f.gearVM);
+            Loaded += StartSim;
+           
         }
 
     }

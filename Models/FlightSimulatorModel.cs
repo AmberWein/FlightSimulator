@@ -235,6 +235,9 @@ namespace FlightSimulator.Models
                 Orientation =  float.Parse(DataMap["heading-deg"][lineNumber].ToString());
                 Altitude =  float.Parse(DataMap["altitude-ft"][lineNumber].ToString());
                 AirSpeed =  float.Parse(DataMap["airspeed-kt"][lineNumber].ToString());
+                Rudder = float.Parse(DataMap["rudder"][lineNumber].ToString());
+                Throttle = float.Parse(DataMap["throttle"][lineNumber].ToString());
+
                 lineNumber++;
                 if (lineNumber >= maxLine)
                 {
