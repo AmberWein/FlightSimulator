@@ -110,6 +110,7 @@
     <Compile Include="Models\ISetModel.cs" />
     <Compile Include="Models\MediaPlayerModel.cs" />
     <Compile Include="Models\SetModel.cs" />
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="plugins\AnomalyDetector.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\FlightSimulatorViewModel.cs" />

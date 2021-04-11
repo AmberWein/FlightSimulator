@@ -83,9 +83,6 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("DataMap");
             }
         }
-        
-        private ArrayList dataLines;
-        public ArrayList DataLines { get {return dataLines;} set{dataLines = value; NotifyPropertyChanged("DataLines");/* should only occur once. do we need to notify anyone?*/}}
 
         public SetModel()
         {

@@ -46,6 +46,11 @@ namespace FlightSimulator.ViewModels
             }
         }
 
+        public double VM_FinishTime
+        {
+            get { return model.FinishTime; }
+        }
+
         public bool VM_UserIsDraggingSlider
         {
             get { return model.UserIsDraggingSlider; }

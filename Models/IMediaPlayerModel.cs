@@ -6,6 +6,7 @@ namespace FlightSimulator.Models
     {
         double Speed { set; get; }
         double Timer { set; get; }
+        double FinishTime { set; get; }
         bool UserIsDraggingSlider { set; get; }
     }
 }
