@@ -28,7 +28,7 @@ namespace FlightSimulator.ViewModels
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
 
-                // NotifyPropertyChanged("VM_" + e.PropertyName);
+                 NotifyPropertyChanged("VM_" + e.PropertyName);
             };
         }
 

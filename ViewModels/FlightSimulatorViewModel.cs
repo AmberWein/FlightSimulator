@@ -16,6 +16,7 @@ namespace FlightSimulator.ViewModels
         public bool VM_IsPlay { get { return model.IsPlay; } set { model.IsPlay = true; } }
         public DashboardViewModel dashVM { get; internal set; }
         public GearControlViewModel gearVM { get; internal set; }
+        public GraphsViewModel graphsVM { get; internal set; }
 
         public FlightSimulatorViewModel(IFlightSimulatorModel m)
         {
@@ -24,6 +25,7 @@ namespace FlightSimulator.ViewModels
 
             dashVM = new DashboardViewModel(this.model);
             gearVM = new GearControlViewModel(this.model);
+            graphsVM = new GraphsViewModel(this.model);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
