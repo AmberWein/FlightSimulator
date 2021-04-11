@@ -99,7 +99,7 @@
 	      <Generator>MSBuild:Compile</Generator>
 	      <SubType>Designer</SubType>
 	    </ApplicationDefinition>
-      Compile Include="Communication\Client.cs" />
+      	    <Compile Include="Communication\Client.cs" />
 	    <Compile Include="IO\XMLParser.cs" />
 	    <Compile Include="Models\DashboardModel.cs" />
 	    <Compile Include="Models\FlightSimulatorModel.cs" />
