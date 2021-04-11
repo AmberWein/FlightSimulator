@@ -2,30 +2,21 @@
 using FlightSimulator.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FlightSimulator.Views
 {
     /// <summary>
-    /// Interaction logic for Media_Player_View.xaml
+    /// Interaction logic for MediaPlayerView.xaml
     /// </summary>
-    public partial class Media_Player_View : UserControl
+    public partial class MediaPlayerView : UserControl
     {
         private MediaPlayerViewModel vm;
         List<double> speeds;
 
-        public Media_Player_View()
+        public MediaPlayerView()
         {
             FillList();
             InitializeComponent();
@@ -68,7 +59,7 @@ namespace FlightSimulator.Views
         }
         private void Stop_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            if(this.vm.VM_Timer != 0)
+            if (this.vm.VM_Timer != 0)
                 this.vm.VM_Timer = 0;
 
             if (this.vm.VM_Speed != 0)
@@ -99,9 +90,9 @@ namespace FlightSimulator.Views
             //vm.VM_UserIsDraggingSlider = false;
             //mePlayer.Position = TimeSpan.FromSeconds(sliProgress.Value);
         }
-        private void Time_Changed_Click(object sender, RoutedEventArgs e)
+        private void Time_Changed_Click(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            //lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
+            this.vm.VM_Speed = Convert.ToDouble(e.NewValue.ToString());
         }
     }
 }
