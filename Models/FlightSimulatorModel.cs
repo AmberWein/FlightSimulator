@@ -4,6 +4,7 @@ using System.Collections;
 using System.Threading;
 using System.ComponentModel;
 using FlightSimulator.Communication;
+using OxyPlot;
 
 namespace FlightSimulator.Models
 {
@@ -124,6 +125,8 @@ namespace FlightSimulator.Models
             orientation = 0;
             altitude = 0;
             airSpeed = 0;
+            plotModel = new PlotModel(); //PlotModel?
+
         }
         // Dashboard properties
         private float yaw;
@@ -240,7 +243,15 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("Rudder");
             }
         }
-        
+        private PlotModel plotModel;
+        public PlotModel PlotModel
+        {
+            get { return plotModel; }
+            set { plotModel = value;
+                NotifyPropertyChanged("PlotModel"); 
+            }
+        }
+
         // initialize dashboard data
         public void InitDashboardData()
         {
