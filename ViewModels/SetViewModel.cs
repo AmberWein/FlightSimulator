@@ -15,8 +15,10 @@ namespace FlightSimulator.ViewModels
         public SetViewModel(ISetModel m)
         {
             this.model = m;
+            // make this a listener for PropertyChanged of model
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged("VM_" + e.PropertyName); };
         }
+        // INotifyPropertyChanged implementations
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
         {
@@ -37,14 +39,13 @@ namespace FlightSimulator.ViewModels
                 model.CsvPath = value;
             }
         }
-        public Dictionary<string, ArrayList> VM_DataMap //might not be beeded here at all. depends where connection to Simulator happens(model or VM)
-            // if we keep then add CM_DataLines
+        /*public Dictionary<string, ArrayList> VM_DataMap
         {
             get
             {
                 return model.DataMap;
             }
-        }
+        }*/
 
     }
 }

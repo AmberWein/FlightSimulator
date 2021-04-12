@@ -92,6 +92,8 @@
     <Compile Include="ViewModels\FlightSimulatorViewModel.cs" />
     <Compile Include="ViewModels\GearControlViewModel.cs" />
     <Compile Include="ViewModels\GraphsViewModel.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="plugins\AnomalyDetector.cs" />
     <Compile Include="ViewModels\MediaPlayerViewModel.cs" />
     <Compile Include="ViewModels\SetViewModel.cs" />
     <Compile Include="Views\DashboardView.xaml.cs">
@@ -181,6 +183,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Images\" />
+    <Resource Include="Views\Images\forward_button.png" />
+    <Resource Include="Views\Images\open_button.png" />
+    <Resource Include="Views\Images\pause_button.png" />
+    <Resource Include="Views\Images\play_button.jpg" />
+    <Resource Include="Views\Images\stop_button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

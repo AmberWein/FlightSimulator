@@ -1,23 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
 using System.ComponentModel;
-using FlightSimulator.ViewModels;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using FlightSimulator.IO;
 using FlightSimulator.Communication;
 
 namespace FlightSimulator.Models
@@ -29,14 +14,38 @@ namespace FlightSimulator.Models
         private float aileron;
         private float throttle;
         private float rudder;
-        private int maxLine;
-        public int MaxLine
+        // INotifyPropertyChanged implementations
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string propName)
         {
-            get {  return maxLine;}
-            set { maxLine=value;}
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-        // need maximum line for media player
-        
+
+        private readonly ISetModel settings;
+        private Client client;
+        private Dictionary<string, ArrayList> dataMap;
+        public Dictionary<string, ArrayList> DataMap
+        {
+            get { return dataMap; }
+            set
+            {
+                // this should only occur once, as csv file will be parsed within the SetModel
+                dataMap = value;
+            }
+        }
+        private ArrayList dataLines;
+        public ArrayList DataLines
+        {
+            get { return dataLines; }
+            set
+            {
+                // this should only occur once, as csv file will be parsed within the SetModel
+                dataLines = value;
+                // 10 Hz means reading 10 lines in 1 second
+                FinishTime = 0.1 * (double)dataLines.Count;
+            }
+        }
         // indicates wheater simulator is on play mode.
         private bool isPlay;
         public bool IsPlay 
@@ -45,33 +54,46 @@ namespace FlightSimulator.Models
             set 
             {
                 isPlay = value; 
-                // when set to true start a thread to get flight data from map
+                // when set to true, start the flight in a new thread
                 if (isPlay)
                 {
                     new Thread(StartFlying).Start();
                 }
             } 
         }
-        private ISetModel settings;
-        // private Imodel[] controllers;
-        private Client client;
-        private int lineNumber;
-        public int LineNumber { get { return lineNumber;} set { lineNumber = value; /* change loop*/} }
-        private int playingSpeed;
-        public int PlayingSpeed { get { return playingSpeed;} set { playingSpeed = value; /* need to check. if getting 1.5 from media player, should be 100/1.5?*/} }
-        private Dictionary<string, ArrayList> dataMap;
-        public Dictionary<string, ArrayList> DataMap { get{return dataMap;} set{dataMap = value; /* should only occur once and make prog start. do we need to notify anyone?*/}}
-        private ArrayList dataLines;
-        public ArrayList DataLines { get {return dataLines;} set{dataLines = value; MaxLine = dataLines.Count;/* should only occur once. do we need to notify anyone?*/}}
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NotifyPropertyChanged(string propName)
+        private double playingSpeed;
+        public double PlayingSpeed
         {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            get { return playingSpeed; }
+            set
+            {
+                // this is only controlled from View, no need to Notify
+                playingSpeed = value; 
+            }
         }
+
+        private double timer;
+        public double Timer
+        {
+            get { return timer; }
+            set { 
+                timer = value;
+                NotifyPropertyChanged("Timer");
+            }
+        }
+
+        private double finishTime;
+        public double FinishTime { 
+            get { return finishTime; } 
+            set
+            { 
+                finishTime = value; 
+                NotifyPropertyChanged("FinishTime"); 
+            }
+        }
+        
+
+        // make this model a listener to changes whitin settings. When the data is uploaded, get it.
         public void SettingsChanged (Object sender, PropertyChangedEventArgs e) {
             if(string.Compare(e.PropertyName,"DataMap")==0)
             {
@@ -88,15 +110,22 @@ namespace FlightSimulator.Models
             // add to settings.PropertyChanged event to listen for changes
             settings = set;
             settings.PropertyChanged += SettingsChanged;
+            // create a new client that will send data to local IP on port 5400
+            client = new Client();
             // initialize members
-            maxLine = 0;
-            lineNumber = 0;
-            playingSpeed = 50;
             dataMap = null;
             dataLines = null;
-            // also create other models and put.??
-            client = new Client();
+            playingSpeed = 1;            
+            timer = 0;
+            finishTime = 0;
+            yaw = 0;
+            pitch = 0;
+            roll = 0;
+            orientation = 0;
+            altitude = 0;
+            airSpeed = 0;
         }
+        // Dashboard properties
         private float yaw;
         public float Yaw
         {
@@ -211,7 +240,9 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("Rudder");
             }
         }
-        public void initData()
+        
+        // initialize dashboard data
+        public void InitDashboardData()
         {
             Yaw = 0;
             Pitch = 0;
@@ -224,11 +255,20 @@ namespace FlightSimulator.Models
             Aileron = 0; 
             Elevator = 0; 
         }
+        // start updating data as the time passes
         public void StartFlying()
         {
+            int sleepingTime, lineNumber;
+            
+           
+            /*int sign= client.Connect();
+            if (sign !=1)
+                return;*/
            while (isPlay)
             {
-                // we might need to get the proper lineNumber. check if this gets changes from mediaplayerview
+                lineNumber = (int)(Timer * 10.0);
+                sleepingTime = (int)(100 / PlayingSpeed);
+                // get current values for dashboard properties
                 Yaw =  float.Parse(DataMap["side-slip-deg"][lineNumber].ToString());
                 Pitch =  float.Parse(DataMap["pitch-deg"][lineNumber].ToString());
                 Roll =  float.Parse(DataMap["roll-deg"][lineNumber].ToString());
@@ -239,18 +279,18 @@ namespace FlightSimulator.Models
                 Throttle = float.Parse(DataMap["throttle"][lineNumber].ToString());
                 Aileron = float.Parse(DataMap["aileron"][lineNumber].ToString());
                 Elevator= float.Parse(DataMap["elevator"][lineNumber].ToString());
-
-
-                lineNumber++;
-                if (lineNumber >= maxLine)
+                //client.Send(DataLines[lineNumber].ToString());
+                Timer += 0.1;
+                // if we finished to read all lines
+                if (Timer >= FinishTime)
                 {
                     IsPlay = false;
-                    initData();
+                    InitDashboardData();
                    // break;
                 }
-                System.Threading.Thread.Sleep(playingSpeed);
+                // make thread sleep, to control frequency
+                System.Threading.Thread.Sleep(sleepingTime);
             }
-            // should be a wl(hile and change all properties every time we move and also send line to client
         }
     }
 }

@@ -1,20 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FlightSimulator.ViewModels;
-using FlightSimulator.Models;
-using System.Threading;
 
 namespace FlightSimulator.Views
 {
@@ -43,14 +29,17 @@ namespace FlightSimulator.Views
             InitializeComponent();
             vm = f;
             DataContext = vm;
-            this.dash.DataContext = f.dashVM;
-            this.dash.SetVM(f.dashVM);
+
+            this.dash.DataContext = f.DashboardVM;
+            this.dash.SetVM(f.DashboardVM);
+            this.media.DataContext = f.MediaPlayerVM;
+            this.media.SetVM(f.MediaPlayerVM);
             this.gear.DataContext = f.gearVM;
             this.gear.SetVM(f.gearVM);
             this.graphs.DataContext =f.graphsVM;
             this.graphs.SetVM(f.graphsVM);
             Loaded += StartSim;
-           
+
         }
 
     }

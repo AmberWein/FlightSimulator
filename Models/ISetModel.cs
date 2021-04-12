@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections;
 
 namespace FlightSimulator.Models
 {
     public interface ISetModel : INotifyPropertyChanged
     {
+        // properties for flight
         ArrayList HeadersList { get; set; }
         string CsvPath { get; set; }
         Dictionary<string, ArrayList> DataMap { get; set; }

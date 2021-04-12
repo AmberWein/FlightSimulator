@@ -2,51 +2,48 @@
 using FlightSimulator.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FlightSimulator.Views
 {
     /// <summary>
-    /// Interaction logic for Media_Player_View.xaml
+    /// Interaction logic for MediaPlayerView.xaml
     /// </summary>
-    public partial class Media_Player_View : UserControl
+    public partial class MediaPlayerView : UserControl
     {
         private MediaPlayerViewModel vm;
         List<double> speeds;
 
-        public Media_Player_View()
+        public MediaPlayerView()
         {
             FillList();
             InitializeComponent();
-            vm = new MediaPlayerViewModel(new MediaPlayerModel());
-            DataContext = vm;
+           // vm = new MediaPlayerViewModel(new MediaPlayerModel());
+            //DataContext = vm;
             Binding dict = new Binding
             {
                 Source = speeds
             };
             speedBox.SetBinding(ComboBox.ItemsSourceProperty, dict);
         }
+        public void SetVM(MediaPlayerViewModel mediaVM)
+        {
+            this.vm = mediaVM;
+        }
+
         private void FillList()
         {
             this.speeds = new List<double>();
 
-            for (double i = 0; i <= 2; i += 0.25)
+            for (double i = 0.25; i <= 2; i += 0.25)
             {
                 this.speeds.Add(i);
             }
         }
-        private void Open_Media_Player_Click(object sender, RoutedEventArgs e)
+
+         private void Open_Media_Player_Click(object sender, RoutedEventArgs e)
         {
             // if(Open_CanExecute(e))
             //{
@@ -59,49 +56,80 @@ namespace FlightSimulator.Views
         //}
         private void Backwards_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            //if (vm.VM_Timer >= 0.1)
-            //vm.VM_Timer -= 0.1;
+            //this.vm.VM_Timer -= 0.1;
+           // lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
+
+            if (vm.VM_Timer >= 1)
+            {
+                this.vm.VM_Timer-= 1;
+            }
+            else { this.vm.VM_Timer=0; }
+            //this.vm.VM_LineNumber -= 10;
+            
+            //this.vm.VM_Timer += 1;
+            //lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
+            lblProgressStatus.Text = TimeSpan.FromSeconds(vm.VM_Timer).ToString(@"hh\:mm\:ss");
         }
         private void Play_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            this.vm.VM_Timer -= 0.1;
+            //  if (this.vm.VM_PlayingSpeed == 0)
+            //      this.vm.VM_PlayingSpeed = 1;
+            if (!this.vm.VM_IsPlay)
+                this.vm.VM_IsPlay = true;
         }
         private void Stop_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            if(this.vm.VM_Timer != 0)
+            if (this.vm.VM_IsPlay)
+                this.vm.VM_IsPlay = false;
+            if (this.vm.VM_Timer != 0)
                 this.vm.VM_Timer = 0;
+            vm.VM_InitData();
+            //if (this.vm.VM_Timer != 0)
+              //  this.vm.VM_Timer = 0;
 
-            if (this.vm.VM_Speed != 0)
-                this.vm.VM_Speed = 0;
+         //   if (this.vm.VM_PlayingSpeed != 0)
+           //     this.vm.VM_PlayingSpeed = 0;
+
         }
         private void Pause_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            if (this.vm.VM_Speed != 0)
-                this.vm.VM_Speed = 0;
+         //   if (this.vm.VM_PlayingSpeed != 0)
+          //      this.vm.VM_PlayingSpeed = 0;
+          if (this.vm.VM_IsPlay)
+                this.vm.VM_IsPlay = false;
+            
         }
         private void Forward_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            this.vm.VM_Timer += 0.1;
+            // should check if not over time?
+            this.vm.VM_Timer += 1;
+            
+            //this.vm.VM_Timer += 1;
+            //lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
+            lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
         }
 
         private void Speed_Changed_Click(object sender, RoutedEventArgs e)
         {
-            ListBoxItem Speed_Box = ((sender as ListBox).SelectedItem as ListBoxItem);
-            this.vm.VM_Speed = Convert.ToDouble(Speed_Box.Content.ToString());
+            ListBoxItem speedBox = ((sender as ListBox).SelectedItem as ListBoxItem);
+            this.vm.VM_PlayingSpeed = Convert.ToDouble(speedBox.Content.ToString());
         }
 
-        private void Drag_Started_Click(object sender, RoutedEventArgs e)
+        private void Time_Changed_Click(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            //vm.VM_UserIsDraggingSlider = true;
+            lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
+            this.vm.VM_Timer = (Convert.ToDouble(sliProgress.Value.ToString())); // why this?
         }
-        private void Drag_Completed_Click(object sender, RoutedEventArgs e)
-        {
-            //vm.VM_UserIsDraggingSlider = false;
-            //mePlayer.Position = TimeSpan.FromSeconds(sliProgress.Value);
-        }
-        private void Time_Changed_Click(object sender, RoutedEventArgs e)
-        {
-            //lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
-        }
+
+        
     }
 }
+
+
+ /*   private void Speed_Changed_Click(object sender, RoutedEventArgs e)
+    {
+        //this.vm.VM_Speed = Convert.ToDouble(Speed_Box.SelectedItem.);
+
+        ListBoxItem Speed_Box = ((sender as ListBox).SelectedItem as ListBoxItem);
+        this.vm.VM_Speed = Convert.ToDouble(Speed_Box.Content.ToString());
+    }*/
