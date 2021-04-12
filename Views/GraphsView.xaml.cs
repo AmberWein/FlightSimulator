@@ -26,7 +26,7 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class GraphsView : UserControl
     {
-        GraphsViewModel vm;
+     /*   GraphsViewModel vm;
        // public ArrayList data { get; private set; }
         public GraphsView()
         {

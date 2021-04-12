@@ -7,20 +7,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FlightSimulatorView">
-    
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="497*"/>
-            <ColumnDefinition Width="100*"/>
-        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="250"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <local:DashboardView x:Name="dash" Grid.Row="0" />
-        <local:MediaPlayerView x:Name="media" Grid.Row="1"/>
-        <local:GraphsView x:Name="graphs" Grid.ColumnSpan="1"/>
-        <local:GearControlView x:Name="gear" />
+        <local:MediaPlayerView x:Name="media" Grid.Row="2" Margin="0,1,0,-2.8"/>
+        <local:GearControlView x:Name="gear" Grid.Row="1" />
     </Grid>
 </Page>

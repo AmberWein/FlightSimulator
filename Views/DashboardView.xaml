@@ -8,6 +8,8 @@
 			 xmlns:controls="using:Syncfusion.UI.Xaml.Gauges"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="800">
+
+    <Viewbox Width="200" Height=" 80">
     <Grid Background="AntiqueWhite">
 
         <Grid.ColumnDefinitions>
@@ -84,4 +86,5 @@
             <TextBox x:Name="PitchDataBox" Text="{Binding VM_Pitch}" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="246" />
         </StackPanel>
     </Grid>
+    </Viewbox>
 </UserControl>
