@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using FlightSimulator.Models;
 
@@ -13,18 +8,7 @@ namespace FlightSimulator.ViewModels
     {
         
         private IFlightSimulatorModel model;
-        public bool VM_IsPlay { get { return model.IsPlay; } set { model.IsPlay = true; } }
-        public DashboardViewModel dashVM { get; internal set; }
-        public MediaPlayerViewModel mediaVM { get; internal set; }
-        public FlightSimulatorViewModel(IFlightSimulatorModel m)
-        {
-            this.model = m;
-            model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged("VM_" + e.PropertyName); };
-
-            dashVM = new DashboardViewModel(this.model);
-            mediaVM = new MediaPlayerViewModel(this.model);
-        }
-
+        // INotifyPropertyChanged implementations
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
         {
@@ -33,8 +17,21 @@ namespace FlightSimulator.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-
-        public Dictionary<string, ArrayList> VM_DataMap
+        
+        // Flight Simulator Controllers ViewModels
+        public DashboardViewModel DashboardVM { get; internal set; }
+        public MediaPlayerViewModel MediaPlayerVM { get; internal set; }
+        public FlightSimulatorViewModel(IFlightSimulatorModel m)
+        {
+            this.model = m;
+            model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged("VM_" + e.PropertyName); };
+            // create the viewModels that will contact the model
+            DashboardVM = new DashboardViewModel(this.model);
+            MediaPlayerVM = new MediaPlayerViewModel(this.model);
+        }
+        public bool VM_IsPlay { get { return model.IsPlay; } set { model.IsPlay = true; } }
+        
+       /* public Dictionary<string, ArrayList> VM_DataMap
         {
             get
             {
@@ -55,11 +52,7 @@ namespace FlightSimulator.ViewModels
             {
                 model.DataLines = value;
             }
-        }
-
-
-        
-        /*this is a try to generate a vm for controller that will be directed to thie model*/
+        }*/
         
     }
 }

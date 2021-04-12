@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections;
 using FlightSimulator.IO;
@@ -11,9 +7,8 @@ namespace FlightSimulator.Models
 {
     class SetModel : ISetModel
     {
-        // INotifyPropertyChanged 
+        // INotifyPropertyChanged  implementations
         public event PropertyChangedEventHandler PropertyChanged;
-
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -42,8 +37,8 @@ namespace FlightSimulator.Models
             }
             set
             {
-                // maybe should check if value = null?
-                // maybe parsing shouldnt be here, and if not, we should hold also lines.
+                // should i check null?
+                // first, validate file existence, then parse it
                 if (FileParser.IsValidPath(value)) { 
                     csvPath = value;
                     NotifyPropertyChanged("CsvPath");
@@ -66,7 +61,7 @@ namespace FlightSimulator.Models
             }
             set
             {
-                dataLines = value;/* should only occur once. do we need to notify anyone?*/
+                dataLines = value;
                 NotifyPropertyChanged("DataLines");
             }
         }
@@ -83,14 +78,16 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("DataMap");
             }
         }
-
+        // Constructor
         public SetModel()
         {
             csvPath = null;
+            dataMap = null;
+            dataLines = null;
+            // parse xml for headers
             XMLParser xmlParser = new XMLParser();
             xmlParser.Parse();
             headersList = xmlParser.Headers;
-            dataMap = null;
         }
     }
 }

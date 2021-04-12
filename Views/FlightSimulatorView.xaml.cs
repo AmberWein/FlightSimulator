@@ -29,10 +29,10 @@ namespace FlightSimulator.Views
             InitializeComponent();
             vm = f;
             DataContext = vm;
-            this.dash.DataContext = f.dashVM;
-            this.dash.SetVM(f.dashVM);
-            this.media.DataContext = f.mediaVM;
-            this.media.SetVM(f.mediaVM);
+            this.dash.DataContext = f.DashboardVM;
+            this.dash.SetVM(f.DashboardVM);
+            this.media.DataContext = f.MediaPlayerVM;
+            this.media.SetVM(f.MediaPlayerVM);
                         Loaded += StartSim;
             
         }

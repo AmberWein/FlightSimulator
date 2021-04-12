@@ -1,18 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FlightSimulator.Models;
 
 namespace FlightSimulator.ViewModels
 {
     public class DashboardViewModel : INotifyPropertyChanged
     {
-        private IFlightSimulatorModel model; // this is a try to hold only one model for all controllers!
+        private IFlightSimulatorModel model;
+        // INotifyPropertyChanged implementations
         public event PropertyChangedEventHandler PropertyChanged;
-
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -20,6 +16,7 @@ namespace FlightSimulator.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+        
         public float VM_Yaw
         {
             get { return model.Yaw; }
@@ -68,6 +65,7 @@ namespace FlightSimulator.ViewModels
             }
                  set { }
         }
+        // select to notify only events that are relevant to dashboard oroperties
         public void DashboardPropertyChange(Object sender, PropertyChangedEventArgs e)
         {
             // example for one
@@ -109,6 +107,7 @@ namespace FlightSimulator.ViewModels
             }
 
         }
+        // Constructor
         public DashboardViewModel(IFlightSimulatorModel m)
         {
             this.model = m;

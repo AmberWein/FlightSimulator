@@ -214,9 +214,9 @@ namespace FlightSimulator.Models
         public void StartFlying()
         {
             int sleepingTime, lineNumber;
-            /*
-          * 
-            int sign= client.Connect();
+            
+           
+            /*int sign= client.Connect();
             if (sign !=1)
                 return;*/
            while (isPlay)
@@ -230,7 +230,7 @@ namespace FlightSimulator.Models
                 Orientation =  float.Parse(DataMap["heading-deg"][lineNumber].ToString());
                 Altitude =  float.Parse(DataMap["altitude-ft"][lineNumber].ToString());
                 AirSpeed =  float.Parse(DataMap["airspeed-kt"][lineNumber].ToString());
-               // client.Send(DataLines[lineNumber].ToString());
+                //client.Send(DataLines[lineNumber].ToString());
                 Timer += 0.1;
                 // if we finished to read all lines
                 if (Timer >= FinishTime)
