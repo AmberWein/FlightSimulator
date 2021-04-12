@@ -130,6 +130,10 @@ namespace FlightSimulator.ViewModels
             get { return model.MaxLine; }
             set { model.MaxLine = value; }
         }*/
+      public void VM_InitData()
+        {
+            this.model.InitDashboardData();
+        }
     }
 }
 

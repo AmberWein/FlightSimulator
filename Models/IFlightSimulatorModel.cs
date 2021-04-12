@@ -24,6 +24,6 @@ namespace FlightSimulator.Models
         double FinishTime { get; set; }
         //int MaxLine { get; set; }
         //int LineNumber { get; set; }
-        
+        void InitDashboardData();
     }
 }

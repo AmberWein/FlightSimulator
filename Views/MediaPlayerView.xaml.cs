@@ -83,6 +83,7 @@ namespace FlightSimulator.Views
                 this.vm.VM_IsPlay = false;
             if (this.vm.VM_Timer != 0)
                 this.vm.VM_Timer = 0;
+            vm.VM_InitData();
             //if (this.vm.VM_Timer != 0)
               //  this.vm.VM_Timer = 0;
 
