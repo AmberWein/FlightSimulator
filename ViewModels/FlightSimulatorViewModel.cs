@@ -11,11 +11,16 @@ namespace FlightSimulator.ViewModels
 {
     public class FlightSimulatorViewModel : INotifyPropertyChanged
     {
+        
         private IFlightSimulatorModel model;
+        public bool VM_IsPlay { get { return model.IsPlay; } set { model.IsPlay = true; } }
+        public DashboardViewModel dashVM { get; internal set; }
         public FlightSimulatorViewModel(IFlightSimulatorModel m)
         {
             this.model = m;
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged("VM_" + e.PropertyName); };
+
+            dashVM = new DashboardViewModel(this.model);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -49,5 +54,10 @@ namespace FlightSimulator.ViewModels
                 model.DataLines = value;
             }
         }
+
+
+        
+        /*this is a try to generate a vm for controller that will be directed to thie model*/
+        
     }
 }
