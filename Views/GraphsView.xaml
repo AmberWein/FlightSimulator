@@ -12,8 +12,8 @@
     
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <oxy:Plot x:Name="Plot1" Title="A Graph" Binding.SourceUpdated="{Binding ElementName=model}" Margin="10" Grid.Row="1">
-        </oxy:Plot>
+        <oxy:PlotView x:Name="Plot1" Model="{Binding PlotModel}" Margin="10" Grid.Row="1">
+        </oxy:PlotView>
 
 
 
