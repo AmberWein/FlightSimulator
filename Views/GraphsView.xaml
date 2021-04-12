@@ -11,20 +11,15 @@
     
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-
-        <Syncfusion:PinnableListBox HorizontalAlignment="Left" Height="185" VerticalAlignment="Top" Width="160">
-            <Syncfusion:PinnableListBox.ContextMenu>
-                <ContextMenu/>
-            </Syncfusion:PinnableListBox.ContextMenu>
-            <Syncfusion:PinnableListBoxItem Content="PinnableItem1"/>
-            <Syncfusion:PinnableListBoxItem Content="PinnableItem2"/>
-            <Syncfusion:PinnableListBoxItem Content="PinnableItem3"/>
-        </Syncfusion:PinnableListBox>
-        <oxy:Plot Title="{Binding Title}" Width="504" Height="283">
+        <oxy:Plot x:Name="model"  Title="{Binding Title}" FontFamily="Bosch Sans Medium" Foreground="#FF0C6596" FontSize="19" Canvas.Left="298" Canvas.Top="32" Background="AliceBlue" Margin="0,0,10,0" BindingGroup="{Binding ElementName=ls, Mode=OneWay}">
             <oxy:Plot.Series>
-                <oxy:LineSeries ItemsSource="{Binding Points}"/>
+                <oxy:ScatterSeries x:Name="ls" Background="White" ItemsSource="{Binding VM_Data}" Color="ForestGreen" MarkerType="None" MarkerSize="5" MarkerFill="Black">
+
+                </oxy:ScatterSeries>
             </oxy:Plot.Series>
         </oxy:Plot>
+
+
 
     </Grid>
 </UserControl>

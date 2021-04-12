@@ -15,8 +15,8 @@
             <ColumnDefinition Width="497*"/>
             <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
-
-        <local:DashboardView x:Name="dash" Grid.Column="0"/>
+        <local:GraphsView x:Name="graphs" Grid.ColumnSpan="1"/>
+        <local:DashboardView x:Name="dash" Height="20"/>
         <local:GearControlView x:Name="gear" />
 
 

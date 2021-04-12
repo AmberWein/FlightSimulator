@@ -11,7 +11,7 @@ namespace FlightSimulator.ViewModels
 {
     public class FlightSimulatorViewModel : INotifyPropertyChanged
     {
-        
+
         private IFlightSimulatorModel model;
         public bool VM_IsPlay { get { return model.IsPlay; } set { model.IsPlay = true; } }
         public DashboardViewModel dashVM { get; internal set; }
@@ -27,6 +27,7 @@ namespace FlightSimulator.ViewModels
             gearVM = new GearControlViewModel(this.model);
             graphsVM = new GraphsViewModel(this.model);
         }
+  
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)

@@ -24,5 +24,7 @@ namespace FlightSimulator.Models
         float Rudder { set; get; }
         float Aileron { set; get; }
         float Elevator { set; get; }
+
+        
     }
 }

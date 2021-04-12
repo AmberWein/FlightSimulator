@@ -12,6 +12,25 @@ using System.Text;
 using System.Threading.Tasks;
 using FlightSimulator.Models;
 using System.ComponentModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using OxyPlot.Series;
+using OxyPlot.Axes;
+using OxyPlot;
+using System.Collections.Generic;
+using System.Collections;
 
 
 
@@ -22,6 +41,7 @@ namespace FlightSimulator.ViewModels
     {
         private IFlightSimulatorModel model; // this is a try to hold only one model for all controllers!
         public event PropertyChangedEventHandler PropertyChanged;
+
         public GraphsViewModel(IFlightSimulatorModel m)
         {
             this.model = m;
@@ -31,6 +51,26 @@ namespace FlightSimulator.ViewModels
                  NotifyPropertyChanged("VM_" + e.PropertyName);
             };
         }
+        public ScatterSeries VM_Data
+            
+        {
+            get
+            {
+                var s = new ScatterSeries();
+                for (int i = 0; i < 30; i*= 5)
+                {
+                    float n = (float.Parse(model.DataMap["heading-deg"][i].ToString()));
+                    s.Points.Add(new OxyPlot.Series.ScatterPoint(i, i + 9));
+                }
+
+                return s;
+            }
+            set{ }
+        
+
+        }
+
+    
 
 
 
