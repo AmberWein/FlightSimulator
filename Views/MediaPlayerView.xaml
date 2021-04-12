@@ -75,7 +75,7 @@
                 </StatusBar.ItemsPanel>
 
                 <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" Width="807" Height="100" Margin="-6,2,0,348" RenderTransformOrigin="0.511,0.838" Background="LightGray" >
-                    <Slider x:Name="sliProgress" Thumb.DragStarted="Drag_Started_Click"  Thumb.DragCompleted="Drag_Completed_Click" ValueChanged="Time_Changed_Click" 
+                    <Slider x:Name="sliProgress" ValueChanged="Time_Changed_Click" 
                             Minimum="0" Maximum="{Binding VM_FinishTime}" Margin="194,0,98,0" Height="25" RenderTransformOrigin="0,3.5 "/>
 
                 </StatusBarItem>
