@@ -14,10 +14,19 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OxyPlot.Series;
 using OxyPlot.Axes;
-using OxyPlot;
+using OxyPlot.Annotations;
+using OxyPlot.Reporting;
+
 using System.Collections.Generic;
 using System.Collections;
 using FlightSimulator.ViewModels;
+using FlightSimulator.Models;
+
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Media;
+
 
 namespace FlightSimulator.Views
 {
@@ -25,13 +34,21 @@ namespace FlightSimulator.Views
     /// Interaction logic for GraphsView.xaml
     /// </summary>
     public partial class GraphsView : UserControl
+
     {
+        //private Models.FlightSimulatorModel viewModel;
+
         GraphsViewModel vm;
        // public ArrayList data { get; private set; }
         public GraphsView()
         {
+           // viewModel = new Models.FlightSimulatorModel();
+            //DataContext = viewModel;
+
+            CompositionTarget.Rendering += CompositionTargetRendering;
+            stopwatch.Start();
             InitializeComponent();
-            var model = new PlotModel() { Title = "hier kehen!" };
+          /*  var model = new PlotModel() { Title = "hier kehen!" };
             var s = new OxyPlot.Series.ScatterSeries()
             
                  {
@@ -50,12 +67,26 @@ namespace FlightSimulator.Views
 
             model.Axes.Add(new OxyPlot.Axes.LinearAxis() { Minimum = 0, Maximum = 200, Position = OxyPlot.Axes.AxisPosition.Left });
             model.Axes.Add(new OxyPlot.Axes.LinearAxis() { Minimum = 0, Maximum = 200, Position = OxyPlot.Axes.AxisPosition.Bottom });
-           
+           */
 
             // this.data = new ArrayList();
 
             // Random rd = new Random();
             // randomPoints();
+        }
+        private long frameCounter;
+        private System.Diagnostics.Stopwatch stopwatch = new Stopwatch();
+        private long lastUpdateMilliSeconds;
+        private void CompositionTargetRendering(object sender, EventArgs e)
+        {
+           
+            if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
+            {
+                vm.UpdateModel();
+            
+                lastUpdateMilliSeconds = stopwatch.ElapsedMilliseconds;
+            }
+
         }
         public void SetVM(GraphsViewModel graphsVM)
         {

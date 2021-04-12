@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using OxyPlot;
+using OxyPlot.Annotations;
+using OxyPlot.Axes;
 
 namespace FlightSimulator.Models
 {
@@ -26,7 +29,13 @@ namespace FlightSimulator.Models
         float Rudder { set; get; }
         float Aileron { set; get; }
         float Elevator { set; get; }
+       
         // initialize all dashboard properties
         void InitDashboardData();
+
+        //PlotModel PlotModel { set; get; }
+
+       // ArrayList Data_reg { set; get; }
+      
     }
 }

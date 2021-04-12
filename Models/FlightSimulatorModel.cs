@@ -5,7 +5,19 @@ using System.Threading;
 using System.ComponentModel;
 using FlightSimulator.Communication;
 using OxyPlot;
+using OxyPlot.Series;
+using OxyPlot.Axes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+//using FlightSimulator.Annotations;
 
+
+//C:\Users\user\Desktop\reg_flight.csv
 namespace FlightSimulator.Models
 {
     class FlightSimulatorModel : IFlightSimulatorModel
@@ -99,6 +111,9 @@ namespace FlightSimulator.Models
             if(string.Compare(e.PropertyName,"DataMap")==0)
             {
                 DataMap = settings.DataMap;
+                //Data_reg = settings.DataMap["engine_rpm"];
+                //NotifyPropertyChanged("Data_reg");
+
             }
             else if(string.Compare(e.PropertyName, "DataLines")==0)
             {
@@ -125,8 +140,10 @@ namespace FlightSimulator.Models
             orientation = 0;
             altitude = 0;
             airSpeed = 0;
-            plotModel = new PlotModel(); //PlotModel?
-
+            //plotModel = new PlotModel(); //PlotModel?
+            // data_reg = new ArrayList();
+            //  SetUpModel();
+        
         }
         // Dashboard properties
         private float yaw;
@@ -243,7 +260,7 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("Rudder");
             }
         }
-        private PlotModel plotModel;
+       /* private PlotModel plotModel;
         public PlotModel PlotModel
         {
             get { return plotModel; }
@@ -251,6 +268,32 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("PlotModel"); 
             }
         }
+
+        private ArrayList data_reg;
+        public ArrayList Data_reg
+        {
+            get { return data_reg; }
+            set { data_reg = value;
+                NotifyPropertyChanged("Data_reg");
+            }
+
+        }
+
+        private void SetUpModel()
+        {
+            PlotModel.LegendTitle = "Legend";
+            PlotModel.LegendOrientation = LegendOrientation.Horizontal;
+            PlotModel.LegendPlacement = LegendPlacement.Outside;
+            PlotModel.LegendPosition = LegendPosition.TopRight;
+            PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
+            PlotModel.LegendBorder = OxyColors.Black;
+            var date = new DateTimeAxis();
+            PlotModel.Axes.Add(date);
+      
+
+
+
+        }*/
 
         // initialize dashboard data
         public void InitDashboardData()
@@ -290,10 +333,11 @@ namespace FlightSimulator.Models
                 Throttle = float.Parse(DataMap["throttle"][lineNumber].ToString());
                 Aileron = float.Parse(DataMap["aileron"][lineNumber].ToString());
                 Elevator= float.Parse(DataMap["elevator"][lineNumber].ToString());
+               // Data_reg.Add(float.Parse(DataMap["engine_rpm"][lineNumber].ToString()));
                 //client.Send(DataLines[lineNumber].ToString());
                 Timer += 0.1;
                 // if we finished to read all lines
-                if (Timer >= FinishTime)
+                if (Timer >= FinishTime) //change to > ?
                 {
                     IsPlay = false;
                     InitDashboardData();
@@ -303,5 +347,8 @@ namespace FlightSimulator.Models
                 System.Threading.Thread.Sleep(sleepingTime);
             }
         }
+
+
+
     }
 }
