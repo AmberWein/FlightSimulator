@@ -78,6 +78,16 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("DataMap");
             }
         }
+        private double frequency;
+        public double Frequency
+        {
+            get { return frequency; }
+            set
+            { 
+                frequency = value;
+                NotifyPropertyChanged("Frequency");
+            }
+        }
         // Constructor
         public SetModel()
         {
@@ -86,6 +96,7 @@ namespace FlightSimulator.Models
             dataLines = null;
             // parse xml for headers
             XMLParser xmlParser = new XMLParser();
+            Frequency = xmlParser.getFrequency();
             xmlParser.Parse();
             headersList = xmlParser.Headers;
         }

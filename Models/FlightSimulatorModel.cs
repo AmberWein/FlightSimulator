@@ -43,7 +43,24 @@ namespace FlightSimulator.Models
                 // this should only occur once, as csv file will be parsed within the SetModel
                 dataLines = value;
                 // 10 Hz means reading 10 lines in 1 second
-                FinishTime = 0.1 * (double)dataLines.Count;
+                FinishTime = ((double)dataLines.Count)/Frequency;
+            }
+        }
+        private double frequency;
+        public double Frequency
+        {
+            get { return frequency; }
+            set
+            {
+                if (value == 0)
+                {
+                    frequency = 10; // default value 10 Hz
+                }
+                else
+                {
+                    frequency = value;
+                }
+                // Notify?
             }
         }
         // indicates wheater simulator is on play mode.
@@ -124,6 +141,7 @@ namespace FlightSimulator.Models
             orientation = 0;
             altitude = 0;
             airSpeed = 0;
+            frequency = 10; // default value
         }
         // Dashboard properties
         private float yaw;
@@ -266,7 +284,7 @@ namespace FlightSimulator.Models
                 return;*/
            while (isPlay)
             {
-                lineNumber = (int)(Timer * 10.0);
+                lineNumber = (int)(Timer * Frequency);
                 sleepingTime = (int)(100 / PlayingSpeed);
                 // get current values for dashboard properties
                 Yaw =  float.Parse(DataMap["side-slip-deg"][lineNumber].ToString());
@@ -280,7 +298,7 @@ namespace FlightSimulator.Models
                 Aileron = float.Parse(DataMap["aileron"][lineNumber].ToString());
                 Elevator= float.Parse(DataMap["elevator"][lineNumber].ToString());
                 //client.Send(DataLines[lineNumber].ToString());
-                Timer += 0.1;
+                Timer += 1.0/Frequency;
                 // if we finished to read all lines
                 if (Timer >= FinishTime)
                 {

@@ -11,5 +11,6 @@ namespace FlightSimulator.Models
         string CsvPath { get; set; }
         Dictionary<string, ArrayList> DataMap { get; set; }
         ArrayList DataLines { get; set; }
+        double Frequency { get; set; }
     }
 }
