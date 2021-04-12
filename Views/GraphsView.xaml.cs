@@ -50,8 +50,7 @@ namespace FlightSimulator.Views
 
             model.Axes.Add(new OxyPlot.Axes.LinearAxis() { Minimum = 0, Maximum = 200, Position = OxyPlot.Axes.AxisPosition.Left });
             model.Axes.Add(new OxyPlot.Axes.LinearAxis() { Minimum = 0, Maximum = 200, Position = OxyPlot.Axes.AxisPosition.Bottom });
-
-
+           
 
             // this.data = new ArrayList();
 
