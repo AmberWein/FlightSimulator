@@ -9,6 +9,11 @@ namespace FlightSimulator.Models
 {
     class FlightSimulatorModel : IFlightSimulatorModel
     {
+        //flight gear
+        private float elevator;
+        private float aileron;
+        private float throttle;
+        private float rudder;
         // INotifyPropertyChanged implementations
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
@@ -199,6 +204,42 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("AirSpeed");
             }
         }
+        public float Throttle
+        {
+            get { return throttle; }
+            set
+            {
+                throttle = value;
+                NotifyPropertyChanged("Throttle");
+            }
+        }
+        public float Aileron
+        {
+            get { return aileron; }
+            set
+            {
+                this.aileron = value;
+                this.NotifyPropertyChanged("Aileron");
+            }
+        }
+        public float Elevator
+        {
+            get { return elevator; }
+            set
+            {
+                this.elevator = value;
+                this.NotifyPropertyChanged("Elevator");
+            }
+        }
+        public float Rudder
+        {
+            get { return rudder; }
+            set
+            {
+                rudder = value;
+                NotifyPropertyChanged("Rudder");
+            }
+        }
         
         // initialize dashboard data
         public void InitDashboardData()
@@ -209,6 +250,10 @@ namespace FlightSimulator.Models
             Orientation = 0;
             Altitude = 0;
             AirSpeed = 0;
+            Throttle = 0;
+            Rudder = 0; 
+            Aileron = 0; 
+            Elevator = 0; 
         }
         // start updating data as the time passes
         public void StartFlying()
@@ -230,6 +275,10 @@ namespace FlightSimulator.Models
                 Orientation =  float.Parse(DataMap["heading-deg"][lineNumber].ToString());
                 Altitude =  float.Parse(DataMap["altitude-ft"][lineNumber].ToString());
                 AirSpeed =  float.Parse(DataMap["airspeed-kt"][lineNumber].ToString());
+                Rudder = float.Parse(DataMap["rudder"][lineNumber].ToString());
+                Throttle = float.Parse(DataMap["throttle"][lineNumber].ToString());
+                Aileron = float.Parse(DataMap["aileron"][lineNumber].ToString());
+                Elevator= float.Parse(DataMap["elevator"][lineNumber].ToString());
                 //client.Send(DataLines[lineNumber].ToString());
                 Timer += 0.1;
                 // if we finished to read all lines

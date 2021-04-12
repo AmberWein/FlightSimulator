@@ -35,6 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>packages\OxyPlot.Core.2.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=2.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>packages\OxyPlot.Wpf.2.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Classic" />
+    <Reference Include="ReachFramework" />
     <Reference Include="Syncfusion.Licensing, Version=19.1460.0.55, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
       <HintPath>packages\Syncfusion.Licensing.19.1.0.55\lib\net46\Syncfusion.Licensing.dll</HintPath>
     </Reference>
@@ -46,6 +54,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +68,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -73,10 +88,12 @@
     <Compile Include="Models\ISetModel.cs" />
     <Compile Include="Models\MediaPlayerModel.cs" />
     <Compile Include="Models\SetModel.cs" />
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="plugins\AnomalyDetector.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\FlightSimulatorViewModel.cs" />
+    <Compile Include="ViewModels\GearControlViewModel.cs" />
+    <Compile Include="ViewModels\GraphsViewModel.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="plugins\AnomalyDetector.cs" />
     <Compile Include="ViewModels\MediaPlayerViewModel.cs" />
     <Compile Include="ViewModels\SetViewModel.cs" />
     <Compile Include="Views\DashboardView.xaml.cs">
@@ -84,6 +101,13 @@
     </Compile>
     <Compile Include="Views\FlightSimulatorView.xaml.cs">
       <DependentUpon>FlightSimulatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GearControlView.xaml.cs">
+      <DependentUpon>GearControlView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\GraphsView.xaml.cs">
+      <DependentUpon>GraphsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MediaPlayerView.xaml.cs">
       <DependentUpon>MediaPlayerView.xaml</DependentUpon>
@@ -110,6 +134,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FlightSimulatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GearControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Views\GraphsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -140,6 +172,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -149,6 +182,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Images\" />
     <Resource Include="Views\Images\forward_button.png" />
     <Resource Include="Views\Images\open_button.png" />
     <Resource Include="Views\Images\pause_button.png" />
