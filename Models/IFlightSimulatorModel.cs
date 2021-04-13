@@ -33,9 +33,11 @@ namespace FlightSimulator.Models
         // initialize all dashboard properties
         void InitDashboardData();
 
-        //PlotModel PlotModel { set; get; }
+        // graphs properties
 
-       // ArrayList Data_reg { set; get; }
-      
+        string ChosenAttribute { set; get; }
+
+
+
     }
 }

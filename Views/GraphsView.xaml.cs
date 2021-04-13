@@ -39,40 +39,16 @@ namespace FlightSimulator.Views
         //private Models.FlightSimulatorModel viewModel;
 
         GraphsViewModel vm;
-       // public ArrayList data { get; private set; }
+        private string chosenAttribute;
+        // public ArrayList data { get; private set; }
         public GraphsView()
         {
-           // viewModel = new Models.FlightSimulatorModel();
-            //DataContext = viewModel;
+        
 
             CompositionTarget.Rendering += CompositionTargetRendering;
             stopwatch.Start();
             InitializeComponent();
-          /*  var model = new PlotModel() { Title = "hier kehen!" };
-            var s = new OxyPlot.Series.ScatterSeries()
-            
-                 {
-                MarkerSize = 0.8f,
-                MarkerType = MarkerType.Circle,
-                MarkerFill = OxyColors.Black
-            };
-        
-            for (int i = 2; i < 300; i *= 5)
-            {
-               // float n = (float.Parse(model.DataMap["heading-deg"][i].ToString()));
-                s.Points.Add(new OxyPlot.Series.ScatterPoint(i, i + 9));
-            }
-            model.Series.Add(s);
-            
-
-            model.Axes.Add(new OxyPlot.Axes.LinearAxis() { Minimum = 0, Maximum = 200, Position = OxyPlot.Axes.AxisPosition.Left });
-            model.Axes.Add(new OxyPlot.Axes.LinearAxis() { Minimum = 0, Maximum = 200, Position = OxyPlot.Axes.AxisPosition.Bottom });
-           */
-
-            // this.data = new ArrayList();
-
-            // Random rd = new Random();
-            // randomPoints();
+         
         }
         private long frameCounter;
         private System.Diagnostics.Stopwatch stopwatch = new Stopwatch();
@@ -80,12 +56,9 @@ namespace FlightSimulator.Views
         private void CompositionTargetRendering(object sender, EventArgs e)
         {
            
-            if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
-            {
                 vm.UpdateModel();
             
-                lastUpdateMilliSeconds = stopwatch.ElapsedMilliseconds;
-            }
+            
 
         }
         public void SetVM(GraphsViewModel graphsVM)

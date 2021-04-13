@@ -260,40 +260,20 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("Rudder");
             }
         }
-       /* private PlotModel plotModel;
-        public PlotModel PlotModel
+        //graph model
+
+        //the chosen atrribute from user to show graphs of
+        string chosenAttribute;
+        public string ChosenAttribute
         {
-            get { return plotModel; }
-            set { plotModel = value;
-                NotifyPropertyChanged("PlotModel"); 
+            get { return chosenAttribute; }
+            set
+            {
+                chosenAttribute = value;
+                NotifyPropertyChanged("ChosenAttribute");
             }
         }
 
-        private ArrayList data_reg;
-        public ArrayList Data_reg
-        {
-            get { return data_reg; }
-            set { data_reg = value;
-                NotifyPropertyChanged("Data_reg");
-            }
-
-        }
-
-        private void SetUpModel()
-        {
-            PlotModel.LegendTitle = "Legend";
-            PlotModel.LegendOrientation = LegendOrientation.Horizontal;
-            PlotModel.LegendPlacement = LegendPlacement.Outside;
-            PlotModel.LegendPosition = LegendPosition.TopRight;
-            PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
-            PlotModel.LegendBorder = OxyColors.Black;
-            var date = new DateTimeAxis();
-            PlotModel.Axes.Add(date);
-      
-
-
-
-        }*/
 
         // initialize dashboard data
         public void InitDashboardData()

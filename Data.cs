@@ -43,18 +43,15 @@ namespace FlightSimulator
         public List<Measurement> GetUpdateData(DateTime dateTime)
         {
             var measurements = new List<Measurement>();
-            var r = new Random();
+
             if (model.DataMap == null)
             {
 
             }
             else
-            {
-
-              //  for (int i = 0; i < 5; i++)
-                //{
-                    measurements.Add(new Measurement() { DetectorId = 2, DateTime = dateTime.AddSeconds(1), Value = float.Parse(model.DataMap["engine_rpm"][10* (int)model.Timer].ToString()) });
-                //}
+            {  
+             measurements.Add(new Measurement() { DetectorId = 2, DateTime = dateTime.AddSeconds(1), Value = float.Parse(model.DataMap["indicated-heading-deg"][10* (int)model.Timer].ToString()) });
+ 
             }
             return measurements;
         }

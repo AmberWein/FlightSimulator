@@ -40,77 +40,33 @@ namespace FlightSimulator.ViewModels
             PlotModel.Series.Add(lineSerie);
         }
 
-        /*  public Series VM_Series
-          {
-              get
-              {
-                  var lineSerie = new LineSeries
-                  {
-                      StrokeThickness = 2,
-                      MarkerSize = 3,
-                      // MarkerStroke = colors[data.Key],
-                      //MarkerType = markerTypes[data.Key],
-                      CanTrackerInterpolatePoints = false,
-                      //Title = string.Format("Detector {0}", data.Key),
-                  };
-                  int j = 0;
-                  for (Double i = 0; i < 2000; i += 0.1)
-                  {
-                      if (model.DataMap == null) { }
-                      else
-                      {
-                          j = (int)(i * 10.0);
-                          //if (j < (int)(model.Timer * 10.0) && j < model.Data_reg.Count)
-                          if (j < 2000)
-                          {
-                              lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(i * 10), double.Parse(model.Data_reg[j].ToString())));
-                          }
-                      }
-                  }
-                  model.PlotModel.Series.Add(lineSerie);
-                  return lineSerie;
-              }
-              set { }
+        private string chosenAttribute;
 
-          }
-          public PlotModel VM_PlotModel
-          {
-              get { return model.PlotModel; }
-              set {  }
-          }*/
-
-
-
-        /*    public ScatterSeries VM_Data
-
+        public string VM_ChosenAttribute
+        {
+            get { return model.ChosenAttribute; }
+            set
             {
-                get
+                if (VM_ChosenAttribute != value)
                 {
-                    var s = new ScatterSeries();
-                    for (int i = 0; i < 30; i*= 5)
-                    {
-                        float n = (float.Parse(model.DataMap["heading-deg"][i].ToString()));
-                        s.Points.Add(new OxyPlot.Series.ScatterPoint(i, i + 9));
-                    }
+                    model.ChosenAttribute = value;
+                    onPropertyChanged("VM_AttUserChoose");///??
 
-                    return s;
                 }
-                set{ }
+
+            }
+        }
+        public void onPropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
 
 
-            }*/
 
 
-
-
-
-        /*  public void NotifyPropertyChanged(String propName)
-          {
-              if (this.PropertyChanged != null)
-              {
-                  this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-              }
-          }*/
 
 
 
@@ -194,14 +150,15 @@ namespace FlightSimulator.ViewModels
         public void UpdateModel()
 
         {
-            Data data_ = new Data(this.model);
-            List<Measurement> measurements = data_.GetUpdateData(lastUpdate);
+      
+            List<float> Y = new List<float>();
 
-            foreach (var d in measurements)
+            Y.Add(float.Parse(model.DataMap[model.ChosenAttribute][10 * (int)model.Timer].ToString()));
+            foreach (var d in Y)
             {
                 if (lineSerie != null)
                 {
-                    lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(d.DateTime), d.Value));
+                    lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
                 }
                 else
                 {
