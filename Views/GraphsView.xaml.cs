@@ -27,7 +27,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
 
-
+//C:\Users\user\Desktop\reg_flight.csv
 namespace FlightSimulator.Views
 {
     /// <summary>
@@ -40,77 +40,57 @@ namespace FlightSimulator.Views
 
         GraphsViewModel vm;
         private string chosenAttribute;
+        List<string> attributes;
         // public ArrayList data { get; private set; }
         public GraphsView()
         {
-        
+            FillList();
+            InitializeComponent();
+
+
+            Binding dict = new Binding
+            {
+                Source = attributes
+            };
+            atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);
+
 
             CompositionTarget.Rendering += CompositionTargetRendering;
-            stopwatch.Start();
-            InitializeComponent();
-         
         }
-        private long frameCounter;
-        private System.Diagnostics.Stopwatch stopwatch = new Stopwatch();
-        private long lastUpdateMilliSeconds;
+
         private void CompositionTargetRendering(object sender, EventArgs e)
         {
-           
-                vm.UpdateModel();
-            
-            
-
+            vm.UpdateModel();
         }
         public void SetVM(GraphsViewModel graphsVM)
         {
             this.vm = graphsVM;
         }
 
-
-
-        /* var model = new PlotModel { Title = "ScatterSeries" };
-
-         var scatterSeries = new ScatterSeries { MarkerType = MarkerType.Circle };
-         var r = new Random(314);
-         for (int i = 0; i < 100; i++)
-         {
-             var x = r.NextDouble();
-             var y = r.NextDouble();
-             var size = r.Next(5, 15);
-             var colorValue = r.Next(100, 1000);
-             scatterSeries.Points.Add(new ScatterPoint(x, y, size, colorValue));
-         }
-
-         model.Series.Add(scatterSeries);
-         model.Axes.Add(new LinearColorAxis { Position = AxisPosition.Right, Palette = OxyPalettes.Jet(200) });*/
-
-
-       /* public void randomPoints()
+        //fil list of attributes with info from viewModel
+        private void FillList()
         {
-                    Random rd = new Random();
+            this.attributes = new List<String>();
+            
+
+        
+             this.attributes.Add("indicated-heading-deg");
+            this.attributes.Add("latitude-deg");
+            this.attributes.Add("engine_rpm");
 
 
-            String myText = "";
 
-            int anz = rd.Next(30, 60);
 
-            for (int i = 0; i < anz; i++)
-                myText += i + "," + rd.Next(0, 99) + ";";
+        }
 
-            myText = myText.Substring(0, myText.Length - 1);
-            String[] splitText = myText.Split(';');
+      
 
-            for (int i = 0; i < splitText.Length; i++)
-            {
-                String[] tmp = splitText[i].Split(',');
-                Points.Add(new DataPoint(Double.Parse(tmp[0].Trim()), Double.Parse(tmp[1].Trim())));
-            }
-
-            while (Points.Count > anz)
-                Points.RemoveAt(0);
-
-            myChart.InvalidatePlot(true);
-        }*/
+         private void Button_Click(object sender, RoutedEventArgs e)
+         {
+            vm.VM_ChosenAttribute = null;
+            vm.ClearPlot();
+         }
+        
     }
 }
 

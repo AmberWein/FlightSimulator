@@ -36,7 +36,6 @@ namespace FlightSimulator.ViewModels
             
             PlotModel = new PlotModel();
             SetUpModel();
-            LoadData();
             PlotModel.Series.Add(lineSerie);
         }
 
@@ -47,15 +46,16 @@ namespace FlightSimulator.ViewModels
             get { return model.ChosenAttribute; }
             set
             {
-                if (VM_ChosenAttribute != value)
-                {
                     model.ChosenAttribute = value;
                     onPropertyChanged("VM_AttUserChoose");///??
-
-                }
-
             }
         }
+       public void ClearPlot()
+        {
+            PlotModel.Series.Clear();
+
+        }
+
         public void onPropertyChanged(string propName)
         {
             if (PropertyChanged != null)
@@ -146,28 +146,64 @@ namespace FlightSimulator.ViewModels
             }
             lastUpdate = DateTime.Now;
         }
+        public void LoadFromStart()
+
+        {
+            lineSerie.Points.Clear();
+            
+           
+            List<float> Y = new List<float>();
+            if (VM_ChosenAttribute == null) { }
+            else
+
+            {
+                for (double i = 0; i < model.Timer; i+= 0.1)
+            {
+                Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][10 * (int)i].ToString()));
+            }
+            
+               
+                foreach (var d in Y)
+                {
+                    if (lineSerie != null)
+                    {
+                        lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
+                    }
+                    else
+                    {
+                        PlotModel.Series.Add(lineSerie);
+                    }
+                }
+                PlotModel = plotModel;
+                lastUpdate = DateTime.Now;
+                PlotModel.InvalidatePlot(true);
+            }
+        }
 
         public void UpdateModel()
 
         {
       
             List<float> Y = new List<float>();
-
-            Y.Add(float.Parse(model.DataMap[model.ChosenAttribute][10 * (int)model.Timer].ToString()));
-            foreach (var d in Y)
+            if (VM_ChosenAttribute == null) { }
+            else
             {
-                if (lineSerie != null)
+                Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int) (10.0 * model.Timer)].ToString()));
+                foreach (var d in Y)
                 {
-                    lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
+                    if (lineSerie != null)
+                    {
+                        lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
+                    }
+                    else
+                    {
+                        PlotModel.Series.Add(lineSerie);
+                    }
                 }
-                else
-                {
-                    PlotModel.Series.Add(lineSerie);
-                }
+                PlotModel = plotModel;
+                lastUpdate = DateTime.Now;
+                PlotModel.InvalidatePlot(true);
             }
-            PlotModel = plotModel;
-            lastUpdate = DateTime.Now;
-            PlotModel.InvalidatePlot(true);
         }
     }
 }

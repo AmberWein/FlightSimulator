@@ -11,11 +11,12 @@
     
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <oxy:PlotView x:Name="Plot1" Model="{Binding Path= PlotModel}" Margin="10" Grid.Row="1">
+        <oxy:PlotView x:Name="Plot1" Model="{Binding Path= PlotModel}" Margin="10" Grid.Row="1" Background="AliceBlue">
         </oxy:PlotView>
-        <ComboBox x:Name="atrributesBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="10, 5, 10, 5"
-                 SelectedValue="{Binding VM_ChosenAtrribute}"/>
+        <ComboBox x:Name="atrributesBox" VerticalAlignment="Top" Margin="10,5,0,0"
+                 SelectedValue="{Binding VM_ChosenAttribute}" HorizontalAlignment="Left" Width="780"/>
 
+        <Button x:Name="Refrashe" Content="clear" Click="Button_Click" Width="30" Height="40" Background="DarkGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,50,50,50"></Button>
 
 
     </Grid>
