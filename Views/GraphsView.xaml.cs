@@ -47,14 +47,7 @@ namespace FlightSimulator.Views
         public GraphsView()
         {
             InitializeComponent();
-            FillList();
-
-
-            Binding dict = new Binding
-            {
-                Source = attributes
-            };
-            atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);
+          
             
 
 
@@ -63,11 +56,21 @@ namespace FlightSimulator.Views
 
         private void CompositionTargetRendering(object sender, EventArgs e)
         {
+
             vm.UpdateModel();
         }
         public void SetVM(GraphsViewModel graphsVM)
         {
+
             this.vm = graphsVM;
+            FillList();
+
+
+            Binding dict = new Binding
+            {
+                Source = attributes
+            };
+            atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);
         }
 
         //fil list of attributes with info from viewModel
@@ -100,6 +103,7 @@ namespace FlightSimulator.Views
 
         private void atrributesBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             vm.LoadFromStart();
 
         }
