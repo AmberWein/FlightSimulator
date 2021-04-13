@@ -66,10 +66,9 @@
                     <Slider x:Name="sliProgress" Minimum="0" Maximum="{Binding VM_FinishTime}" Value="{Binding VM_Timer}"
                              Margin="156,0,101,0" Height="21" RenderTransformOrigin="0,3.5" ValueChanged="Time_Changed_Click" />
 
-                    </StatusBarItem>
+                </StatusBarItem>
 
-                </StatusBar>
-            </StackPanel>
-        </Border>
-    </Viewbox>
+            </StatusBar>
+        </StackPanel>
+    </Border>
 </UserControl>

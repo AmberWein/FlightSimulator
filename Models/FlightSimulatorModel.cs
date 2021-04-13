@@ -142,6 +142,16 @@ namespace FlightSimulator.Models
             altitude = 0;
             airSpeed = 0;
             frequency = 10; // default value
+            dllMap = new Dictionary<string, string>();
+            dllMap.Add("Simple", "plugins/SimpleDetect.dll");
+            dllMap.Add("Circular", "plugins/CircularDetect.dll");
+            detectorsList = new List<string>();
+            detectorsList.Add("Choose detector");
+            detectorsList.Add("Simple");
+            detectorsList.Add("Circular");
+            detectorsList.Add("Upload detector");
+            currentDetector = DetectorsList[0];
+            isDetectorOn = false;
         }
         // Dashboard properties
         private float yaw;
@@ -310,5 +320,40 @@ namespace FlightSimulator.Models
                 System.Threading.Thread.Sleep(sleepingTime);
             }
         }
+        // Anomalies Detector Properties
+        private string currentDetector;
+        public string CurrentDetector
+        {
+            get { return currentDetector; }
+            set
+            {
+                currentDetector = value;
+                if(string.Compare(value, "Choose detector") == 0)
+                {
+                    IsDetectorOn = false;
+                }
+            }
+        }
+        private Dictionary<string, string> dllMap;
+        public Dictionary<string, string> DllMap
+        {
+            get { return dllMap; }
+            set
+            {
+                dllMap = value;
+            }
+        }
+        private List<string> detectorsList;
+        public List<string> DetectorsList
+        {
+            get { return detectorsList; }
+            set
+            {
+                detectorsList = value;
+            }
+        }
+        private bool isDetectorOn;
+        public bool IsDetectorOn { get { return isDetectorOn; } set { isDetectorOn = value; NotifyPropertyChanged("IsDetectorOn"); } }
+
     }
 }

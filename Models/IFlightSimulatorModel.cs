@@ -28,5 +28,10 @@ namespace FlightSimulator.Models
         float Elevator { set; get; }
         // initialize all dashboard properties
         void InitDashboardData();
+        // properties for dll detector
+        Dictionary<string, string> DllMap { get; set; }
+        List<string> DetectorsList { get; set; }
+        string CurrentDetector { get; set; }
+        bool IsDetectorOn { get; set; }
     }
 }
