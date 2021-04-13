@@ -10,7 +10,7 @@ namespace FlightSimulator
 {
     class NativeMethods
     {
-        /*
+        
         [DllImport("kernel32.dll")]
         public static extern IntPtr LoadLibrary(string dllToLoad);
 
@@ -27,29 +27,37 @@ namespace FlightSimulator
     class Program
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int MultiplyByTen(int numberToMultiply);
+        private delegate void Detect();
 
-        static void Main(string[] args)
+        public static void OperateDLL()
         {
-            IntPtr pDll = NativeMethods.LoadLibrary(@"PathToYourDll.DLL");
+            IntPtr pDll = NativeMethods.LoadLibrary("plugins/SimpleAnomalyDetectorDll.dll");
             //oh dear, error handling here
-            //if (pDll == IntPtr.Zero)
+            if (pDll == IntPtr.Zero)
+            {
 
-            IntPtr detectorAdress = NativeMethods.GetProcAddress(pDll, "Create");
+            }
+
+            IntPtr detectorAddress = NativeMethods.GetProcAddress(pDll, "Create");
             //oh dear, error handling here
-            //if(pAddressOfFunctionToCall == IntPtr.Zero)
+            if (detectorAddress == IntPtr.Zero)
+            {
+                // should print an error accured and exit the app
+            }
 
-            IntPtr detectAdress = NativeMethods.GetProcAddress(pDll, "detect");
+            IntPtr detectFuncAddress = NativeMethods.GetProcAddress(pDll, "Detect");
+            //oh dear, error handling here
+            if (detectFuncAddress == IntPtr.Zero)
+            {
+                // should print an error accured and exit the app
+            }
 
-            detect d = (detect)Marshal.GetDelegateForFunctionPointer(detectorAdress, typeof(detect));
-
+            Detect d = (Detect)Marshal.GetDelegateForFunctionPointer(detectFuncAddress, typeof(Detect));
+            d();
             //int theResult = multiplyByTen(10);
 
             bool result = NativeMethods.FreeLibrary(pDll);
             //remaining code here
-
-            Console.WriteLine(theResult);
         }
-        */
     }
 }
