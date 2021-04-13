@@ -11,13 +11,30 @@
     
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         <oxy:PlotView x:Name="Plot1" Model="{Binding Path= PlotModel}" Margin="10" Grid.Row="1" Background="AliceBlue">
         </oxy:PlotView>
         <Syncfusion:ComboBoxAdv x:Name="atrributesBox" VerticalAlignment="Top" Margin="10,5,0,0"
                 SelectedValue="{Binding VM_ChosenAttribute}" HorizontalAlignment="Left" Width="780" Syncfusion:SkinManager.ActiveColorScheme="Purple" SelectionChanged="atrributesBox_SelectionChanged">
-            
+
         </Syncfusion:ComboBoxAdv>
-       
+
+        <oxy:PlotView x:Name="PlotModelCorr" Model="{Binding Path= PlotModelCorr}" Margin="10" Grid.Row="2" Background="BlueViolet">
+        </oxy:PlotView>
+
+        <oxy:PlotView x:Name="PlotModelReg" Model="{Binding Path= PlotModelReg}" Margin="10" Grid.Row="2" Background="BlueViolet">
+        </oxy:PlotView>
+        <syncfusion:Trendline Stroke="Black" Type="Linear"  
+
+StrokeDashArray="4,4" StrokeThickness="2" />
+
+        </syncfusion:FastLineSeries.Trendlines>
+
+        </syncfusion:FastLineSeries>
 
     </Grid>
 </UserControl>

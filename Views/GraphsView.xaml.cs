@@ -47,25 +47,19 @@ namespace FlightSimulator.Views
         public GraphsView()
         {
             InitializeComponent();
-          
-            
-
-
             CompositionTarget.Rendering += CompositionTargetRendering;
         }
 
         private void CompositionTargetRendering(object sender, EventArgs e)
         {
-
             vm.UpdateModel();
+            vm.UpdateModelCorr();
         }
         public void SetVM(GraphsViewModel graphsVM)
         {
 
             this.vm = graphsVM;
             FillList();
-
-
             Binding dict = new Binding
             {
                 Source = attributes
@@ -83,29 +77,15 @@ namespace FlightSimulator.Views
                 {
                     this.attributes.Add(v.ToString());
                 }
-
-
-                this.attributes.Add("indicated-heading-deg");
-                this.attributes.Add("latitude-deg");
-                this.attributes.Add("engine_rpm");
-            
-
-
-
         }
 
 
-         private void Button_Click(object sender, RoutedEventArgs e)
-         {
-            vm.VM_ChosenAttribute = null;
-            vm.LoadFromStart();
-         }
+       //when a attribute is selected- run its graph
 
         private void atrributesBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
             vm.LoadFromStart();
-
+           
         }
     }
 }

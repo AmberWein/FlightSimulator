@@ -20,6 +20,7 @@ namespace FlightSimulator.ViewModels
     {
         private IFlightSimulatorModel model; // this is a try to hold only one model for all controllers!
         LineSeries lineSerie = new LineSeries();
+        LineSeries lineSerie_c = new LineSeries();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -58,6 +59,7 @@ namespace FlightSimulator.ViewModels
             get { return model.Attributes; }
             set { model.Attributes = value;
                 onPropertyChanged("VM_Attributes");
+
             }
         }
        
@@ -80,6 +82,19 @@ namespace FlightSimulator.ViewModels
         {
             get { return plotModel; }
             set { plotModel = value; OnPropertyChanged("PlotModel"); }
+        }
+        private PlotModel plotModelCorr;
+        public PlotModel PlotModelCorr
+        {
+            get { return plotModelCorr; }
+            set { plotModelCorr = value; OnPropertyChanged("PlotModelCorr"); }
+        }
+        private PlotModel plotModelReg;
+
+        public PlotModel PlotModelReg
+        {
+            get { return plotModelReg; }
+            set { plotModelReg = value; OnPropertyChanged("PlotModelReg"); }
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -108,7 +123,22 @@ namespace FlightSimulator.ViewModels
                                                        MarkerType.Cross
                                                    };
 
-        //Set up the model
+        //Set up the model for corralated features
+        private void SetUpModelCorr()
+        {
+            PlotModelCorr.LegendTitle = "Legend";
+            PlotModelCorr.LegendOrientation = LegendOrientation.Horizontal;
+            PlotModelCorr.LegendPlacement = LegendPlacement.Outside;
+            PlotModelCorr.LegendPosition = LegendPosition.LeftTop;
+            PlotModelCorr.LegendBackground = OxyColor.FromAColor(200, OxyColors.Aqua);
+            PlotModelCorr.LegendBorder = OxyColors.Black;
+
+            var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
+            PlotModelCorr.Axes.Add(dateAxis);
+            var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
+            PlotModelCorr.Axes.Add(valueAxis);
+
+        }
         private void SetUpModel()
         {
             PlotModel.LegendTitle = "Legend";
@@ -124,17 +154,43 @@ namespace FlightSimulator.ViewModels
             PlotModel.Axes.Add(valueAxis);
 
         }
+        //Set up the model for regression line
+        private void SetUpModelReg()
+        {
+            PlotModelCorr.LegendTitle = "Legend";
+            PlotModelCorr.LegendOrientation = LegendOrientation.Horizontal;
+            PlotModelCorr.LegendPlacement = LegendPlacement.Outside;
+            PlotModelCorr.LegendPosition = LegendPosition.LeftTop;
+            PlotModelCorr.LegendBackground = OxyColor.FromAColor(200, OxyColors.Aqua);
+            PlotModelCorr.LegendBorder = OxyColors.Black;
 
-       //loading the series from start of flight untill now when an attribute is chosen
+            var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
+            PlotModelCorr.Axes.Add(dateAxis);
+            var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
+            PlotModelCorr.Axes.Add(valueAxis);
+
+        }
+
+        //loading the series from start of flight untill now when an attribute is chosen
         public void LoadFromStart()
 
         {
+            //clean previous
             lineSerie.Points.Clear();
-            PlotModel.Series.Clear();
+            PlotModel.Series.Clear(); 
+            PlotModelCorr.Series.Clear();
+            PlotModelReg.Series.Clear();
             PlotModel = new PlotModel();
+            PlotModelCorr = new PlotModel();
+           
+            SetUpModelCorr();
             SetUpModel();
+
+            //add
             PlotModel.Series.Add(lineSerie);
+            PlotModelCorr.Series.Add(lineSerie_c);
             List<float> Y = new List<float>();
+            List<float> Y_c = new List<float>();
             if (VM_ChosenAttribute == null) { }
             else
 
@@ -142,9 +198,10 @@ namespace FlightSimulator.ViewModels
                 for (double i = 0; i < model.Timer; i+= 0.1)
             {
                 Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][10 * (int)i].ToString()));
-            }
-            
-               
+             //    Y_c.Add(float.Parse(model.DataMap[VM_ChosenAttribute.corrlated][10 * (int)i].ToString()));
+                }
+
+
                 foreach (var d in Y)
                 {
                     if (lineSerie != null)
@@ -157,9 +214,21 @@ namespace FlightSimulator.ViewModels
                     }
                 }
                 PlotModel.InvalidatePlot(true);
+                 foreach (var d in Y_c)
+                 {
+                     if (lineSerie_c != null)
+                     {
+                         lineSerie_c.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
+                     }
+                     else
+                     {
+                         PlotModelCorr.Series.Add(lineSerie_c);
+                     }
+                 }
+                PlotModelCorr.InvalidatePlot(true);
             }
         }
-        //updating the model throughout the flight ob a regular bases
+        //updating the model throughout the flight ob a regular basis
 
         public void UpdateModel()
 
@@ -182,6 +251,41 @@ namespace FlightSimulator.ViewModels
                 }
                 PlotModel.InvalidatePlot(true);
             }
+        }
+
+        //updating the model of corralated attribute throughout the flight on a regular basis
+        public void UpdateModelCorr()
+
+        {
+            List<float> Y = new List<float>();
+            // Y.Add(float.Parse(model.DataMap[/*/corralated/*/][(int)(10.0 * model.Timer)].ToString()));
+                foreach (var d in Y)
+                {
+                    if (lineSerie_c != null)
+                    {
+                        lineSerie_c.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
+                    }
+                    else
+                    {
+                        PlotModelCorr.Series.Add(lineSerie);
+                    }
+                }
+                PlotModelCorr.InvalidatePlot(true);
+        }
+
+
+        public void LoadRegModel()
+        {
+            var lineSerieReg = new LineSeries()
+            {
+                Color = OxyColors.Red,
+                StrokeThickness = 2
+            };
+
+
+            ArrayList points = new ArrayList();
+            //Line reg_line = model.linear_reg(points)
+
         }
     }
 }
