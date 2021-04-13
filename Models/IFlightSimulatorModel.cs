@@ -37,6 +37,7 @@ namespace FlightSimulator.Models
 
         string ChosenAttribute { set; get; }
 
+        ArrayList Attributes { set; get; }
 
 
     }

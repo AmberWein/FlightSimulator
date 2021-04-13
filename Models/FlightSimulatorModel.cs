@@ -47,6 +47,13 @@ namespace FlightSimulator.Models
                 dataMap = value;
             }
         }
+        private ArrayList attributes;
+
+        public ArrayList Attributes
+        {
+            get { return attributes; }
+            set { attributes = value; }
+        }
         private ArrayList dataLines;
         public ArrayList DataLines
         {
@@ -111,13 +118,16 @@ namespace FlightSimulator.Models
             if(string.Compare(e.PropertyName,"DataMap")==0)
             {
                 DataMap = settings.DataMap;
-                //Data_reg = settings.DataMap["engine_rpm"];
-                //NotifyPropertyChanged("Data_reg");
+               
 
             }
             else if(string.Compare(e.PropertyName, "DataLines")==0)
             {
                 DataLines = settings.DataLines;
+            }
+            else if (string.Compare(e.PropertyName, "Attributes") == 0)
+            {
+                Attributes = settings.HeadersList;
             }
         }
         // Constructor
@@ -140,9 +150,7 @@ namespace FlightSimulator.Models
             orientation = 0;
             altitude = 0;
             airSpeed = 0;
-            //plotModel = new PlotModel(); //PlotModel?
-            // data_reg = new ArrayList();
-            //  SetUpModel();
+          
         
         }
         // Dashboard properties
@@ -313,7 +321,6 @@ namespace FlightSimulator.Models
                 Throttle = float.Parse(DataMap["throttle"][lineNumber].ToString());
                 Aileron = float.Parse(DataMap["aileron"][lineNumber].ToString());
                 Elevator= float.Parse(DataMap["elevator"][lineNumber].ToString());
-               // Data_reg.Add(float.Parse(DataMap["engine_rpm"][lineNumber].ToString()));
                 //client.Send(DataLines[lineNumber].ToString());
                 Timer += 0.1;
                 // if we finished to read all lines
