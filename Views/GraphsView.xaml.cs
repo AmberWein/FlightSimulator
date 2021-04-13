@@ -22,6 +22,8 @@ using System.Collections;
 using FlightSimulator.ViewModels;
 using FlightSimulator.Models;
 
+
+
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -83,14 +85,18 @@ namespace FlightSimulator.Views
 
         }
 
-      
 
          private void Button_Click(object sender, RoutedEventArgs e)
          {
             vm.VM_ChosenAttribute = null;
-            vm.ClearPlot();
+            vm.LoadFromStart();
          }
-        
+
+        private void atrributesBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            vm.LoadFromStart();
+
+        }
     }
 }
 

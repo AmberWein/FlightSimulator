@@ -13,11 +13,11 @@
     <Grid>
         <oxy:PlotView x:Name="Plot1" Model="{Binding Path= PlotModel}" Margin="10" Grid.Row="1" Background="AliceBlue">
         </oxy:PlotView>
-        <ComboBox x:Name="atrributesBox" VerticalAlignment="Top" Margin="10,5,0,0"
-                 SelectedValue="{Binding VM_ChosenAttribute}" HorizontalAlignment="Left" Width="780"/>
-
-        <Button x:Name="Refrashe" Content="clear" Click="Button_Click" Width="30" Height="40" Background="DarkGreen" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,50,50,50"></Button>
-
+        <Syncfusion:ComboBoxAdv x:Name="atrributesBox" VerticalAlignment="Top" Margin="10,5,0,0"
+                SelectedValue="{Binding VM_ChosenAttribute}" HorizontalAlignment="Left" Width="780" Syncfusion:SkinManager.ActiveColorScheme="Purple" SelectionChanged="atrributesBox_SelectionChanged">
+            
+        </Syncfusion:ComboBoxAdv>
+       
 
     </Grid>
 </UserControl>

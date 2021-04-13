@@ -104,7 +104,7 @@ namespace FlightSimulator.ViewModels
                                                        MarkerType.Cross
                                                    };
 
-
+        //Set up the model
         private void SetUpModel()
         {
             PlotModel.LegendTitle = "Legend";
@@ -121,37 +121,15 @@ namespace FlightSimulator.ViewModels
 
         }
 
-        private void LoadData()
-        {
-            Data data = new Data(this.model);
-            List<Measurement> measurements = data.GetData();
-
-            var dataPerDetector = measurements.GroupBy(m => m.DetectorId).OrderBy(m => m.Key).ToList();
-
-            foreach (var data_Proprety in dataPerDetector)
-            {
-                var lineSerie = new LineSeries
-                {
-                    StrokeThickness = 2,
-                    MarkerSize = 3,
-                    MarkerStroke = colors[data_Proprety.Key],
-                    MarkerType = markerTypes[data_Proprety.Key],
-                    CanTrackerInterpolatePoints = false,
-                    Title = string.Format("Detector {0}", data_Proprety.Key),
-
-                };
-
-                data_Proprety.ToList().ForEach(d => lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(d.DateTime), d.Value)));
-                PlotModel.Series.Add(lineSerie);
-            }
-            lastUpdate = DateTime.Now;
-        }
+       //loading the series from start of flight untill now when an attribute is chosen
         public void LoadFromStart()
 
         {
             lineSerie.Points.Clear();
-            
-           
+            PlotModel.Series.Clear();
+            PlotModel = new PlotModel();
+            SetUpModel();
+            PlotModel.Series.Add(lineSerie);
             List<float> Y = new List<float>();
             if (VM_ChosenAttribute == null) { }
             else
@@ -174,16 +152,14 @@ namespace FlightSimulator.ViewModels
                         PlotModel.Series.Add(lineSerie);
                     }
                 }
-                PlotModel = plotModel;
-                lastUpdate = DateTime.Now;
                 PlotModel.InvalidatePlot(true);
             }
         }
+        //updating the model throughout the flight ob a regular bases
 
         public void UpdateModel()
 
         {
-      
             List<float> Y = new List<float>();
             if (VM_ChosenAttribute == null) { }
             else
@@ -200,8 +176,6 @@ namespace FlightSimulator.ViewModels
                         PlotModel.Series.Add(lineSerie);
                     }
                 }
-                PlotModel = plotModel;
-                lastUpdate = DateTime.Now;
                 PlotModel.InvalidatePlot(true);
             }
         }
