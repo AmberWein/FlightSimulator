@@ -2,7 +2,7 @@
 
 namespace FlightSimulator.IO
 {
-    abstract class FileParser
+    public abstract class FileParser
     {
         protected string filePath;
         public string FilePath
@@ -21,10 +21,14 @@ namespace FlightSimulator.IO
         {
             this.filePath = filePath;
         }
+
+        // checks if a given file's path is valid
         public static bool IsValidPath(string filePath)
         {
             return File.Exists(filePath);
         }
+
+        // parse data from this file's path
         virtual public void Parse()
         {
             // backup validity check

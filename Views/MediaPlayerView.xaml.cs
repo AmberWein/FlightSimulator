@@ -1,5 +1,4 @@
-﻿using FlightSimulator.Models;
-using FlightSimulator.ViewModels;
+﻿using FlightSimulator.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -9,7 +8,7 @@ using System.Windows.Data;
 namespace FlightSimulator.Views
 {
     /// <summary>
-    /// Interaction logic for MediaPlayerView.xaml
+    /// Responsible for the view logic of the media player controller
     /// </summary>
     public partial class MediaPlayerView : UserControl
     {
@@ -99,12 +98,7 @@ namespace FlightSimulator.Views
             // binding the current timer's change and show it in lblProgressStatus
             lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
         }
-        // when comboBox button value's is changed, the function update the speed property accordingly
-        private void Speed_Changed_Click(object sender, RoutedEventArgs e)
-        {
-            ListBoxItem speedBox = ((sender as ListBox).SelectedItem as ListBoxItem);
-            this.vm.VM_PlayingSpeed = Convert.ToDouble(speedBox.Content.ToString());
-        }
+
         // when slider button is dragged, the function update the timer property accordingly
         private void Time_Changed_Click(object sender, RoutedPropertyChangedEventArgs<double> e)
         {

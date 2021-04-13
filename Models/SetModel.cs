@@ -45,10 +45,12 @@ namespace FlightSimulator.Models
                     NotifyPropertyChanged("CsvPath");
                     if (csvPath != null)
                     {
-                        CSVParser csvParser = new CSVParser(csvPath, HeadersList);
-                        csvParser.Parse();
-                        DataMap = csvParser.Map;
-                        DataLines = csvParser.Lines;
+                        //CSVParser csvParser = new CSVParser(csvPath, HeadersList);
+                        CsvParser.FilePath = value;
+                        CsvParser.Parse();
+                        CsvParser.CreateCSV("anomaly_flight_with_headers.csv");
+                        DataMap = CsvParser.Map;
+                        DataLines = CsvParser.Lines;
                     }  
                 }
             }
@@ -80,16 +82,28 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("DataMap");
             }
         }
-        private double frequency;
-        public double Frequency
+        private CSVParser csvParser;
+        public CSVParser CsvParser
         {
-            get { return frequency; }
-            set
-            { 
-                frequency = value;
-                NotifyPropertyChanged("Frequency");
+            get
+            {
+                return csvParser;
             }
         }
+
+        private ArrayList correlatedFeatures { get; set; }
+        public ArrayList CorrelatedFeatures
+        {
+            get
+            {
+                return correlatedFeatures;
+            }
+            set
+            {
+                correlatedFeatures = value;
+            }
+        }
+
         // Constructor
         public SetModel()
         {
@@ -101,6 +115,9 @@ namespace FlightSimulator.Models
             Frequency = xmlParser.getFrequency();
             xmlParser.Parse();
             headersList = xmlParser.Headers;
+            csvParser = new CSVParser("reg_flight.csv", headersList);
+            csvParser.CreateCSV("reg_flight_with_headers.csv");
+            // also need to make correlation map
         }
 
         // correlation computin
@@ -183,6 +200,16 @@ namespace FlightSimulator.Models
                 }
             }
             return mostCorrelatedName;
+        }
+        // set the correlated features
+        void SetMostCorrelated()
+        {
+            // go over each property and find the most correlated property to it
+            foreach(string h in this.headersList)
+            {
+                string correlated = GetMostCorrelatedFeature(h);
+                this.CorrelatedFeatures.Add(new KeyValuePair<string, string>(h, correlated));
+            }
         }
     }
 }
