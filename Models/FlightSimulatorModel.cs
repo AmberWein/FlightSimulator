@@ -143,8 +143,9 @@ namespace FlightSimulator.Models
             airSpeed = 0;
             frequency = 10; // default value
             dllMap = new Dictionary<string, string>();
-            dllMap.Add("Simple", "plugins/SimpleDetect.dll");
-            dllMap.Add("Circular", "plugins/CircularDetect.dll");
+           // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
+            dllMap.Add("Simple", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\SimpleDetect.dll");
+            dllMap.Add("Circular", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\CircularDetect.dll");
             detectorsList = new List<string>() { "Choose detector", "Simple", "Circular", "Add detector" };
             currentDetector = DetectorsList[0];
             isDetectorOn = false;
@@ -328,10 +329,19 @@ namespace FlightSimulator.Models
             {
                 currentDetector = value;
                 if(string.Compare(value, "Choose detector") == 0)
+                //if (string.Compare(value, DetectorsList[DetectorsList.Count-1]) == 0)
                 {
                     IsDetectorOn = false;
                 }
+                else
+                    new Thread(GetAnomalies).Start();
             }
+        }
+        public void GetAnomalies()
+        {
+            string dllPath;
+            DllMap.TryGetValue(CurrentDetector, out dllPath);
+            Program.OperateDLL(dllPath);
         }
         private Dictionary<string, string> dllMap;
         public Dictionary<string, string> DllMap

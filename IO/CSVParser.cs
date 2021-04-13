@@ -2,8 +2,6 @@
 using System.Collections;
 using System.IO;
 using System.Globalization;
-using System.Text;
-using Microsoft.VisualBasic.FileIO;
 
 namespace FlightSimulator.IO
 {

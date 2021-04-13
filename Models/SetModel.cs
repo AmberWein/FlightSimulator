@@ -82,6 +82,16 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("DataMap");
             }
         }
+        private double frequency;
+        public double Frequency
+        {
+            get { return frequency; }
+            set
+            {
+                frequency = value;
+                NotifyPropertyChanged("Frequency");
+            }
+        }
         private CSVParser csvParser;
         public CSVParser CsvParser
         {
