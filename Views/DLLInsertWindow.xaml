@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator.Views"
         mc:Ignorable="d"
-        Title="DLLInsertWindow" Height="200" Width="400">
+        Title="DLLInsertWindow" Height="221.4" Width="400">
     <Grid>
-        <local:InsertDLLView x:Name="insert" Margin="25,30,38.6,30.4"/>
+        <local:InsertDLLView x:Name="insert" Margin="55,45,43.6,47"/>
     </Grid>
 </Window>

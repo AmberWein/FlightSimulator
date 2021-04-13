@@ -30,6 +30,17 @@ namespace FlightSimulator
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate void Free(IntPtr d);
 
+        public static bool IsValidDLL(string path)
+        {
+            IntPtr pDll = NativeMethods.LoadLibrary(path);
+            if (pDll==IntPtr.Zero)
+            {
+                return false;
+            }
+            NativeMethods.FreeLibrary(pDll);
+            return true;
+        }
+
         //public static void OperateDLL(string path)
         public static bool OperateDLL(string path)
         {

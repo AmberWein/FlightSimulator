@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FlightSimulator.ViewModels;
 
 namespace FlightSimulator.Views
 {
@@ -19,9 +20,11 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class DLLInsertWindow : Window
     {
-        public DLLInsertWindow()
+        public DLLInsertWindow(DetectorViewModel v)
         {
             InitializeComponent();
+            insert.SetVM(v);
+
         }
     }
 }

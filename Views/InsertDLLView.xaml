@@ -4,21 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
-             mc:Ignorable="d" Height="75" Width="295">
-    <Grid Background="White" Margin="0,0,-0.2,-0.2">
+             mc:Ignorable="d" Height="108.987" Width="295">
+    <Grid Background="White" Margin="-5,4,0.2,0">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Height="40" Margin="15,10,0,0" VerticalAlignment="Top" Width="245">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Detector Name:" Width="90" HorizontalAlignment="Center"/>
-                <TextBox Width="150"/>
+                <TextBox x:Name="DLLname" GotFocus="DLLNameBox_GotFocus" Text="{Binding VM_InsertDLLPath}" Width="150"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" >
                 <TextBlock Text="DLL path:" Width="90" HorizontalAlignment="Center"/>
-                <TextBox Width="150"/>
+                <TextBox x:Name="DLLpath" GotFocus="DLLPathBox_GotFocus" Text="{Binding VM_InsertDLLName}" Width="150"/>
             </StackPanel>
         </StackPanel>
-
-
+        <Button x:Name="OkButton" IsEnabled="False" Content="OK" HorizontalAlignment="Left" Margin="140,70,0,0" VerticalAlignment="Top" Width="75" Click="OKButton_Click"/>
+        <TextBlock x:Name="invalidityMessage"  HorizontalAlignment="Left" Margin="120,50,0,0" TextWrapping="Wrap" Text="invalid" VerticalAlignment="Top" Foreground="Red" 
+                   Visibility="Hidden" Width="110"/>
 
     </Grid>
 </UserControl>

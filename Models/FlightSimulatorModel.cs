@@ -335,6 +335,7 @@ namespace FlightSimulator.Models
                 }
                 else
                     new Thread(GetAnomalies).Start();
+                //NotifyPropertyChanged("CurrentDetector");
             }
         }
         public void GetAnomalies()
@@ -362,12 +363,19 @@ namespace FlightSimulator.Models
             get { return detectorsList; }
             set
             {
-                detectorsList = value;
+                detectorsList = new List<string>(value);
                 NotifyPropertyChanged("DetectorsList");
             }
         }
         private bool isDetectorOn;
         public bool IsDetectorOn { get { return isDetectorOn; } set { isDetectorOn = value; NotifyPropertyChanged("IsDetectorOn"); } }
-
+        private string insertDLLPath;
+        public string InsertDLLPath { get { return insertDLLPath; } set { insertDLLPath = value; } }
+        private string insertDLLName;
+        public string InsertDLLName { get { return insertDLLName; } set { insertDLLName = value; } }
+        public bool ValidateDLLPath(string path)
+        {
+            return Program.IsValidDLL(path);
+        }
     }
 }
