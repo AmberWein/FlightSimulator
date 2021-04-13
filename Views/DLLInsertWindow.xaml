@@ -1,0 +1,12 @@
+﻿<Window x:Class="FlightSimulator.Views.DLLInsertWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlightSimulator.Views"
+        mc:Ignorable="d"
+        Title="DLLInsertWindow" Height="200" Width="400">
+    <Grid>
+        <local:InsertDLLView x:Name="insert" Margin="25,30,38.6,30.4"/>
+    </Grid>
+</Window>
