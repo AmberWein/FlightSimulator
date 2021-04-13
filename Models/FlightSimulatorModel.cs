@@ -123,9 +123,12 @@ namespace FlightSimulator.Models
             }
             else if(string.Compare(e.PropertyName, "DataLines")==0)
             {
+                Attributes = settings.HeadersList;
+
                 DataLines = settings.DataLines;
+
             }
-            else if (string.Compare(e.PropertyName, "Attributes") == 0)
+            else if (string.Compare(e.PropertyName, "HeadersList") == 0)
             {
                 Attributes = settings.HeadersList;
             }

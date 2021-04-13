@@ -46,8 +46,8 @@ namespace FlightSimulator.Views
         // public ArrayList data { get; private set; }
         public GraphsView()
         {
-            FillList();
             InitializeComponent();
+            FillList();
 
 
             Binding dict = new Binding
@@ -55,6 +55,7 @@ namespace FlightSimulator.Views
                 Source = attributes
             };
             atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);
+            
 
 
             CompositionTarget.Rendering += CompositionTargetRendering;
@@ -72,14 +73,20 @@ namespace FlightSimulator.Views
         //fil list of attributes with info from viewModel
         private void FillList()
         {
-            this.attributes = new List<String>();
-            
+            if (vm == null) { }
+            else
+            {
+                this.attributes = new List<String>();
+                foreach (var v in vm.VM_Attributes)
+                {
+                    this.attributes.Add(v.ToString());
+                }
 
-        
-             this.attributes.Add("indicated-heading-deg");
-            this.attributes.Add("latitude-deg");
-            this.attributes.Add("engine_rpm");
 
+                this.attributes.Add("indicated-heading-deg");
+                this.attributes.Add("latitude-deg");
+                this.attributes.Add("engine_rpm");
+            }
 
 
 

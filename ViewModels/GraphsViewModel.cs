@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using FlightSimulator.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -25,7 +26,6 @@ namespace FlightSimulator.ViewModels
         public GraphsViewModel(IFlightSimulatorModel m)
 
         {
-         
             this.model = m;
 
              model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
@@ -47,15 +47,20 @@ namespace FlightSimulator.ViewModels
             set
             {
                     model.ChosenAttribute = value;
-                    onPropertyChanged("VM_AttUserChoose");///??
+                    onPropertyChanged("VM_ChosenAttribute");///??
             }
         }
-       public void ClearPlot()
+
+        private ArrayList attributes;
+
+        public ArrayList VM_Attributes
         {
-            PlotModel.Series.Clear();
-
+            get { return model.Attributes; }
+            set { model.Attributes = value;
+                onPropertyChanged("VM_Attributes");
+            }
         }
-
+       
         public void onPropertyChanged(string propName)
         {
             if (PropertyChanged != null)
@@ -82,7 +87,6 @@ namespace FlightSimulator.ViewModels
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
-        private DateTime lastUpdate = DateTime.Now;
 
 
 
