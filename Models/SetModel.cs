@@ -92,7 +92,9 @@ namespace FlightSimulator.Models
             headersList = xmlParser.Headers;
         }
 
-        // anomaly detection util
+        // correlation computin
+
+        // returns the avarege of a given ArrayList
         float Avg(ArrayList x, int size)
         {
             float sum = 0;
@@ -104,7 +106,7 @@ namespace FlightSimulator.Models
         }
 
         // returns the variance of X and Y
-        float var(ArrayList x, int size)
+        float Var(ArrayList x, int size)
         {
             float av = Avg(x, size);
             float sum = 0;
@@ -132,7 +134,12 @@ namespace FlightSimulator.Models
         // returns the Pearson correlation coefficient of X and Y
         float Pearson(ArrayList x, ArrayList y, int size)
         {
-            return Cov(x, y, size) / (float)(Math.Sqrt(var(x, size)) * Math.Sqrt(var(y, size)));
+            float a = (float)Math.Sqrt(Var(x, size));
+            float b = (float)Math.Sqrt(Var(y, size));
+            // make sure not to divide by zero
+            if (a == 0 || b == 0)
+                return 0;
+            return Cov(x, y, size) / (a * b);
         }
         string GetMostCorrelatedFeature(string featureName)
         {

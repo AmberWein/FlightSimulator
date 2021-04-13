@@ -21,7 +21,7 @@ namespace FlightSimulator.Views
         {
             FillList();
             InitializeComponent();
-            // set binding between the ComboBox's chosen value to 
+            // set binding between the ComboBox's chosen value to the speeds list 
             Binding dict = new Binding
             {
                 Source = speeds
