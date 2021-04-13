@@ -45,10 +45,12 @@ namespace FlightSimulator.Models
                     NotifyPropertyChanged("CsvPath");
                     if (csvPath != null)
                     {
-                        CSVParser csvParser = new CSVParser(csvPath, HeadersList);
-                        csvParser.Parse();
-                        DataMap = csvParser.Map;
-                        DataLines = csvParser.Lines;
+                        //CSVParser csvParser = new CSVParser(csvPath, HeadersList);
+                        CsvParser.FilePath = value;
+                        CsvParser.Parse();
+                        CsvParser.CreateCSV("anomaly_flight_with_headers.csv");
+                        DataMap = CsvParser.Map;
+                        DataLines = CsvParser.Lines;
                     }  
                 }
             }
@@ -80,6 +82,15 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("DataMap");
             }
         }
+        private CSVParser csvParser;
+        public CSVParser CsvParser
+        {
+            get
+            {
+                return csvParser;
+            }
+        }
+
         // Constructor
         public SetModel()
         {
@@ -90,6 +101,9 @@ namespace FlightSimulator.Models
             XMLParser xmlParser = new XMLParser();
             xmlParser.Parse();
             headersList = xmlParser.Headers;
+            csvParser = new CSVParser("reg_flight.csv", headersList);
+            csvParser.CreateCSV("reg_flight_with_headers.csv");
+            // also need to make correlation map
         }
 
         // correlation computin

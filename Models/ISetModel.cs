@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections;
+using FlightSimulator.IO;
 
 namespace FlightSimulator.Models
 {
@@ -11,5 +12,6 @@ namespace FlightSimulator.Models
         string CsvPath { get; set; }
         Dictionary<string, ArrayList> DataMap { get; set; }
         ArrayList DataLines { get; set; }
+        CSVParser CsvParser { get; }
     }
 }

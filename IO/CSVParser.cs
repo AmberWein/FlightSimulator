@@ -2,10 +2,12 @@
 using System.Collections;
 using System.IO;
 using System.Globalization;
+using System.Text;
+using Microsoft.VisualBasic.FileIO;
 
 namespace FlightSimulator.IO
 {
-    class CSVParser: FileParser
+    public class CSVParser: FileParser
     {
         private ArrayList properties;
         private ArrayList lines;
@@ -56,16 +58,19 @@ namespace FlightSimulator.IO
                 map = value;
             }
         }
+        // parse the data from a given CSV file's path 
+        // and a list of headers
         public CSVParser(string newFilePath, ArrayList newProperties) : base(newFilePath)
         {
             this.properties = newProperties;
             this.numOfProperties = properties.Count;
             this.map = new Dictionary<string, ArrayList>();
-            initMap();
+            InitMap();
             this.lines = new ArrayList();
         }
 
-        private void initMap()
+        // function to init this map
+        private void InitMap()
         {
             for (int i = 0; i < this.numOfProperties; i++)
             {
@@ -96,5 +101,34 @@ namespace FlightSimulator.IO
             }
             reader.Dispose();
         }
+
+        // create a CSV file contains both headers and data
+        public void CreateCSV(string fileName)
+        {
+            //var filepath = fileName;
+            using (StreamWriter writer = new StreamWriter(new FileStream(fileName,
+            FileMode.Create, FileAccess.Write)))
+            {
+                // write the first line of properties' name
+                foreach (string h in this.properties)
+                {
+                    writer.Write(h + ", ");
+                }
+
+                foreach (string line in this.lines)
+                {
+                    writer.WriteLine();
+                    string[] valuesString = line.Split(',');
+                    foreach (string value in valuesString)
+                    {
+                        float currentValue = float.Parse(value, CultureInfo.InvariantCulture);
+                        writer.Write(currentValue + ", ");
+                    }
+                }
+
+                writer.Close();
+            }
+        }
+
     }
 }
