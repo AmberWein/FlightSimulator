@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="800">
     <Grid Background="DarkGray" Margin="0,0,0,-390">
-        <ComboBox x:Name="DetectorComboBox" ItemsSource="{Binding DetectNames}" HorizontalAlignment="Left" Margin="205,15,0,0" VerticalAlignment="Top" Width="80" Height="35"
+        <ComboBox x:Name="DetectorComboBox" ItemsSource="{Binding VM_DetectorsList}" HorizontalAlignment="Left" Margin="180,15,0,0" VerticalAlignment="Top" Width="130" Height="35"
                   SelectedValue="{Binding VM_CurrentDetector}"/>
         <Button Content="Detect Anomalies" HorizontalAlignment="Left" Margin="315,20,0,0" VerticalAlignment="Top" Width="155" IsEnabled="{Binding VM_IsDetectorOn}" Height="30"/>
 

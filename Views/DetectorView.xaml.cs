@@ -22,6 +22,7 @@ namespace FlightSimulator.Views
     public partial class DetectorView : UserControl
     {
         private DetectorViewModel vm;
+        //private List<string> list;
         public DetectorView()
         {
             InitializeComponent();
@@ -30,6 +31,14 @@ namespace FlightSimulator.Views
         {
             this.vm = detectVM;
         }
+       /* public void initList()
+        {
+            list.Add("Choose detector");
+            list.Add("Simple");
+            list.Add("Circular");
+            list.Add("Upload detector");
+            vm.VM_DetectorsList = list;
+        }*/
        
         private void AddToList(string path, string name)
         {

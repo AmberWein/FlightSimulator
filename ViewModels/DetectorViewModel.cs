@@ -52,7 +52,7 @@ namespace FlightSimulator.ViewModels
             get { return model.DetectorsList; }
             set
             {
-                model.DetectorsList = value;
+               
             }
         }
         
@@ -77,6 +77,12 @@ namespace FlightSimulator.ViewModels
             {
                 VM_IsDetectorOn = model.IsDetectorOn;
                 NotifyPropertyChanged("VM_IsDetectorOn");
+                return;
+            }
+            if (string.Compare(e.PropertyName, "DetectorsList") == 0)
+            {
+                VM_DetectorsList = model.DetectorsList;
+                NotifyPropertyChanged("VM_DetectorsList");
                 return;
             }
         }
