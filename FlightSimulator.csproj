@@ -89,15 +89,18 @@
     <Compile Include="Models\MediaPlayerModel.cs" />
     <Compile Include="Models\SetModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\DetectorViewModel.cs" />
     <Compile Include="ViewModels\FlightSimulatorViewModel.cs" />
     <Compile Include="ViewModels\GearControlViewModel.cs" />
     <Compile Include="ViewModels\GraphsViewModel.cs" />
     <Compile Include="NativeMethods.cs" />
-    <Compile Include="plugins\AnomalyDetector.cs" />
     <Compile Include="ViewModels\MediaPlayerViewModel.cs" />
     <Compile Include="ViewModels\SetViewModel.cs" />
     <Compile Include="Views\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetectorView.xaml.cs">
+      <DependentUpon>DetectorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FlightSimulatorView.xaml.cs">
       <DependentUpon>FlightSimulatorView.xaml</DependentUpon>
@@ -130,6 +133,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\DashboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetectorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,7 +189,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Images\" />
     <Resource Include="Views\Images\forward_button.png" />
     <Resource Include="Views\Images\open_button.png" />
     <Resource Include="Views\Images\pause_button.png" />
@@ -190,7 +196,8 @@
     <Resource Include="Views\Images\stop_button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="plugins\SimpleAnomalyDetector.dll" />
+    <Content Include="plugins\CircularDetect.dll" />
+    <Content Include="plugins\SimpleDetect.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

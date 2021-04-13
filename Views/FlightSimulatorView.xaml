@@ -14,9 +14,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="100" />
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <local:DashboardView x:Name="dash" Grid.Row="0" />
         <local:MediaPlayerView x:Name="media" Grid.Row="2" Margin="0,1,0,-2.8"/>
         <local:GearControlView x:Name="gear" Grid.Row="1" />
+        <local:DetectorView x:Name="detector" Grid.Row="3"/>
     </Grid>
 </Page>

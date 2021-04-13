@@ -142,6 +142,12 @@ namespace FlightSimulator.Models
             altitude = 0;
             airSpeed = 0;
             frequency = 10; // default value
+            dllMap = new Dictionary<string, string>();
+            dllMap.Add("Simple", "plugins/SimpleDetect.dll");
+            dllMap.Add("Circular", "plugins/CircularDetect.dll");
+            detectorsList = new List<string>() { "Choose detector", "Simple", "Circular", "Add detector" };
+            currentDetector = DetectorsList[0];
+            isDetectorOn = false;
         }
         // Dashboard properties
         private float yaw;
@@ -276,14 +282,17 @@ namespace FlightSimulator.Models
         // start updating data as the time passes
         public void StartFlying()
         {
-            int sleepingTime, lineNumber;
             
-           
+            DetectorsList = detectorsList;
+            CurrentDetector = DetectorsList[0];
+            int sleepingTime, lineNumber;
+
             /*int sign= client.Connect();
             if (sign !=1)
                 return;*/
-           while (isPlay)
+            while (isPlay)
             {
+                
                 lineNumber = (int)(Timer * Frequency);
                 sleepingTime = (int)(100 / PlayingSpeed);
                 // get current values for dashboard properties
@@ -310,5 +319,41 @@ namespace FlightSimulator.Models
                 System.Threading.Thread.Sleep(sleepingTime);
             }
         }
+        // Anomalies Detector Properties
+        private string currentDetector;
+        public string CurrentDetector
+        {
+            get { return currentDetector; }
+            set
+            {
+                currentDetector = value;
+                if(string.Compare(value, "Choose detector") == 0)
+                {
+                    IsDetectorOn = false;
+                }
+            }
+        }
+        private Dictionary<string, string> dllMap;
+        public Dictionary<string, string> DllMap
+        {
+            get { return dllMap; }
+            set
+            {
+                dllMap = value;
+            }
+        }
+        private List<string> detectorsList;
+        public List<string> DetectorsList
+        {
+            get { return detectorsList; }
+            set
+            {
+                detectorsList = value;
+                NotifyPropertyChanged("DetectorsList");
+            }
+        }
+        private bool isDetectorOn;
+        public bool IsDetectorOn { get { return isDetectorOn; } set { isDetectorOn = value; NotifyPropertyChanged("IsDetectorOn"); } }
+
     }
 }
