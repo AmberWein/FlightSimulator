@@ -91,6 +91,19 @@ namespace FlightSimulator.Models
             }
         }
 
+        private ArrayList correlatedFeatures { get; set; }
+        public ArrayList CorrelatedFeatures
+        {
+            get
+            {
+                return correlatedFeatures;
+            }
+            set
+            {
+                correlatedFeatures = value;
+            }
+        }
+
         // Constructor
         public SetModel()
         {
@@ -186,6 +199,16 @@ namespace FlightSimulator.Models
                 }
             }
             return mostCorrelatedName;
+        }
+        // set the correlated features
+        void SetMostCorrelated()
+        {
+            // go over each property and find the most correlated property to it
+            foreach(string h in this.headersList)
+            {
+                string correlated = GetMostCorrelatedFeature(h);
+                this.CorrelatedFeatures.Add(new KeyValuePair<string, string>(h, correlated));
+            }
         }
     }
 }

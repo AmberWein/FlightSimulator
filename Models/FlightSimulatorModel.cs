@@ -43,18 +43,18 @@ namespace FlightSimulator.Models
         }
         // indicates wheater simulator is on play mode.
         private bool isPlay;
-        public bool IsPlay 
+        public bool IsPlay
         {
-            get { return isPlay; } 
-            set 
+            get { return isPlay; }
+            set
             {
-                isPlay = value; 
+                isPlay = value;
                 // when set to true, start the flight in a new thread
                 if (isPlay)
                 {
                     new Thread(StartFlying).Start();
                 }
-            } 
+            }
         }
         private double playingSpeed;
         public double PlayingSpeed
@@ -63,7 +63,7 @@ namespace FlightSimulator.Models
             set
             {
                 // this is only controlled from View, no need to Notify
-                playingSpeed = value; 
+                playingSpeed = value;
             }
         }
 
@@ -71,30 +71,30 @@ namespace FlightSimulator.Models
         public double Timer
         {
             get { return timer; }
-            set { 
+            set {
                 timer = value;
                 NotifyPropertyChanged("Timer");
             }
         }
 
         private double finishTime;
-        public double FinishTime { 
-            get { return finishTime; } 
+        public double FinishTime {
+            get { return finishTime; }
             set
-            { 
-                finishTime = value; 
-                NotifyPropertyChanged("FinishTime"); 
+            {
+                finishTime = value;
+                NotifyPropertyChanged("FinishTime");
             }
         }
-        
+
 
         // make this model a listener to changes whitin settings. When the data is uploaded, get it.
-        public void SettingsChanged (Object sender, PropertyChangedEventArgs e) {
-            if(string.Compare(e.PropertyName,"DataMap")==0)
+        public void SettingsChanged(Object sender, PropertyChangedEventArgs e) {
+            if (string.Compare(e.PropertyName, "DataMap") == 0)
             {
                 DataMap = settings.DataMap;
             }
-            else if(string.Compare(e.PropertyName, "DataLines")==0)
+            else if (string.Compare(e.PropertyName, "DataLines") == 0)
             {
                 DataLines = settings.DataLines;
             }
@@ -110,7 +110,7 @@ namespace FlightSimulator.Models
             // initialize members
             dataMap = null;
             dataLines = null;
-            playingSpeed = 1;            
+            playingSpeed = 1;
             timer = 0;
             finishTime = 0;
             yaw = 0;
