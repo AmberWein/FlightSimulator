@@ -20,7 +20,7 @@ using OxyPlot.Reporting;
 using System.Collections.Generic;
 using System.Collections;
 using FlightSimulator.ViewModels;
-using FlightSimulator.Models;
+
 
 
 
@@ -40,7 +40,7 @@ namespace FlightSimulator.Views
     {
         //private Models.FlightSimulatorModel viewModel;
 
-        GraphsViewModel vm;
+       private GraphsViewModel vm;
         private string chosenAttribute;
         List<string> attributes;
         // public ArrayList data { get; private set; }
@@ -74,8 +74,7 @@ namespace FlightSimulator.Views
         private void FillList()
         {
             if (vm == null) { }
-            else
-            {
+          
                 this.attributes = new List<String>();
                 foreach (var v in vm.VM_Attributes)
                 {
@@ -86,7 +85,7 @@ namespace FlightSimulator.Views
                 this.attributes.Add("indicated-heading-deg");
                 this.attributes.Add("latitude-deg");
                 this.attributes.Add("engine_rpm");
-            }
+            
 
 
 

@@ -9,8 +9,8 @@ namespace FlightSimulator.ViewModels
 
         private IFlightSimulatorModel model;
 
-        public GearControlViewModel gearVM { get; internal set; }
-        public GraphsViewModel graphsVM { get; internal set; }
+       // public GearControlViewModel gearVM { get; internal set; }
+        ///public GraphsViewModel graphsVM { get; internal set; }
 
         // INotifyPropertyChanged implementations
         public event PropertyChangedEventHandler PropertyChanged;
@@ -25,6 +25,8 @@ namespace FlightSimulator.ViewModels
         // Flight Simulator Controllers ViewModels
         public DashboardViewModel DashboardVM { get; internal set; }
         public MediaPlayerViewModel MediaPlayerVM { get; internal set; }
+        public GraphsViewModel GraphsVM { get; internal set; }
+        public GearControlViewModel GearControlVM { get; internal set; }
         public FlightSimulatorViewModel(IFlightSimulatorModel m)
         {
             this.model = m;
@@ -32,8 +34,8 @@ namespace FlightSimulator.ViewModels
             // create the viewModels that will contact the model
             DashboardVM = new DashboardViewModel(this.model);
             MediaPlayerVM = new MediaPlayerViewModel(this.model);
-            gearVM = new GearControlViewModel(this.model);
-            graphsVM = new GraphsViewModel(this.model);
+            GearControlVM = new GearControlViewModel(this.model);
+            GraphsVM = new GraphsViewModel(this.model);
         }
         public bool VM_IsPlay { get { return model.IsPlay; } set { model.IsPlay = true; } }
         

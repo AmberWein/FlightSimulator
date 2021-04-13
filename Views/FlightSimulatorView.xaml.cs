@@ -34,10 +34,10 @@ namespace FlightSimulator.Views
             this.dash.SetVM(f.DashboardVM);
             this.media.DataContext = f.MediaPlayerVM;
             this.media.SetVM(f.MediaPlayerVM);
-            this.gear.DataContext = f.gearVM;
-            this.gear.SetVM(f.gearVM);
-            this.graphs.DataContext =f.graphsVM;
-            this.graphs.SetVM(f.graphsVM);
+            this.gear.DataContext = f.GearControlVM;
+            this.gear.SetVM(f.GearControlVM);
+            this.graphs.DataContext =f.GraphsVM;
+            this.graphs.SetVM(f.GraphsVM);
             Loaded += StartSim;
 
         }
