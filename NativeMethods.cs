@@ -30,7 +30,8 @@ namespace FlightSimulator
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate void Free(IntPtr d);
 
-        public static void OperateDLL(string path)
+        //public static void OperateDLL(string path)
+        public static bool OperateDLL(string path)
         {
             IntPtr pDll = NativeMethods.LoadLibrary(path);
             //oh dear, error handling here
@@ -60,15 +61,15 @@ namespace FlightSimulator
                 Console.WriteLine("Error in loading free func");
                 // should print an error accured and exit the app
             }
-            Create c = (Create)Marshal.GetDelegateForFunctionPointer(CreateFuncAddress, typeof(Create));
-            Detect d = (Detect)Marshal.GetDelegateForFunctionPointer(DetectFuncAddress, typeof(Detect));
-            Free f = (Free)Marshal.GetDelegateForFunctionPointer(FreeFuncAddress, typeof(Free));
+            Create create = (Create)Marshal.GetDelegateForFunctionPointer(CreateFuncAddress, typeof(Create));
+            Detect detect = (Detect)Marshal.GetDelegateForFunctionPointer(DetectFuncAddress, typeof(Detect));
+            Free free = (Free)Marshal.GetDelegateForFunctionPointer(FreeFuncAddress, typeof(Free));
 
-            IntPtr p = c();
-            d(p);
-            f(p);
+            IntPtr p = create();
+            detect(p);
+            free(p);
             
-            bool result = NativeMethods.FreeLibrary(pDll);
+            return NativeMethods.FreeLibrary(pDll);
             //remaining code here
         }
     }

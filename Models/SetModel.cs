@@ -125,7 +125,8 @@ namespace FlightSimulator.Models
             Frequency = xmlParser.getFrequency();
             xmlParser.Parse();
             headersList = xmlParser.Headers;
-            csvParser = new CSVParser("reg_flight.csv", headersList);
+            csvParser = new CSVParser("C:/Users/NicoleS/Downloads/reg_flight.csv", headersList);
+            csvParser.Parse();
             csvParser.CreateCSV("reg_flight_with_headers.csv");
             // also need to make correlation map
         }

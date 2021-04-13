@@ -341,7 +341,11 @@ namespace FlightSimulator.Models
         {
             string dllPath;
             DllMap.TryGetValue(CurrentDetector, out dllPath);
-            Program.OperateDLL(dllPath);
+            bool madeReport = Program.OperateDLL(dllPath);
+            if (madeReport)
+            {
+                IsDetectorOn = true;
+            }
         }
         private Dictionary<string, string> dllMap;
         public Dictionary<string, string> DllMap
