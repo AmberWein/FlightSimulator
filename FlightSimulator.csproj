@@ -189,5 +189,8 @@
     <Resource Include="Views\Images\play_button.jpg" />
     <Resource Include="Views\Images\stop_button.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="plugins\SimpleAnomalyDetector.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
