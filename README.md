@@ -10,10 +10,10 @@ Each one is for a different purpose:
 2. Dashboard- displays some aspects of the flight such as the altimeter, airspeed, orientation of the flight and measures of pitch, roll and yaw.
 3. Joystick - to inspect the direction that the plane is heading.
 4. Graphs- allows the user to evaluate the different aspects of the flight:
-a. a selected attribute from an attributes box
-b. the most correlated attribute to the one we selected.
-c.  the linear regression between the two attributes from the first two graphs. 
-d. anomalies from the flight in relation to the two attributes.
+ a. a selected attribute from an attributes box
+ b. the most correlated attribute to the one we selected.
+ c.  the linear regression between the two attributes from the first two graphs. 
+ d. anomalies from the flight in relation to the two attributes.
 
 ## Organization of the Project:
 Our project is organized in five folders:
