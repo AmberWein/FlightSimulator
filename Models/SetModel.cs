@@ -40,7 +40,7 @@ namespace FlightSimulator.Models
             {
                 // should i check null?
                 // first, validate file existence, then parse it
-                if (FileParser.IsValidPath(value)) { 
+                if (CSVParser.IsCSV(value) && FileParser.IsValidPath(value)) { 
                     csvPath = value;
                     NotifyPropertyChanged("CsvPath");
                     if (csvPath != null)

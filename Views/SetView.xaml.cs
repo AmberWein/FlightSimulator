@@ -51,9 +51,12 @@ namespace FlightSimulator.Views
         }
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            if (FileParser.IsValidPath(pathBox.Text))
+            if (CSVParser.IsCSV(pathBox.Text))
             {
-                isValidPath = true;
+                if (FileParser.IsValidPath(pathBox.Text))
+                {
+                    isValidPath = true;
+                }
             }
             if (isValidPath)
             {

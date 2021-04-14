@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Globalization;
+using System;
 
 namespace FlightSimulator.IO
 {
@@ -67,6 +68,15 @@ namespace FlightSimulator.IO
             this.lines = new ArrayList();
         }
 
+        public static bool IsCSV(string path)
+        {
+            string extension = System.IO.Path.GetExtension(path);
+            if (extension == null)
+                return false;
+            if (String.Compare(extension.ToLower(), ".csv") == 0)
+                return true;
+            return false;
+        }
         // function to init this map
         private void InitMap()
         {

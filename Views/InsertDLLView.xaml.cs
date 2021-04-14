@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FlightSimulator.ViewModels;
+using FlightSimulator.IO;
 
 namespace FlightSimulator.Views
 {
@@ -40,7 +29,7 @@ namespace FlightSimulator.Views
         {
             vm.VM_IsDetectorOn = false;
             // check that dll path is valid
-            if (vm.VM_ValidateDLLPath(DLLpath.Text))
+            if (FileParser.IsDLL(DLLpath.Text) && vm.VM_ValidateDLLPath(DLLpath.Text))
             {
                 // check that name does not already exist
                 if (vm.VM_DetectorsList.Contains(DLLname.Text))
