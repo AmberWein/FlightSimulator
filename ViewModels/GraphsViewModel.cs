@@ -24,7 +24,7 @@ namespace FlightSimulator.ViewModels
         LineSeries lineSerie_c = new LineSeries();
         LineSeries lineSerieReg = new LineSeries();
         ScatterSeries scatterPoints = new ScatterSeries();
-
+        ScatterSeries recentPoints = new ScatterSeries();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -317,6 +317,7 @@ namespace FlightSimulator.ViewModels
         public void UpdateModelReg()
 
         {
+            PlotModelReg.InvalidatePlot(true);
             foreach (KeyValuePair<string, string> v in VM_CorrelatedFeatures)
             {
                 if (v.Key == VM_ChosenAttribute)
@@ -329,13 +330,10 @@ namespace FlightSimulator.ViewModels
             if (VM_ChosenAttribute != null && correlated_feature != null)
             {
 
-           
-            //last 30 seconds points - in red
-            var recentPoints = new ScatterSeries
-            {
-                MarkerType = MarkerType.Circle,
-                MarkerFill = OxyColors.Red
-            };
+
+                //last 30 seconds points - in red
+               
+          
                 PlotModelReg.Series.Add(recentPoints);
 
                 if (model.Timer > 30)
@@ -358,6 +356,8 @@ namespace FlightSimulator.ViewModels
                 }
 
                 PlotModelReg.InvalidatePlot(true);
+              
+                
             }
 
 
@@ -377,7 +377,9 @@ namespace FlightSimulator.ViewModels
             }
             if (correlated_feature != "" && correlated_feature != null)
             {
+                scatterPoints.Points.Clear();
                 lineSerieReg.Points.Clear();
+               
                 PlotModelReg.Series.Clear();
 
                 ArrayList points = model.fromFloatsToPoints(model.DataMap[VM_ChosenAttribute], model.DataMap[correlated_feature]);
