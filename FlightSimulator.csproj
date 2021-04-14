@@ -102,6 +102,9 @@
     <Compile Include="Views\DetectorView.xaml.cs">
       <DependentUpon>DetectorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DLLInsertWindow.xaml.cs">
+      <DependentUpon>DLLInsertWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FlightSimulatorView.xaml.cs">
       <DependentUpon>FlightSimulatorView.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,9 @@
     </Compile>
     <Compile Include="Views\GraphsView.xaml.cs">
       <DependentUpon>GraphsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsertDLLView.xaml.cs">
+      <DependentUpon>InsertDLLView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LetsStartPage.xaml.cs">
       <DependentUpon>LetsStartPage.xaml</DependentUpon>
@@ -149,6 +155,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DLLInsertWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FlightSimulatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LetsStartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsertDLLView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

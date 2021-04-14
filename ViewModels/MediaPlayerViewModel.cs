@@ -71,37 +71,6 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        // private double vm_Timer;
-        // public double VM_Timer
-        //{
-        //   get { //return model.Timer;
-        //     return vm_Timer;
-        //return 0.1 * (double)model.LineNumber;
-        //}
-        //set
-        //{
-        //   if (value <= 0)
-        //   {
-        //      VM_Timer = 0;
-        //     model.LineNumber = 0;
-        // }
-        // else
-        //{// what will happen? vm_Timer need to be changed. but should line also change? or it changes anyway? 
-        //   if (vm_Timer + 0.1 < value)
-        //  {
-        ///      VM_LineNumber = (int )(value * 10.0);
-        //}
-        //vm_Timer = value;
-
-        // lineNumber??
-        //   model.LineNumber = (int)(value * 10.0);
-        //               }
-        //if (value <= 0)
-        //    model.Timer = 0;
-        //else
-        //    model.Timer = value;
-        //         }
-        //    }
         public double VM_Timer
         {
             get { return model.Timer; }

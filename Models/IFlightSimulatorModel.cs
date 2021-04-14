@@ -33,5 +33,13 @@ namespace FlightSimulator.Models
         List<string> DetectorsList { get; set; }
         string CurrentDetector { get; set; }
         bool IsDetectorOn { get; set; }
+        //string InsertDLLPath { get; set; }
+        //string InsertDLLName { get; set; }
+
+        bool ValidateDLLPath(string path);
+
+
+
+        bool GetDetector { get; set; }
     }
 }

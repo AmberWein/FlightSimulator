@@ -12,5 +12,6 @@
                   SelectedValue="{Binding VM_CurrentDetector}"/>
         <Button Content="Detect Anomalies" HorizontalAlignment="Left" Margin="315,20,0,0" VerticalAlignment="Top" Width="155" IsEnabled="{Binding VM_IsDetectorOn}" Height="30"/>
 
+
     </Grid>
 </UserControl>

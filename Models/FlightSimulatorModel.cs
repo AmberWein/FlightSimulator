@@ -143,11 +143,13 @@ namespace FlightSimulator.Models
             airSpeed = 0;
             frequency = 10; // default value
             dllMap = new Dictionary<string, string>();
-            dllMap.Add("Simple", "plugins/SimpleDetect.dll");
-            dllMap.Add("Circular", "plugins/CircularDetect.dll");
+           // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
+            dllMap.Add("Simple", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\SimpleDetect.dll");
+            dllMap.Add("Circular", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\CircularDetect.dll");
             detectorsList = new List<string>() { "Choose detector", "Simple", "Circular", "Add detector" };
             currentDetector = DetectorsList[0];
             isDetectorOn = false;
+            getDetector = false;
         }
         // Dashboard properties
         private float yaw;
@@ -326,11 +328,41 @@ namespace FlightSimulator.Models
             get { return currentDetector; }
             set
             {
+                IsDetectorOn = false;
                 currentDetector = value;
-                if(string.Compare(value, "Choose detector") == 0)
+                if (string.Compare(value, DetectorsList[0]) == 0)
                 {
-                    IsDetectorOn = false;
+                    isDetectorOn = false;
+                    // something else?
+                    NotifyPropertyChanged("CurrentDetector");
+                    return;
                 }
+                if (!GetDetector && string.Compare(value, DetectorsList[DetectorsList.Count - 1]) == 0)
+                {
+                    currentDetector = DetectorsList[0];
+                    GetDetector = true;
+                }
+                else
+                {
+                    new Thread(GetAnomalies).Start();
+                    NotifyPropertyChanged("CurrentDetector");
+                }
+            }
+        }
+        private bool getDetector;
+        public bool GetDetector
+        {
+            get { return getDetector; }
+            set { getDetector = value; NotifyPropertyChanged("GetDetector"); }
+        }
+        public void GetAnomalies()
+        {
+            string dllPath;
+            DllMap.TryGetValue(CurrentDetector, out dllPath);
+            bool madeReport = Program.OperateDLL(dllPath);
+            if (madeReport)
+            {
+                IsDetectorOn = true;
             }
         }
         private Dictionary<string, string> dllMap;
@@ -348,12 +380,15 @@ namespace FlightSimulator.Models
             get { return detectorsList; }
             set
             {
-                detectorsList = value;
+                detectorsList = new List<string>(value);
                 NotifyPropertyChanged("DetectorsList");
             }
         }
         private bool isDetectorOn;
         public bool IsDetectorOn { get { return isDetectorOn; } set { isDetectorOn = value; NotifyPropertyChanged("IsDetectorOn"); } }
-
+        public bool ValidateDLLPath(string path)
+        {
+            return Program.IsValidDLL(path);
+        }
     }
 }
