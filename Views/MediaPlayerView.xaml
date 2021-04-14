@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
-             mc:Ignorable="d" d:DesignWidth="800" Height="142">
-    <Border BorderBrush="LightGray"
+             mc:Ignorable="d" d:DesignWidth="998" Height="180">
+
+    <Viewbox Height="180" Width="998">
+        <Border BorderBrush="LightGray"
         BorderThickness="1"
         Background="LightGray"
         CornerRadius="10">
@@ -68,4 +70,5 @@
             </StatusBar>
         </StackPanel>
     </Border>
+    </Viewbox>
 </UserControl>

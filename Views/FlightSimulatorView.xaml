@@ -5,22 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FlightSimulator.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="1371" d:DesignWidth="1371"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="FlightSimulatorView">
 
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4"/>
             <RowDefinition Height="auto" />
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4"/>
         </Grid.RowDefinitions>
-        <local:DashboardView x:Name="dash" Grid.Row="0" />
-        <local:GraphsView x:Name="graphs" Grid.Row="2"/>
-        <local:MediaPlayerView x:Name="media" Grid.Row="4" Margin="0,1,0,-2.8"/>
-        <local:GearControlView x:Name="gear" Grid.Row="1" />
+        <local:DashboardView x:Name="dash" Grid.Row="0" HorizontalAlignment="Left" />
+        <local:GraphsView x:Name="graphs" HorizontalAlignment="Stretch" Grid.Row="3"VerticalAlignment="Center"/>
+        <local:MediaPlayerView x:Name="media" Grid.Row="2" VerticalAlignment="Bottom" Margin="0,1,0,-2.8"/>
+        <local:GearControlView x:Name="gear" HorizontalAlignment="Right"/>
         <local:DetectorView x:Name="detector" Grid.Row="3"/>
     </Grid>
 </Page>

@@ -8,30 +8,25 @@
              xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
              mc:Ignorable="d" 
             
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="998" d:DesignWidth="250">
+    <Viewbox Width="250" Height="998">
+    <Grid Height="700" Width ="800" VerticalAlignment="Bottom">
 
-    <Grid Height="260" VerticalAlignment="Bottom">
-     
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-
-        <oxy:PlotView x:Name="Plot1" Model="{Binding Path= PlotModel}" Grid.Row="5" Background="GreenYellow" Grid.RowSpan="6"  Height="90" ></oxy:PlotView>
-        <Syncfusion:ComboBoxAdv x:Name="atrributesBox" VerticalAlignment="Top" Margin="70,-130,-50,0"
-                SelectedValue="{Binding VM_ChosenAttribute}" HorizontalAlignment="Left" Width="780" Height="20" Syncfusion:SkinManager.ActiveColorScheme="Purple" SelectionChanged="atrributesBox_SelectionChanged" Grid.ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+               
+            </Grid.RowDefinitions>
+            <oxy:PlotView x:Name="Plot1" Model="{Binding Path= PlotModel}" Grid.Row="2" Background="#FF937193" HorizontalAlignment="Right" Grid.RowSpan="3"  Height="200" Width="300" ></oxy:PlotView>
+        <Syncfusion:ComboBoxAdv x:Name="atrributesBox" VerticalAlignment="Top"
+                SelectedValue="{Binding VM_ChosenAttribute}" HorizontalAlignment="Stretch"  Width="600" Height="20" Syncfusion:SkinManager.ActiveColorScheme="Purple" SelectionChanged="atrributesBox_SelectionChanged" Grid.ColumnSpan="3">
 
         </Syncfusion:ComboBoxAdv>
-        <oxy:PlotView x:Name ="Plot2" Model ="{Binding Path=PlotModelCorr}" Margin = "0,9.667,10,-227.333" Grid.Row = "3" Background ="BlueViolet"  Height="90" Grid.RowSpan = "4" ></oxy:PlotView>
-
-        
-    
-        <oxy:PlotView x:Name ="Plot3" Model ="{Binding Path=PlotModelReg}" Margin = "0,9.667,10,-227.333" Grid.Row = "3" Background ="BlueViolet"  Height="90" Grid.RowSpan = "4"></oxy:PlotView>
+            <oxy:PlotView x:Name ="Plot2" Model ="{Binding Path=PlotModelCorr}"  Grid.Row = "3" Background ="#FF237193" HorizontalAlignment="Left"  Height="200" Width="300" Grid.RowSpan = "4" ></oxy:PlotView>
+            <oxy:PlotView x:Name ="Plot3" Model ="{Binding Path=PlotModelReg}" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Grid.Row = "3" Background ="SeaGreen"  Height="200" Width="200" Grid.RowSpan = "4"></oxy:PlotView>
 
     </Grid>
+    </Viewbox>
 </UserControl>
