@@ -114,7 +114,7 @@ namespace FlightSimulator.ViewModels
         {
             return model.ValidateDLLPath(path);
         }
-        public string VM_InsertDLLPath { get { return model.InsertDLLPath; } set { model.InsertDLLPath = value; } }
-        public string VM_InsertDLLName { get { return model.InsertDLLName; } set { model.InsertDLLName = value; } }
+       // public string VM_InsertDLLPath { get { return model.InsertDLLPath; } set { model.InsertDLLPath = value; } }
+        //public string VM_InsertDLLName { get { return model.InsertDLLName; } set { model.InsertDLLName = value; } }
     }
 }

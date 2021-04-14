@@ -386,10 +386,6 @@ namespace FlightSimulator.Models
         }
         private bool isDetectorOn;
         public bool IsDetectorOn { get { return isDetectorOn; } set { isDetectorOn = value; NotifyPropertyChanged("IsDetectorOn"); } }
-        private string insertDLLPath;
-        public string InsertDLLPath { get { return insertDLLPath; } set { insertDLLPath = value; } }
-        private string insertDLLName;
-        public string InsertDLLName { get { return insertDLLName; } set { insertDLLName = value; } }
         public bool ValidateDLLPath(string path)
         {
             return Program.IsValidDLL(path);
