@@ -112,8 +112,17 @@
     <Compile Include="Views\GraphsView.xaml.cs">
       <DependentUpon>GraphsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LetsStartPage.xaml.cs">
+      <DependentUpon>LetsStartPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MediaPlayerView.xaml.cs">
       <DependentUpon>MediaPlayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OpeningPage.xaml.cs">
+      <DependentUpon>OpeningPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SetPage.xaml.cs">
+      <DependentUpon>SetPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SetView.xaml.cs">
       <DependentUpon>SetView.xaml</DependentUpon>
@@ -152,7 +161,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\LetsStartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MediaPlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OpeningPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SetPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
