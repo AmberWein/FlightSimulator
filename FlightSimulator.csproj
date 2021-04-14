@@ -115,6 +115,9 @@
     <Compile Include="Views\GraphsView.xaml.cs">
       <DependentUpon>GraphsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InsertCSVView.xaml.cs">
+      <DependentUpon>InsertCSVView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InsertDLLView.xaml.cs">
       <DependentUpon>InsertDLLView.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,10 @@
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Views\GraphsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsertCSVView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +240,9 @@
   <ItemGroup>
     <Content Include="plugins\CircularDetect.dll" />
     <Content Include="plugins\SimpleDetect.dll" />
+    <Resource Include="Views\Images\airplane.jpg" />
+    <Resource Include="Views\Images\flying_airplane.jpg" />
+    <Resource Include="Views\Images\set_airplane.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
