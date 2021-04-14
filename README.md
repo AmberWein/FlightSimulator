@@ -2,7 +2,7 @@
 A flight simulator app, at Advanced Programming 2nd course, Bar-Ilan University.
 Created by: Nicole Sharabany, Amber Weiner and Avia wolf.
 
-# Overview and Features:
+## Overview and Features:
 A flight simulator desktop application that interacts with a dedicated server. Our multithread application using C# and WPF with the MVVM software architectural pattern. Using FlightGear simulator, the program features a convenient user interface to view and analyze several attributes related to the flight.
  The GUI contains 6 main components: media player, dashboard, joystick, graphs, gear control and an option to upload a dll anomaly detector to present anomalies. 
 Each one is for a different purpose:
@@ -15,7 +15,7 @@ b. the most correlated attribute to the one we selected.
 c.  the linear regression between the two attributes from the first two graphs. 
 d. anomalies from the flight in relation to the two attributes.
 
-# Organization of the Project:
+## Organization of the Project:
 Our project is organized in five folders:
 1. Models- contains all of the models.
 2. ViewModels- contains all of the view models.
@@ -23,7 +23,7 @@ Our project is organized in five folders:
 4. IO- contains all of the classes involve with parsing data from files and writing to them as well.
 5. plugins- contians dynamic link libraries.
 
-#Required files:
+## Required files:
 1. reg_flight.csv - for a valid flight data.
 Make sure to save it in FlightSimulator\bin\Debug folder
 2. anomaly_flight.csv - for an anomaly flight data.
@@ -38,7 +38,7 @@ Required Installations:
 6. In order to run a different dll from our built in dll's, make sure to implement the following methods:
 צריך ליישר לגבי זה את הקו!
 
-# Manual:
+## Manual:
 1. Run the application and a GUI should be opened.
 2. Press the "start simulator" to start the simulator
 3. Upload your CSV file and press the enter button.
@@ -48,7 +48,7 @@ Please notice to write a valid CSV file path, otherwise you will be requested to
 6. The simulation is on, feel free to check it out and use the different features!
 Notice: in any case you want to go back one page, yto the opening window, you can use the "back" buuton on the left hand side.
 
-# UMLs and Class Diagrams:
+## UMLs and Class Diagrams:
 Our desktop application consists of 3 main parts that communicate and run. The first component is the MyFlightModel that interacts with the server via TCP communication. The second component is the ViewModel that sends data requests to the MyFlightModel and recieves notifications when data changes from the MyFlightModel. Our last component is the View (MainWindow file) that sends commands to the ViewModel and gets notified about changed data from the ViewModel. Data is displayed in our MainWindow through the process of data binding. The following link is our project UML:
 
-Short Video About Our Project:
+## Short Video About Our Project:
