@@ -4,16 +4,17 @@ Created by: Nicole Sharabany, Amber Weiner and Avia wolf.
 
 ## Overview and Features:
 A flight simulator desktop application that interacts with a dedicated server. Our multithread application using C# and WPF with the MVVM software architectural pattern. Using FlightGear simulator, the program features a convenient user interface to view and analyze several attributes related to the flight.
- The GUI contains 6 main components: media player, dashboard, joystick, graphs, gear control and an option to upload a dll anomaly detector to present anomalies. 
+ The GUI contains 5 main components: media player, dashboard, gear control, graphs and DLL controller. 
 Each one is for a different purpose:
 1. Media player- allows the user to control both the speed of the playback and the time reference. Meaning, play playback of the flight, pause it or stop the simulation, forward or backward the track and jump to a different point of time.
 2. Dashboard- displays some aspects of the flight such as the altimeter, airspeed, orientation of the flight and measures of pitch, roll and yaw.
-3. Joystick - to inspect the direction that the plane is heading.
-4. Graphs- allows the user to evaluate the different aspects of the flight:
- a. a selected attribute from an attributes box
- b. the most correlated attribute to the one we selected.
- c.  the linear regression between the two attributes from the first two graphs. 
- d. anomalies from the flight in relation to the two attributes.
+3. Graphs- allows the user to evaluate the different aspects of the flight:
+ * a selected attribute from an attributes box
+ * the most correlated attribute to the one we selected.
+ * the linear regression between the two attributes from the first two graphs. 
+ * anomalies from the flight in relation to the two attributes.
+4. Gear control- includind a joystick to inspect the direction that the plane is heading and sliders to visualize the changes of the throttle and rudder. 
+5. DLL controller- give an option to upload a dll anomaly detector to present anomalies
 
 ## Organization of the Project:
 Our project is organized in five folders:
@@ -27,9 +28,12 @@ Our project is organized in five folders:
 1. reg_flight.csv - for a valid flight data.
 Make sure to save it in FlightSimulator\bin\Debug folder
 2. anomaly_flight.csv - for an anomaly flight data.
-3. play_back.xml 
-3. Optional: add a dll to FlightSimulator\plugins folder
-Required Installations:
+Make sure to save it in FlightSimulator\Folders folder.
+4. play_back.xml - contains names of different features.
+Make sure to save it in FlightSimulator\Folders folder.
+6. Optional: add a dll file to FlightSimulator\plugins folder.
+
+## Required Installations:
 1. Recompile dll on your own native environment
 2. Install the latest version of FlightGear on your computer
 3. Import oxyplot in appropriate files to view graphs.
