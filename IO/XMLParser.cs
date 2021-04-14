@@ -35,11 +35,11 @@ namespace FlightSimulator.IO
         {
             this.headers = new ArrayList();
             // not sure - should be default, and change if given a specific path
-            this.xmlPath = "C:/Users/user/source/repos/FlightSimulator/playback_small.xml";
+            this.xmlPath = "C:/Users/17amb/source/repos/FlightSimulator/playback_small.xml";
         }
 
 
-        public double getFrequency()
+        public double GetFrequency()
         {
             string element;
             int i;

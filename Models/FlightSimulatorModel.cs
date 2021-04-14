@@ -178,42 +178,46 @@ namespace FlightSimulator.Models
             frequency = 10; // default value
             dllMap = new Dictionary<string, string>();
             string path = System.IO.Directory.GetCurrentDirectory();
-            string filter = "*.dll";
+            //string filter = "*.dll";
             // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
-            dllMap.Add("Simple", GetRelativePathDll("SimpleDetect.dll"));
-            dllMap.Add("Circular", GetRelativePathDll("CircularDetect.dll"));
+            //string dllFileName = GetRelativePath("C:\\Users\\17amb\\source\\repos\\FlightSimulator\\bin\\Debug\\plugins\\SimpleDetect.dll");
+            dllMap.Add("Simple", GetRelativePath("SimpleDetect.dll"));
+            //dllFileName = GetRelativePath("C:\\Users\\17amb\\source\\repos\\FlightSimulator\\bin\\Debug\\plugins\\CircularDetect.dll");
+            dllMap.Add("Circular", GetRelativePath("CircularDetect.dll"));
             detectorsList = new List<string>() { "Choose detector", "Simple", "Circular", "Add detector" };
             currentDetector = DetectorsList[0];
             isDetectorOn = false;
             getDetector = false;
         }
 
-        string getParentPath()
+        string GetParentPath(string path)
         {
             try
             {
                 System.IO.DirectoryInfo directoryInfo =
                     System.IO.Directory.GetParent(path);
 
-                string parentFile = directoryInfo.FullName.ToString;
+                string parentFile = directoryInfo.FullName;
                 return parentFile;
             }
             catch (ArgumentNullException)
             {
                 System.Console.WriteLine("Path is a null reference.");
+                return null;
             }
             catch (ArgumentException)
             {
                 System.Console.WriteLine("Path is an empty string, " +
                     "contains only white spaces, or " +
                     "contains invalid characters.");
+                return null;
             }
         }
 
-        string GetRelativePathDll(string dllName)
+        string GetRelativePath(string fileName)
         {
-            string relativePath = getParentPath();
-            relativePath += "\\plugins\\" + dllName;
+            string relativePath = GetParentPath(fileName);
+            relativePath += "\\plugins\\" + fileName;
             return relativePath;
         }
 

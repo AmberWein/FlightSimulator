@@ -124,7 +124,7 @@ namespace FlightSimulator.Models
             dataLines = null;
             // parse xml for headers
             XMLParser xmlParser = new XMLParser();
-            Frequency = xmlParser.getFrequency();
+            Frequency = xmlParser.GetFrequency();
             xmlParser.Parse();
             headersList = xmlParser.Headers;
             csvParser = new CSVParser("C:/Users/NicoleS/Downloads/reg_flight.csv", headersList);
