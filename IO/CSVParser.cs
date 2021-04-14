@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Globalization;
+using System;
 
 namespace FlightSimulator.IO
 {
@@ -58,7 +59,7 @@ namespace FlightSimulator.IO
         }
         // parse the data from a given CSV file's path 
         // and a list of headers
-        public CSVParser(string newFilePath, ArrayList newProperties) :  base(newFilePath)
+        public CSVParser(string newFilePath, ArrayList newProperties) : base(newFilePath)
         {
             this.properties = newProperties;
             this.numOfProperties = properties.Count;
@@ -67,6 +68,15 @@ namespace FlightSimulator.IO
             this.lines = new ArrayList();
         }
 
+        public static bool IsCSV(string path)
+        {
+            string extension = System.IO.Path.GetExtension(path);
+            if (extension == null)
+                return false;
+            if (String.Compare(extension.ToLower(), ".csv") == 0)
+                return true;
+            return false;
+        }
         // function to init this map
         private void InitMap()
         {
@@ -103,6 +113,7 @@ namespace FlightSimulator.IO
         // create a CSV file contains both headers and data
         public void CreateCSV(string fileName)
         {
+            //var filepath = fileName;
             using (StreamWriter writer = new StreamWriter(new FileStream(fileName,
             FileMode.Create, FileAccess.Write)))
             {

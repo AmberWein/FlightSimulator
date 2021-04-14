@@ -14,5 +14,6 @@ namespace FlightSimulator.Models
         ArrayList DataLines { get; set; }
         CSVParser CsvParser { get; }
         ArrayList CorrelatedFeatures { get; set; }
+        double Frequency { get; set; }
     }
 }

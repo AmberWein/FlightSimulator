@@ -40,7 +40,7 @@ namespace FlightSimulator.Models
             {
                 // should i check null?
                 // first, validate file existence, then parse it
-                if (FileParser.IsValidPath(value)) { 
+                if (CSVParser.IsCSV(value) && FileParser.IsValidPath(value)) { 
                     csvPath = value;
                     NotifyPropertyChanged("CsvPath");
                     if (csvPath != null)
@@ -83,6 +83,16 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("DataMap");
             }
         }
+        private double frequency;
+        public double Frequency
+        {
+            get { return frequency; }
+            set
+            {
+                frequency = value;
+                NotifyPropertyChanged("Frequency");
+            }
+        }
         private CSVParser csvParser;
         public CSVParser CsvParser
         {
@@ -113,9 +123,11 @@ namespace FlightSimulator.Models
             dataLines = null;
             // parse xml for headers
             XMLParser xmlParser = new XMLParser();
+            Frequency = xmlParser.getFrequency();
             xmlParser.Parse();
             headersList = xmlParser.Headers;
-            csvParser = new CSVParser("reg_flight.csv", headersList);
+            csvParser = new CSVParser("C:/Users/NicoleS/Downloads/reg_flight.csv", headersList);
+            csvParser.Parse();
             csvParser.CreateCSV("reg_flight_with_headers.csv");
             correlatedFeatures = new ArrayList();
             // also need to make correlation map

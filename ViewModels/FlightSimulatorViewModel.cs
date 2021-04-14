@@ -6,8 +6,10 @@ namespace FlightSimulator.ViewModels
 {
     public class FlightSimulatorViewModel : INotifyPropertyChanged
     {
-        
+
         private IFlightSimulatorModel model;
+
+
         // INotifyPropertyChanged implementations
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
@@ -21,6 +23,12 @@ namespace FlightSimulator.ViewModels
         // Flight Simulator Controllers ViewModels
         public DashboardViewModel DashboardVM { get; internal set; }
         public MediaPlayerViewModel MediaPlayerVM { get; internal set; }
+
+        public GraphsViewModel GraphsVM { get; internal set; }
+        public GearControlViewModel GearControlVM { get; internal set; }
+
+        public DetectorViewModel DetectorVM { get; internal set; }
+
         public FlightSimulatorViewModel(IFlightSimulatorModel m)
         {
             this.model = m;
@@ -28,6 +36,10 @@ namespace FlightSimulator.ViewModels
             // create the viewModels that will contact the model
             DashboardVM = new DashboardViewModel(this.model);
             MediaPlayerVM = new MediaPlayerViewModel(this.model);
+            GearControlVM = new GearControlViewModel(this.model);
+            GraphsVM = new GraphsViewModel(this.model);
+            DetectorVM = new DetectorViewModel(this.model);
+
         }
         public bool VM_IsPlay { get { return model.IsPlay; } set { model.IsPlay = true; } }
         
@@ -55,4 +67,10 @@ namespace FlightSimulator.ViewModels
         }*/
         
     }
+
+
+
+
+
+
 }

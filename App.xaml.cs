@@ -17,6 +17,7 @@ namespace FlightSimulator
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            //Program.OperateDLL("C:/Users/NicoleS/source/repos/FlightSimulator/plugins/CircularDetect.dll");
             ISetModel setModel = new SetModel();
             SetViewModel setVM = new SetViewModel(setModel);
             IFlightSimulatorModel simModel = new FlightSimulatorModel(setModel);
