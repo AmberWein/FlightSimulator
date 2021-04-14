@@ -17,6 +17,8 @@ namespace FlightSimulator.Models
         double PlayingSpeed { get; set; }
         double Timer { get; set; }
         double FinishTime { get; set; }
+
+        double Frequency { get; set; }
         // dashboard properties
         float Yaw { get; set; }
         float Pitch { get;set;}
@@ -39,6 +41,8 @@ namespace FlightSimulator.Models
         string ChosenAttribute { set; get; }
 
         ArrayList Attributes { set; get; }
+
+        ArrayList CorrelatedFeatures { get; set; }
 
         // properties for dll detector
         Dictionary<string, string> DllMap { get; set; }

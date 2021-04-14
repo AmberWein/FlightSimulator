@@ -22,9 +22,7 @@ namespace FlightSimulator.ViewModels
         private IFlightSimulatorModel model; // this is a try to hold only one model for all controllers!
         LineSeries lineSerie = new LineSeries();
         LineSeries lineSerie_c = new LineSeries();
-        LineSeries lineSerieReg = new LineSeries();
-        ScatterSeries ScatterSerie = new ScatterSeries();
-        ScatterSeries lastSecsScatterSerie = new ScatterSeries();
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,37 +30,18 @@ namespace FlightSimulator.ViewModels
 
         {
             this.model = m;
-            //Init();
-
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
-
                 OnPropertyChanged("VM_" + e.PropertyName);
             };
 
             PlotModel = new PlotModel();
             SetUpModel();
-            //  PlotModel.Series.Add(lineSerie);
+            PlotModelCorr = new PlotModel();
+            SetUpModelCorr();
 
         }
-       /* private void Init()
-        {
-            Levels =  new DataPointCollection();
-
-            for (int i = 0; i < 500; i++) Levels.AddPoints(0.2 * i, i, 3);
-        }
-
-        private DataPointCollection _levels;
-        public DataPointCollection Levels
-        {
-            get { return _levels; ; }
-            set
-            {
-                _levels = value;
-                //OnPropertyChanged();
-            }
-        }*/
-
+     
         private string chosenAttribute;
 
         public string VM_ChosenAttribute
@@ -95,12 +74,6 @@ namespace FlightSimulator.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-
-
-
-
-
-
 
         private PlotModel plotModel;
         public PlotModel PlotModel
@@ -151,7 +124,7 @@ namespace FlightSimulator.ViewModels
         //Set up the model for corralated features
         private void SetUpModelCorr()
         {
-            PlotModelCorr.LegendTitle = "Legend";
+            PlotModelCorr.LegendTitle = "Correlation";
             PlotModelCorr.LegendOrientation = LegendOrientation.Horizontal;
             PlotModelCorr.LegendPlacement = LegendPlacement.Outside;
             PlotModelCorr.LegendPosition = LegendPosition.LeftTop;
@@ -166,11 +139,11 @@ namespace FlightSimulator.ViewModels
         }
         private void SetUpModel()
         {
-             PlotModel.LegendTitle = "Legend";
+             PlotModel.LegendTitle = model.ChosenAttribute;
              PlotModel.LegendOrientation = LegendOrientation.Horizontal;
              PlotModel.LegendPlacement = LegendPlacement.Outside;
-             PlotModel.LegendPosition = LegendPosition.TopRight;
-             PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
+             PlotModel.LegendPosition = LegendPosition.LeftTop;
+             PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.Black);
              PlotModel.LegendBorder = OxyColors.Black;
 
              var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
@@ -201,89 +174,90 @@ namespace FlightSimulator.ViewModels
 
         {
             //clean previous
-              lineSerie.Points.Clear();
-              PlotModel.Series.Clear(); 
-              PlotModelCorr.Series.Clear();
-              PlotModelReg.Series.Clear();
-              PlotModel = new PlotModel();
-              PlotModelCorr = new PlotModel();
-
-              SetUpModelCorr();
-              SetUpModel();
-
-              //add
-              PlotModel.Series.Add(lineSerie);
-              PlotModelCorr.Series.Add(lineSerie_c);
-              List<float> Y = new List<float>();
-              List<float> Y_c = new List<float>();
-              if (VM_ChosenAttribute == null) { }
-              else
-
-              {
-                  for (double i = 0; i < model.Timer; i+= 0.1)
-              {
-                  Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][10 * (int)i].ToString()));
-               //    Y_c.Add(float.Parse(model.DataMap[VM_ChosenAttribute.corrlated][10 * (int)i].ToString()));
-                  }
+            lineSerie.Points.Clear();
+            PlotModel.Series.Clear();
+            lineSerie_c.Points.Clear();
+            PlotModelCorr.Series.Clear();
 
 
-                  foreach (var d in Y)
-                  {
-                      if (lineSerie != null)
-                      {
-                          lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
-                      }
-                      else
-                      {
-                          PlotModel.Series.Add(lineSerie);
-                      }
-                  }
-                  PlotModel.InvalidatePlot(true);
-                   foreach (var d in Y_c)
-                   {
-                       if (lineSerie_c != null)
-                       {
-                           lineSerie_c.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
-                       }
-                       else
-                       {
-                           PlotModelCorr.Series.Add(lineSerie_c);
-                       }
-                   }
-                  PlotModelCorr.InvalidatePlot(true);
-              }
-          }
+            //add
+            PlotModel.Series.Add(lineSerie);
+            PlotModelCorr.Series.Add(lineSerie_c);
+            List<float> Y = new List<float>();
+            List<float> Y_c = new List<float>();
+           
+
+
+                {
+                    for (double i = 0; i < model.Timer; i += 0.1)
+                    {
+                        Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * i)].ToString()));
+                        Y_c.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * i)].ToString()));
+                    }
+
+
+                    foreach (var d in Y)
+                    {
+                        if (lineSerie != null)
+                        {
+                            lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
+                        }
+                        else
+                        {
+                            PlotModel.Series.Add(lineSerie);
+                        }
+                    }
+                    PlotModel.InvalidatePlot(true);
+                    foreach (var d in Y_c)
+                    {
+                        if (lineSerie_c != null)
+                        {
+                            lineSerie_c.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
+                        }
+                        else
+                        {
+                            PlotModelCorr.Series.Add(lineSerie_c);
+                        }
+                    }
+                    PlotModelCorr.InvalidatePlot(true);
+
+                }
+            
+        }
           //updating the model throughout the flight ob a regular basis
 
           public void UpdateModel()
 
           {
-              List<float> Y = new List<float>();
-              if (VM_ChosenAttribute == null) { }
-              else
-              {
-                  Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int) (10.0 * model.Timer)].ToString()));
-                  foreach (var d in Y)
-                  {
-                      if (lineSerie != null)
-                      {
-                          lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
-                      }
-                      else
-                      {
-                          PlotModel.Series.Add(lineSerie);
-                      }
-                  }
-                  PlotModel.InvalidatePlot(true);
-              }
+            if (VM_ChosenAttribute != null)
+            {
+                List<float> Y = new List<float>();
+                Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * model.Timer)].ToString()));
+                foreach (var d in Y)
+                {
+                    if (lineSerie != null)
+                    {
+                        lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
+                    }
+                    else
+                    {
+                        PlotModel.Series.Add(lineSerie);
+                    }
+                }
+                PlotModel.InvalidatePlot(true);
+            }
+                
+              
           }
 
           //updating the model of corralated attribute throughout the flight on a regular basis
           public void UpdateModelCorr()
 
           {
-              List<float> Y = new List<float>();
-              // Y.Add(float.Parse(model.DataMap[//][(int)(10.0 * model.Timer)].ToString()));
+
+           
+                List<float> Y = new List<float>();
+            Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(10.0 * model.Timer)].ToString()));
                   foreach (var d in Y)
                   {
                       if (lineSerie_c != null)
@@ -292,20 +266,21 @@ namespace FlightSimulator.ViewModels
                       }
                       else
                       {
-                          PlotModelCorr.Series.Add(lineSerie);
+                          PlotModelCorr.Series.Add(lineSerie_c);
                       }
                   }
                   PlotModelCorr.InvalidatePlot(true);
+                 
           }
 
 
           public void LoadRegModel()
           {
-            lineSerieReg.Points.Clear();
+            /*lineSerieReg.Points.Clear();
             PlotModelReg.Series.Clear();
             PlotModelReg = new PlotModel();
 
-            /*var lineSerieReg = new LineSeries()
+            var lineSerieReg = new LineSeries()
               {
                   Color = OxyColors.Red,
                   StrokeThickness = 2
@@ -336,5 +311,5 @@ namespace FlightSimulator.ViewModels
 
     }
     }
-}
+
 

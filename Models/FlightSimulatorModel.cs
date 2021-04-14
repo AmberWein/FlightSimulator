@@ -143,11 +143,16 @@ namespace FlightSimulator.Models
                 Attributes = settings.HeadersList;
 
                 DataLines = settings.DataLines;
+               
 
             }
             else if (string.Compare(e.PropertyName, "HeadersList") == 0)
             {
                 Attributes = settings.HeadersList;
+            }
+            else if (string.Compare(e.PropertyName, "CorrelatedFeatures") == 0)
+            {
+               // CorrelatedFeatures = settings.CorrelatedFeatures;
             }
         }
         // Constructor
@@ -295,7 +300,7 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("Rudder");
             }
         }
-        //graph model
+        /****Graph Model*****/
 
         //the chosen atrribute from user to show graphs of
         string chosenAttribute;
@@ -306,6 +311,20 @@ namespace FlightSimulator.Models
             {
                 chosenAttribute = value;
                 NotifyPropertyChanged("ChosenAttribute");
+            }
+        }
+
+        //correlatef features for presenting graphs
+        private ArrayList correlatedFeatures { get; set; }
+        public ArrayList CorrelatedFeatures
+        {
+            get
+            {
+                return correlatedFeatures;
+            }
+            set
+            {
+                correlatedFeatures = value;
             }
         }
 
