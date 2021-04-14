@@ -294,13 +294,10 @@
     <Compile Include="Communication\Client.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="IO\XMLParser.cs" />
-    <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\FlightSimulatorModel.cs" />
     <Compile Include="Models\IFlightSimulatorModel.cs" />
-    <Compile Include="Models\IMediaPlayerModel.cs" />
     <Compile Include="Models\ISetModel.cs" />
     <Compile Include="Models\Line.cs" />
-    <Compile Include="Models\MediaPlayerModel.cs" />
     <Compile Include="Models\Point.cs" />
     <Compile Include="Models\SetModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
@@ -350,6 +347,9 @@
     </Compile>
     <Compile Include="Views\SetView.xaml.cs">
       <DependentUpon>SetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AnomaliesWindow.xaml.cs">
+      <DependentUpon>AnomaliesWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -417,6 +417,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AnomaliesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -436,6 +440,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -89,7 +89,8 @@ namespace FlightSimulator.IO
 
         public override void Parse()
         {
-            var reader = new StreamReader(File.OpenRead(FlightSimulatorModel.GetRelativePath("Files", "reg_flight.csv")));
+            //var reader = new StreamReader(File.OpenRead(FlightSimulatorModel.GetRelativePath("Files", "reg_flight.csv")));
+            var reader = new StreamReader(filePath);
             int i = 0;
             int j;
 

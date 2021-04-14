@@ -13,7 +13,7 @@
             <ImageBrush ImageSource="Images/airplane.jpg"/>
         </Grid.Background>
 
-        <TextBox AcceptsReturn="True" TextWrapping="Wrap" Height="150" Background="Transparent" BorderBrush="Transparent"
+        <TextBlock TextWrapping="Wrap" Height="150" Background="Transparent"
                  Text="Flight simulator" FontSize="100" HorizontalAlignment="Center" Margin="51,56,57,244"/>
 
     </Grid>
