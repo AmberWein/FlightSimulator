@@ -11,9 +11,6 @@
         CornerRadius="10">
         <StackPanel HorizontalAlignment="Center" Margin="0,-1,0,0">
             <StackPanel Orientation="Horizontal" Margin="0,-1,0,-30" Width="794" Height="110">
-                <Button Width="39" Height="40" Margin="30,27,0,43" Click="Open_Media_Player_Click">
-                    <Image Source="Images\open_button.png"></Image>
-                </Button>
                 <Separator Width="50" Background="LightGray"></Separator>
                 <Button Width="38" Height="39" Margin="0,22,0,44" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Click="Backwards_Media_Player_Click">
                     <Button.RenderTransform>
