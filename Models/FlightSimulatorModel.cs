@@ -456,5 +456,37 @@ namespace FlightSimulator.Models
             return Program.IsValidDLL(path);
         }
 
+
+        //calculates linear regression given a list of points
+        public Line linear_reg(ArrayList points, int size)
+        {
+            ArrayList x = new ArrayList();
+            ArrayList y = new ArrayList();
+           foreach (Point  p in points)
+            {
+                x.Add(p.x);
+                y.Add(p.y);
+            }
+            float a = settings.Cov(x, y, size) / settings.Var(x, size);
+            float b = settings.Avg(y, size) - a*(settings.Avg(x, size));
+            Line l = new Line(a, b);
+            return l;
+        }
+
+
+        public ArrayList fromFloatsToPoints(ArrayList a, ArrayList b)
+        {
+            ArrayList points = new ArrayList();
+            for(int i = 0; i < a.Count- 1; i++)
+            {
+                points.Add(new Point(float.Parse(a[i].ToString()), float.Parse(b[i].ToString())));
+            }
+
+            return points;
+        }
+
+
+
+
     }
 }

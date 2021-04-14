@@ -52,25 +52,38 @@ namespace FlightSimulator.Views
         private string chosenAttribute;
         List<string> attributes;
         // public ArrayList data { get; private set; }
+        private long frameCounter;
+        private System.Diagnostics.Stopwatch stopwatch = new Stopwatch();
+        private long lastUpdateMilliSeconds;
 
         public GraphsView()
         {
             InitializeComponent();
            
                 CompositionTarget.Rendering += CompositionTargetRendering;
-           
+            stopwatch.Start();
+
         }
 
         private void CompositionTargetRendering(object sender, EventArgs e)
         {
             if (vm.VM_ChosenAttribute != null)
             {
-                vm.UpdateModel();
-           vm.UpdateModelCorr();
+                //  vm.UpdateModel();
+                // vm.UpdateModelCorr();
+
+
+
+
+                if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
+                {
+                    vm.UpdateModelReg();
+                    // vm.UpdateModel();
+                    // vm.UpdateModelCorr();
+                    lastUpdateMilliSeconds = stopwatch.ElapsedMilliseconds;
+
+                }
             }
-
-
-            //      < oxy:PlotView x:Name = "Plot2" Model = "{Binding Path= PlotModelCorr}" Margin = "0,9.667,10,-227.333" Grid.Row = "3" Background = "Blue" Height = "90" Grid.RowSpan = "4" ></ oxy:PlotView >*/
         }
         public void SetVM(GraphsViewModel graphsVM)
         {
@@ -107,7 +120,8 @@ namespace FlightSimulator.Views
             if (vm.VM_ChosenAttribute != null)
             {
 
-                vm.LoadFromStart();
+               // vm.LoadFromStart();
+                vm.LoadRegModel();
             }
 
            

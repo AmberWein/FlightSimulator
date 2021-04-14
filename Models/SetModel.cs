@@ -138,7 +138,7 @@ namespace FlightSimulator.Models
         // correlation computin
 
         // returns the avarege of a given ArrayList
-        float Avg(ArrayList x, int size)
+        public float Avg(ArrayList x, int size)
         {
             float sum = 0;
             foreach(float xValue in x)
@@ -149,7 +149,7 @@ namespace FlightSimulator.Models
         }
 
         // returns the variance of X and Y
-        float Var(ArrayList x, int size)
+        public float Var(ArrayList x, int size)
         {
             float av = Avg(x, size);
             float sum = 0;
@@ -161,7 +161,7 @@ namespace FlightSimulator.Models
         }
 
         // returns the covariance of X and Y
-        float Cov(ArrayList x, ArrayList y, int size)
+        public float Cov(ArrayList x, ArrayList y, int size)
         {
             float sum = 0;
             for (int i = 0; i < size; i++)
@@ -175,7 +175,7 @@ namespace FlightSimulator.Models
             return sum - Avg(x, size) * Avg(y, size);
         }
         // returns the Pearson correlation coefficient of X and Y
-        float Pearson(ArrayList x, ArrayList y, int size)
+        public float Pearson(ArrayList x, ArrayList y, int size)
         {
             float a = (float)Math.Sqrt(Var(x, size));
             float b = (float)Math.Sqrt(Var(y, size));
