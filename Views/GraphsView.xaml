@@ -8,7 +8,7 @@
              xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
              mc:Ignorable="d" 
             
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="250" d:DesignWidth="800">
 
     <Grid Height="260" VerticalAlignment="Bottom">
      

@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:FlightSimulator.Views"
              xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" x:Class="FlightSimulator.Views.DetectorView"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="800">
-    <Grid Background="DarkGray" Margin="0,0,0,-390" Height="80">
-        <ComboBox x:Name="DetectorComboBox" ItemsSource="{Binding VM_DetectorsList}" HorizontalAlignment="Left" Margin="180,15,0,0" VerticalAlignment="Top" Width="130" Height="35"
+             d:DesignHeight="30" d:DesignWidth="360">
+    <Grid Background="DarkGray" Margin="0,0,0,0" Height="30">
+        <ComboBox x:Name="DetectorComboBox" ItemsSource="{Binding VM_DetectorsList}" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center" Width="116" Height="25"
                   SelectedValue="{Binding VM_CurrentDetector}"/>
-        <Button x:Name="DetectButton" Click="DetectButton_Click" Content="Detect Anomalies" HorizontalAlignment="Left" Margin="315,20,0,0" VerticalAlignment="Top" Width="155" IsEnabled="{Binding VM_IsDetectorOn}" Height="30"/>
+        <Button x:Name="DetectButton" Click="DetectButton_Click" Content="Detect Anomalies" HorizontalAlignment="Left" Margin="220,0,0,0" VerticalAlignment="Center" Width="130" IsEnabled="{Binding VM_IsDetectorOn}" Height="25"/>
     </Grid>
 </UserControl>
