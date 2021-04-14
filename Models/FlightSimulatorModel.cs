@@ -172,14 +172,46 @@ namespace FlightSimulator.Models
             airSpeed = 0;
             frequency = 10; // default value
             dllMap = new Dictionary<string, string>();
-           // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
-            dllMap.Add("Simple", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\SimpleDetect.dll");
-            dllMap.Add("Circular", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\CircularDetect.dll");
+            string path = System.IO.Directory.GetCurrentDirectory();
+            string filter = "*.dll";
+            // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
+            dllMap.Add("Simple", GetRelativePathDll("SimpleDetect.dll"));
+            dllMap.Add("Circular", GetRelativePathDll("CircularDetect.dll"));
             detectorsList = new List<string>() { "Choose detector", "Simple", "Circular", "Add detector" };
             currentDetector = DetectorsList[0];
             isDetectorOn = false;
             getDetector = false;
         }
+
+        string getParentPath()
+        {
+            try
+            {
+                System.IO.DirectoryInfo directoryInfo =
+                    System.IO.Directory.GetParent(path);
+
+                string parentFile = directoryInfo.FullName.ToString;
+                return parentFile;
+            }
+            catch (ArgumentNullException)
+            {
+                System.Console.WriteLine("Path is a null reference.");
+            }
+            catch (ArgumentException)
+            {
+                System.Console.WriteLine("Path is an empty string, " +
+                    "contains only white spaces, or " +
+                    "contains invalid characters.");
+            }
+        }
+
+        string GetRelativePathDll(string dllName)
+        {
+            string relativePath = getParentPath();
+            relativePath += "\\plugins\\" + dllName;
+            return relativePath;
+        }
+
         // Dashboard properties
         private float yaw;
         public float Yaw
