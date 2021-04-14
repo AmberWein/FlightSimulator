@@ -16,7 +16,5 @@
         <TextBox AcceptsReturn="True" TextWrapping="Wrap" Height="150" Background="Transparent" BorderBrush="Transparent"
                  Text="Flight simulator" FontSize="100" HorizontalAlignment="Center" Margin="51,56,57,244"/>
 
-        <Button x:Name="startButton" Content=" Start Simulator " VerticalAlignment="Top" HorizontalAlignment="Center" Margin="285,370,320,0" FontWeight="Bold"
-                    IsEnabled="False" Height="24" Width="195"/>
     </Grid>
 </Page>

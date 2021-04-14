@@ -34,6 +34,10 @@ namespace FlightSimulator.ViewModels
             this.model = m;
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
+                if (String.Compare(e.PropertyName, "Attributes") == 0)
+                {
+                    //
+                }
                 OnPropertyChanged("VM_" + e.PropertyName);
             };
 

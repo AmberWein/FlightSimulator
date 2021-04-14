@@ -40,7 +40,7 @@ namespace FlightSimulator.Models
 
         string ChosenAttribute { set; get; }
 
-        ArrayList Attributes { set; get; }
+        ArrayList Attributes { get; set; }
 
         ArrayList CorrelatedFeatures { get; set; }
 

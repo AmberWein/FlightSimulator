@@ -4,6 +4,7 @@ using System.Collections;
 using System.Threading;
 using System.ComponentModel;
 using FlightSimulator.Communication;
+
 using OxyPlot;
 using OxyPlot.Series;
 using OxyPlot.Axes;
@@ -15,13 +16,14 @@ using System.Linq;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+
 //using FlightSimulator.Annotations;
 
 
 //C:\Users\user\Desktop\reg_flight.csv
 namespace FlightSimulator.Models
 {
-    class FlightSimulatorModel : IFlightSimulatorModel
+    public class FlightSimulatorModel : IFlightSimulatorModel
     {
         //flight gear
         private float elevator;
@@ -53,7 +55,9 @@ namespace FlightSimulator.Models
         public ArrayList Attributes
         {
             get { return attributes; }
-            set { attributes = value; }
+            set { attributes = value;
+                NotifyPropertyChanged("Attributes");
+            }
         }
         private ArrayList dataLines;
         public ArrayList DataLines
@@ -179,14 +183,49 @@ namespace FlightSimulator.Models
             airSpeed = 0;
             frequency = 10; // default value
             dllMap = new Dictionary<string, string>();
-           // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
-            dllMap.Add("Simple", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\SimpleDetect.dll");
-            dllMap.Add("Circular", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\CircularDetect.dll");
+            // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
+            dllMap.Add("Simple", GetRelativePath("plugins","SimpleDetect.dll"));
+            dllMap.Add("Circular", GetRelativePath("plugins", "CircularDetect.dll"));
             detectorsList = new List<string>() { "Choose detector", "Simple", "Circular", "Add detector" };
             currentDetector = DetectorsList[0];
             isDetectorOn = false;
             getDetector = false;
         }
+        // return the parent folder of this folder, meaning FilghtSimulator's path
+        public static string GetParentPath(string path)
+        {
+            try
+            {
+                System.IO.DirectoryInfo directoryInfo =
+                    System.IO.Directory.GetParent(path);
+
+                string parentFile = directoryInfo.FullName;
+                return parentFile;
+            }
+            catch (ArgumentNullException)
+            {
+                System.Console.WriteLine("Path is a null reference.");
+                return null;
+            }
+            catch (ArgumentException)
+            {
+                System.Console.WriteLine("Path is an empty string, " +
+                    "contains only white spaces, or " +
+                    "contains invalid characters.");
+                return null;
+            }
+        }
+
+        // return a relative path to a given file in a given folder
+        public static string GetRelativePath(string folderName, string fileName)
+        {
+            string relativePath = GetParentPath(fileName);
+            relativePath = GetParentPath(relativePath);
+            relativePath = GetParentPath(relativePath);
+            relativePath += "\\"+ folderName +"\\" + fileName;
+            return relativePath;
+        }
+
         // Dashboard properties
         private float yaw;
         public float Yaw
@@ -394,9 +433,10 @@ namespace FlightSimulator.Models
             set
             {
                 IsDetectorOn = false;
-                currentDetector = value;
+                
                 if (string.Compare(value, DetectorsList[0]) == 0)
                 {
+                    currentDetector = value;
                     isDetectorOn = false;
                     // something else?
                     NotifyPropertyChanged("CurrentDetector");
@@ -409,6 +449,7 @@ namespace FlightSimulator.Models
                 }
                 else
                 {
+                    currentDetector = value;
                     new Thread(GetAnomalies).Start();
                     NotifyPropertyChanged("CurrentDetector");
                 }

@@ -8,7 +8,7 @@ namespace FlightSimulator.Models
 {
     class SetModel : ISetModel
     {
-        // INotifyPropertyChanged  implementations
+        // INotifyPropertyChanged implementations
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
         {
@@ -51,7 +51,9 @@ namespace FlightSimulator.Models
                         CsvParser.CreateCSV("anomaly_flight_with_headers.csv");
                         DataMap = CsvParser.Map;
                         DataLines = CsvParser.Lines;
+
                        this.SetMostCorrelated();
+
                     }  
                 }
             }
@@ -124,19 +126,26 @@ namespace FlightSimulator.Models
             dataLines = null;
             // parse xml for headers
             XMLParser xmlParser = new XMLParser();
-            Frequency = xmlParser.getFrequency();
+            Frequency = xmlParser.GetFrequency();
             xmlParser.Parse();
             headersList = xmlParser.Headers;
-            csvParser = new CSVParser("C:/Users/NicoleS/Downloads/reg_flight.csv", headersList);
+            string filePath = FlightSimulatorModel.GetRelativePath("Files", "reg_flight.csv");
+            csvParser = new CSVParser(filePath, headersList);
             csvParser.Parse();
             csvParser.CreateCSV("reg_flight_with_headers.csv");
             CorrelatedFeatures = new ArrayList();
        
             // also need to make correlation map
+            //SetMostCorrelated();
+        }
+
+        // set the map property according to the CSV parser's map
+        void setMap()
+        {
+
         }
 
         // correlation computin
-
         // returns the avarege of a given ArrayList
         public float Avg(ArrayList x, int size)
         {
@@ -188,24 +197,24 @@ namespace FlightSimulator.Models
         {
             float mostCorrelatedValue = 0;
             string mostCorrelatedName = "";
-            if (dataMap.ContainsKey(featureName))
+            if (CsvParser.Map.ContainsKey(featureName))
             {
-                ArrayList givenFeatue = dataMap[featureName];
+                ArrayList givenFeatue = CsvParser.Map[featureName];
                 // go over all the features and find the most correlative one
                 foreach (string hl in this.HeadersList)
                 {
                     // ignore checking the given feature
-                    if (hl == featureName)
+                    if (String.Compare(hl,featureName) == 0)
                     {
                         continue;
                     }
                     else
                     {
-                        ArrayList currentFeatue = dataMap[hl];
-                        float currentCorrelation = Cov(givenFeatue, currentFeatue, headersList.Count);
+                        ArrayList currentFeature = CsvParser.Map[hl];
+                        float currentCorrelation = Cov(givenFeatue, currentFeature, CsvParser.Map[hl].Count);
                         // chech if we get higher correlation for the current feature,
                         // if so, then upate the values
-                        if (mostCorrelatedValue < currentCorrelation)
+                        if (mostCorrelatedValue <= currentCorrelation)
                         {
                             mostCorrelatedValue = currentCorrelation;
                             mostCorrelatedName = hl;

@@ -51,6 +51,7 @@ namespace FlightSimulator.Views
         private GraphsViewModel vm;
         private string chosenAttribute;
         List<string> attributes;
+        bool isFirst;
         // public ArrayList data { get; private set; }
         private long frameCounter;
         private System.Diagnostics.Stopwatch stopwatch = new Stopwatch();
@@ -63,15 +64,28 @@ namespace FlightSimulator.Views
                 CompositionTarget.Rendering += CompositionTargetRendering;
             stopwatch.Start();
 
+            isFirst = true;
+         
         }
 
         private void CompositionTargetRendering(object sender, EventArgs e)
         {
+            if (isFirst && vm.VM_Attributes != null)
+            {
+                isFirst = false;
+                FillList();
+                Binding dict = new Binding
+                {
+                    Source = attributes
+                };
+                atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);
+                // maybe add other two lines
+            }
             if (vm.VM_ChosenAttribute != null)
             {
                 //  vm.UpdateModel();
-                // vm.UpdateModelCorr();
-
+                // vm.UpdateModelCorr();                
+            }
 
 
 
@@ -89,12 +103,12 @@ namespace FlightSimulator.Views
         {
 
             this.vm = graphsVM;
-            FillList();
-            Binding dict = new Binding
+           // FillList();
+         /*   Binding dict = new Binding
             {
                 Source = attributes
             };
-            atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);          
+            atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);          */
         }
     
     

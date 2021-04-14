@@ -330,6 +330,9 @@
     <Compile Include="Views\GraphsView.xaml.cs">
       <DependentUpon>GraphsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InsertCSVView.xaml.cs">
+      <DependentUpon>InsertCSVView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InsertDLLView.xaml.cs">
       <DependentUpon>InsertDLLView.xaml</DependentUpon>
     </Compile>
@@ -385,6 +388,10 @@
     <Page Include="Views\GraphsView.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Views\InsertCSVView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LetsStartPage.xaml">
       <SubType>Designer</SubType>
@@ -453,6 +460,9 @@
     <Resource Include="Views\Images\airplane.jpg" />
     <Resource Include="Views\Images\flying_airplane.jpg" />
     <Resource Include="Views\Images\set_airplane.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Files\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
