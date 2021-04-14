@@ -38,5 +38,8 @@ namespace FlightSimulator.Models
 
         bool ValidateDLLPath(string path);
 
+
+
+        bool GetDetector { get; set; }
     }
 }

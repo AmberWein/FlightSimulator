@@ -149,6 +149,7 @@ namespace FlightSimulator.Models
             detectorsList = new List<string>() { "Choose detector", "Simple", "Circular", "Add detector" };
             currentDetector = DetectorsList[0];
             isDetectorOn = false;
+            getDetector = false;
         }
         // Dashboard properties
         private float yaw;
@@ -328,15 +329,30 @@ namespace FlightSimulator.Models
             set
             {
                 currentDetector = value;
-                if(string.Compare(value, "Choose detector") == 0)
-                //if (string.Compare(value, DetectorsList[DetectorsList.Count-1]) == 0)
+                if (string.Compare(value, DetectorsList[0]) == 0)
                 {
-                    IsDetectorOn = false;
+                    isDetectorOn = false;
+                    // something else?
+                    NotifyPropertyChanged("CurrentDetector");
+                    return;
+                }
+                if (!GetDetector && string.Compare(value, DetectorsList[DetectorsList.Count - 1]) == 0)
+                {
+                    currentDetector = DetectorsList[0];
+                    GetDetector = true;
                 }
                 else
+                {
                     new Thread(GetAnomalies).Start();
-                //NotifyPropertyChanged("CurrentDetector");
+                    NotifyPropertyChanged("CurrentDetector");
+                }
             }
+        }
+        private bool getDetector;
+        public bool GetDetector
+        {
+            get { return getDetector; }
+            set { getDetector = value; NotifyPropertyChanged("GetDetector"); }
         }
         public void GetAnomalies()
         {

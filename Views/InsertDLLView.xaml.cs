@@ -51,15 +51,17 @@ namespace FlightSimulator.Views
                 }
                 else
                 { // path and name are valid
+                    vm.VM_DllMap.Add(DLLname.Text, DLLpath.Text);
                     vm.VM_DetectorsList.Insert(vm.VM_DetectorsList.Count - 1, DLLname.Text);
                     vm.VM_DetectorsList = vm.VM_DetectorsList;
-                    System.Threading.Thread.Sleep(150);
-                    vm.VM_CurrentDetector = vm.VM_DetectorsList[vm.VM_DetectorsList.Count - 1];
+                   // System.Threading.Thread.Sleep(150);
+                    
+                    vm.VM_CurrentDetector = vm.VM_DetectorsList[vm.VM_DetectorsList.Count - 2];
                     //List<string> l = vm.VM_DetectorsList;
                     //vm.VM_DetectorsList.Insert(vm.VM_DetectorsList.Count - 1, DLLname.Text);
-                   // l.Insert(vm.VM_DetectorsList.Count - 1, DLLname.Text);
-                    
-                    vm.VM_DllMap.Add(DLLname.Text, DLLpath.Text);
+                    // l.Insert(vm.VM_DetectorsList.Count - 1, DLLname.Text);
+
+                    vm.VM_GetDetector = false;
                     //vm.VM_DetectorsList = l;
                     //vm.VM_CurrentDetector = DLLname.Text;
                     //vm.NotifyPropertyChanged("VM_DetectorsList");

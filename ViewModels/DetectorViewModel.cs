@@ -22,24 +22,31 @@ namespace FlightSimulator.ViewModels
             }
         }
 
+        public bool VM_GetDetector
+        {
+            get;
+            set;
+        }
         public string VM_CurrentDetector
         {
             get { return model.CurrentDetector; }
             set
             {
+                model.CurrentDetector = value;
                 // check if its add detector
-                if (string.Compare(value, VM_DetectorsList[VM_DetectorsList.Count - 1]) == 0)
+              /*  if (string.Compare(value, VM_DetectorsList[VM_DetectorsList.Count - 1]) == 0)
                 {
                     // neew to open box for path, check path. if its real - put in map and set this as current detector. 
                     // make some animation while detecting the file until the anomaliesreport is generated??
                     // if not good
+                    model.CurrentDetector = model.DetectorsList[0];
                     DLLInsertWindow win = new DLLInsertWindow(this);
                     win.Show();
                     // 
                     //NotifyPropertyChanged("VM_CurrentDetector");
                 }
                 else
-                    model.CurrentDetector = value; // this works for some reason
+                    model.CurrentDetector = value; // this works for some reason*/
             }
         }
         public Dictionary<string, string> VM_DllMap
@@ -86,6 +93,14 @@ namespace FlightSimulator.ViewModels
             {
                 //VM_DetectorsList = model.DetectorsList;
                 NotifyPropertyChanged("VM_DetectorsList");
+                return;
+            }
+            if (string.Compare(e.PropertyName, "GetDetector") == 0)
+            {
+                DLLInsertWindow win = new DLLInsertWindow(this);
+                win.Show();
+                //VM_DetectorsList = model.DetectorsList;
+                //NotifyPropertyChanged("VM_DetectorsList");
                 return;
             }
         }
