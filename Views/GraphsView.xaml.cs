@@ -12,10 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using OxyPlot.Series;
-using OxyPlot.Axes;
+
+//using OxyPlot.Axes;
 using OxyPlot.Annotations;
 using OxyPlot.Reporting;
+
+
+
+//using Syncfusion.UI.Xaml.Charts;
 
 using System.Collections.Generic;
 using System.Collections;
@@ -28,6 +32,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
+using Syncfusion.UI.Xaml.Charts;
 
 //C:\Users\user\Desktop\reg_flight.csv
 namespace FlightSimulator.Views
@@ -40,13 +45,14 @@ namespace FlightSimulator.Views
     {
         //private Models.FlightSimulatorModel viewModel;
 
-       private GraphsViewModel vm;
+        private GraphsViewModel vm;
         private string chosenAttribute;
         List<string> attributes;
         // public ArrayList data { get; private set; }
         public GraphsView()
         {
             InitializeComponent();
+           
             CompositionTarget.Rendering += CompositionTargetRendering;
         }
 
@@ -65,8 +71,13 @@ namespace FlightSimulator.Views
                 Source = attributes
             };
             atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);
-        }
+            SfChart chart = new SfChart() { Header = "Chart", Height = 200, Width = 200 };
 
+         
+            
+        }
+    
+    
         //fil list of attributes with info from viewModel
         private void FillList()
         {
