@@ -60,12 +60,12 @@ namespace FlightSimulator.Views
         public GraphsView()
         {
             InitializeComponent();
-           
-                CompositionTarget.Rendering += CompositionTargetRendering;
+
+            CompositionTarget.Rendering += CompositionTargetRendering;
             stopwatch.Start();
 
             isFirst = true;
-         
+
         }
 
         private void CompositionTargetRendering(object sender, EventArgs e)
@@ -79,6 +79,15 @@ namespace FlightSimulator.Views
                     Source = attributes
                 };
                 atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);
+                stopwatch.Start();
+                if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
+                {
+                    vm.UpdateModelReg();
+                    // vm.UpdateModel();
+                    // vm.UpdateModelCorr();
+                    lastUpdateMilliSeconds = stopwatch.ElapsedMilliseconds;
+
+                }
                 // maybe add other two lines
             }
             if (vm.VM_ChosenAttribute != null)
@@ -89,29 +98,29 @@ namespace FlightSimulator.Views
 
 
 
-                if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
-                {
-                    vm.UpdateModelReg();
-                    // vm.UpdateModel();
-                    // vm.UpdateModelCorr();
-                    lastUpdateMilliSeconds = stopwatch.ElapsedMilliseconds;
+            //if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
+            //{
+              //  vm.UpdateModelReg();
+                // vm.UpdateModel();
+                // vm.UpdateModelCorr();
+                //lastUpdateMilliSeconds = stopwatch.ElapsedMilliseconds;
 
-                }
-            }
+            //}
         }
+
         public void SetVM(GraphsViewModel graphsVM)
         {
 
             this.vm = graphsVM;
-           // FillList();
-         /*   Binding dict = new Binding
-            {
-                Source = attributes
-            };
-            atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);          */
+            // FillList();
+            /*   Binding dict = new Binding
+               {
+                   Source = attributes
+               };
+               atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);          */
         }
-    
-    
+
+
         //fil list of attributes with info from viewModel
         private void FillList()
         {
@@ -127,18 +136,18 @@ namespace FlightSimulator.Views
         }
 
 
-       //when a attribute is selected- run its graph
+        //when a attribute is selected- run its graph
 
         private void atrributesBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (vm.VM_ChosenAttribute != null)
             {
 
-               // vm.LoadFromStart();
+                // vm.LoadFromStart();
                 vm.LoadRegModel();
             }
 
-           
+
         }
     }
 }
