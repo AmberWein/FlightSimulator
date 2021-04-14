@@ -4,16 +4,6 @@ using System.Collections;
 using System.Threading;
 using System.ComponentModel;
 using FlightSimulator.Communication;
-using OxyPlot;
-using OxyPlot.Series;
-using OxyPlot.Axes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
 //using FlightSimulator.Annotations;
 
 
@@ -52,7 +42,9 @@ namespace FlightSimulator.Models
         public ArrayList Attributes
         {
             get { return attributes; }
-            set { attributes = value; }
+            set { attributes = value;
+                NotifyPropertyChanged("Attributes");
+            }
         }
         private ArrayList dataLines;
         public ArrayList DataLines
@@ -182,6 +174,7 @@ namespace FlightSimulator.Models
             // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
             //string dllFileName = GetRelativePath("C:\\Users\\17amb\\source\\repos\\FlightSimulator\\bin\\Debug\\plugins\\SimpleDetect.dll");
             dllMap.Add("Simple", GetRelativePath("SimpleDetect.dll"));
+      //  C: \Users\NicoleS\source\repos\FlightSimulator\plugins\CircularDetect.dll
             //dllFileName = GetRelativePath("C:\\Users\\17amb\\source\\repos\\FlightSimulator\\bin\\Debug\\plugins\\CircularDetect.dll");
             dllMap.Add("Circular", GetRelativePath("CircularDetect.dll"));
             detectorsList = new List<string>() { "Choose detector", "Simple", "Circular", "Add detector" };
@@ -217,6 +210,8 @@ namespace FlightSimulator.Models
         string GetRelativePath(string fileName)
         {
             string relativePath = GetParentPath(fileName);
+            relativePath = GetParentPath(relativePath);
+            relativePath = GetParentPath(relativePath);
             relativePath += "\\plugins\\" + fileName;
             return relativePath;
         }
