@@ -328,6 +328,7 @@ namespace FlightSimulator.Models
             get { return currentDetector; }
             set
             {
+                IsDetectorOn = false;
                 currentDetector = value;
                 if (string.Compare(value, DetectorsList[0]) == 0)
                 {

@@ -38,6 +38,7 @@ namespace FlightSimulator.Views
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
+            vm.VM_IsDetectorOn = false;
             // check that dll path is valid
             if (vm.VM_ValidateDLLPath(DLLpath.Text))
             {
