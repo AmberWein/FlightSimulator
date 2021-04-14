@@ -142,6 +142,7 @@ namespace FlightSimulator.Models
         {
 
         }
+
         // correlation computin
         // returns the avarege of a given ArrayList
         float Avg(ArrayList x, int size)

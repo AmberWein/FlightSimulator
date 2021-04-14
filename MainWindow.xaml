@@ -8,8 +8,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
     <Grid>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
-		
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,0,-0.4,100.4"/>
+
+        <Button x:Name="NextButton" Content="Start" Click="NextButton_Click" HorizontalAlignment="Left" Margin="1045,720,0,0" VerticalAlignment="Top" Width="95" Height="25" />
+        <Button x:Name="BackButton" Content="Back" Click="BackButton_Click" HorizontalAlignment="Left" Margin="60,710,0,0" VerticalAlignment="Top" Width="115" Height="25" Visibility="Hidden"/>
     </Grid>
-	
+
 </Window>

@@ -4,16 +4,7 @@ using System.Collections;
 using System.Threading;
 using System.ComponentModel;
 using FlightSimulator.Communication;
-using OxyPlot;
-using OxyPlot.Series;
-using OxyPlot.Axes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
+//using FlightSimulator.Annotations;
 
 
 //C:\Users\user\Desktop\reg_flight.csv
@@ -51,7 +42,9 @@ namespace FlightSimulator.Models
         public ArrayList Attributes
         {
             get { return attributes; }
-            set { attributes = value; }
+            set { attributes = value;
+                NotifyPropertyChanged("Attributes");
+            }
         }
         private ArrayList dataLines;
         public ArrayList DataLines
@@ -426,9 +419,10 @@ namespace FlightSimulator.Models
             set
             {
                 IsDetectorOn = false;
-                currentDetector = value;
+                
                 if (string.Compare(value, DetectorsList[0]) == 0)
                 {
+                    currentDetector = value;
                     isDetectorOn = false;
                     // something else?
                     NotifyPropertyChanged("CurrentDetector");
@@ -441,6 +435,7 @@ namespace FlightSimulator.Models
                 }
                 else
                 {
+                    currentDetector = value;
                     new Thread(GetAnomalies).Start();
                     NotifyPropertyChanged("CurrentDetector");
                 }
