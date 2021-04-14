@@ -7,10 +7,10 @@
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
 			 xmlns:controls="using:Syncfusion.UI.Xaml.Gauges"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="800">
+             d:DesignHeight="80" d:DesignWidth="200">
 
-    <Viewbox Width="200" Height=" 80">
-    <Grid Background="AntiqueWhite">
+    <Viewbox Width="200" Height="80">
+    <Grid Background="Gray">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -27,6 +27,7 @@
             <RowDefinition Height="27*"/>
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
+       
         <syncfusion:SfCircularGauge x:Name="AltimeterGauge" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30,5,78.2,62.2" 
                                     HeaderAlignment="Bottom" Grid.ColumnSpan="3" Grid.RowSpan="2">
             <syncfusion:SfCircularGauge.GaugeHeader>
@@ -47,7 +48,7 @@
                 <TextBlock Text="Airspeed" Margin="0,0,0,10" FontSize="16" FontWeight="DemiBold"/>
             </syncfusion:SfCircularGauge.GaugeHeader>
             <syncfusion:SfCircularGauge.Scales>
-                <syncfusion:CircularScale RimStroke="Red">
+                    <syncfusion:CircularScale RimStroke="#FF937193">
                     <syncfusion:CircularScale.Pointers>
                         <syncfusion:CircularPointer Value="{Binding VM_AirSpeed}"/>
                     </syncfusion:CircularScale.Pointers>

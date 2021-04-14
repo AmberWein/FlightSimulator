@@ -24,12 +24,6 @@ using System.Collections;
 using FlightSimulator.ViewModels;
 
 ﻿using System.Windows.Controls;
-
-
-
-//        <oxy:PlotView x:Name="Plot2" Model="{Binding Path= PlotModelCorr}" Margin="0,9.667,10,-227.333" Grid.Row="3" Background="Blue" Height="90" Grid.RowSpan="4" ></oxy:PlotView>
-
-
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -80,20 +74,20 @@ namespace FlightSimulator.Views
                 };
                 atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);
                 stopwatch.Start();
-                if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
-                {
-                    vm.UpdateModelReg();
-                    // vm.UpdateModel();
-                    // vm.UpdateModelCorr();
-                    lastUpdateMilliSeconds = stopwatch.ElapsedMilliseconds;
-
-                }
+               
                 // maybe add other two lines
             }
             if (vm.VM_ChosenAttribute != null)
             {
-                //  vm.UpdateModel();
-                // vm.UpdateModelCorr();                
+                vm.UpdateModel();
+                 vm.UpdateModelCorr();
+                if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
+                {
+                    vm.UpdateModelReg();
+                    
+                    lastUpdateMilliSeconds = stopwatch.ElapsedMilliseconds;
+
+                }
             }
 
 
@@ -143,7 +137,7 @@ namespace FlightSimulator.Views
             if (vm.VM_ChosenAttribute != null)
             {
 
-                // vm.LoadFromStart();
+                 vm.LoadFromStart();
                 vm.LoadRegModel();
             }
 

@@ -29,6 +29,7 @@ namespace FlightSimulator.Views
             InitializeComponent();
             vm = f;
             DataContext = vm;
+            
 
             this.dash.DataContext = f.DashboardVM;
             this.dash.SetVM(f.DashboardVM);
@@ -45,5 +46,6 @@ namespace FlightSimulator.Views
             
         }
 
+      
     }
 }

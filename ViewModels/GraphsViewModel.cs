@@ -23,7 +23,6 @@ namespace FlightSimulator.ViewModels
         LineSeries lineSerie = new LineSeries();
         LineSeries lineSerie_c = new LineSeries();
         LineSeries lineSerieReg = new LineSeries();
-        ScatterSeries scatterPoints = new ScatterSeries();
         ScatterSeries recentPoints = new ScatterSeries();
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -147,49 +146,24 @@ namespace FlightSimulator.ViewModels
         //Set up the model for corralated features
         private void SetUpModelCorr()
         {
-            PlotModelCorr.LegendTitle = "correlated feature";
-            PlotModelCorr.LegendOrientation = LegendOrientation.Horizontal;
-            PlotModelCorr.LegendPlacement = LegendPlacement.Outside;
-            PlotModelCorr.LegendPosition = LegendPosition.LeftTop;
-            PlotModelCorr.LegendBackground = OxyColor.FromAColor(200, OxyColors.Aqua);
-            PlotModelCorr.LegendBorder = OxyColors.Black;
-
-            var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
-            PlotModelCorr.Axes.Add(dateAxis);
-            var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
+           
+            var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "correlated feature" };
             PlotModelCorr.Axes.Add(valueAxis);
 
         }
         private void SetUpModel()
         {
-             PlotModel.LegendTitle = model.ChosenAttribute;
-             PlotModel.LegendOrientation = LegendOrientation.Horizontal;
-             PlotModel.LegendPlacement = LegendPlacement.Outside;
-             PlotModel.LegendPosition = LegendPosition.LeftTop;
-             PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.Black);
-             PlotModel.LegendBorder = OxyColors.Black;
-
-             var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
-             PlotModel.Axes.Add(dateAxis);
-             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
+            
+             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = VM_ChosenAttribute };
              PlotModel.Axes.Add(valueAxis);
 
         }
         //Set up the model for regression line
         private void SetUpModelReg()
         {
-             PlotModelCorr.LegendTitle = "Legend";
-             PlotModelCorr.LegendOrientation = LegendOrientation.Horizontal;
-             PlotModelCorr.LegendPlacement = LegendPlacement.Outside;
-             PlotModelCorr.LegendPosition = LegendPosition.LeftTop;
-             PlotModelCorr.LegendBackground = OxyColor.FromAColor(200, OxyColors.Aqua);
-             PlotModelCorr.LegendBorder = OxyColors.Black;
-
-             var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
-             PlotModelCorr.Axes.Add(dateAxis);
+           
              var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
-             PlotModelCorr.Axes.Add(valueAxis);
-
+             PlotModelReg.Axes.Add(valueAxis);
         }
 
         //loading the series from start of flight untill now when an attribute is chosen
@@ -218,8 +192,6 @@ namespace FlightSimulator.ViewModels
             List<float> Y = new List<float>();
             List<float> Y_c = new List<float>();
            
-
-
                 {
                     for (double i = 0; i < model.Timer; i += 0.1)
                     {
@@ -229,7 +201,6 @@ namespace FlightSimulator.ViewModels
                         Y_c.Add(float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * i)].ToString()));
                     }
                     }
-
 
                     foreach (var d in Y)
                     {
@@ -256,7 +227,7 @@ namespace FlightSimulator.ViewModels
                             PlotModelCorr.Series.Add(lineSerie_c);
                         }
                     }
-                   
+                  
                 }
 
                 PlotModelCorr.InvalidatePlot(true);
@@ -292,9 +263,7 @@ namespace FlightSimulator.ViewModels
           //updating the model of corralated attribute throughout the flight on a regular basis
           public void UpdateModelCorr()
 
-          {
-
-           
+          {           
                 List<float> Y = new List<float>();
             if (correlated_feature != "")
             {
@@ -321,7 +290,6 @@ namespace FlightSimulator.ViewModels
         public void UpdateModelReg()
 
         {
-            PlotModelReg.InvalidatePlot(true);
             foreach (KeyValuePair<string, string> v in VM_CorrelatedFeatures)
             {
                 if (v.Key == VM_ChosenAttribute)
@@ -331,20 +299,20 @@ namespace FlightSimulator.ViewModels
 
                 }
             }
+            if (PlotModelReg.Series.Contains(recentPoints))
+            {
+                recentPoints.Points.Clear();
+                PlotModelReg.Series.Remove(recentPoints);
+                
+            }
             if (VM_ChosenAttribute != null && correlated_feature != null)
             {
 
-
-                //last 30 seconds points - in red
-               
-          
-                PlotModelReg.Series.Add(recentPoints);
-
-                if (model.Timer > 30)
+                if (model.Timer > 90.0)
                 {
                    
                     //recent points
-                    for (double i = (model.Timer - 30); i < model.Timer;  i+= 0.1)
+                    for (double i = (model.Timer - 90.0); i < model.Timer;  i+= 0.1)
                     {
                         recentPoints.Points.Add(new ScatterPoint(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * model.Timer)].ToString()), float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()), 3));
                     }
@@ -358,10 +326,8 @@ namespace FlightSimulator.ViewModels
 
 
                 }
-
+                PlotModelReg.Series.Add(recentPoints);
                 PlotModelReg.InvalidatePlot(true);
-              
-                
             }
 
 
@@ -381,7 +347,6 @@ namespace FlightSimulator.ViewModels
             }
             if (correlated_feature != "" && correlated_feature != null)
             {
-                scatterPoints.Points.Clear();
                 lineSerieReg.Points.Clear();
                
                 PlotModelReg.Series.Clear();
@@ -394,26 +359,12 @@ namespace FlightSimulator.ViewModels
                 float Min_x = float.Parse(model.DataMap[VM_ChosenAttribute].ToArray().Min().ToString());
                 float y_hat_max = reg_line.y_hat(Max_x);
                 float y_hat_min = reg_line.y_hat(Min_x);
-
-
                 lineSerieReg.Points.Add(new DataPoint(Max_x, y_hat_max));
                 lineSerieReg.Points.Add(new DataPoint(Min_x, y_hat_min));
-
-               /* var scatterPoints = new ScatterSeries
-                {
-                    MarkerType = MarkerType.Circle,
-                    MarkerFill = OxyColors.Gray
-                };*/
-                for (double i = 0; i < model.FinishTime-0.9; i+= 0.1)
-                {
-                    scatterPoints.Points.Add(new ScatterPoint(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * model.Timer)].ToString()), float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()), 3));
-                }
                 PlotModelReg.Series.Add(lineSerieReg);
-                PlotModelReg.Series.Add(scatterPoints);
                 PlotModelReg.InvalidatePlot(true);
             }
-             //else write no corratlive attribute
-            //scatter series copy from first load from start
+        
 
 
 
