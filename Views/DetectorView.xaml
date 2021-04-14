@@ -9,8 +9,9 @@
              d:DesignHeight="100" d:DesignWidth="800">
     <Viewbox Height="30" Width="368">
         <Grid Background="DarkGray" Margin="0,0,0,-390" Height="80">
-        <ComboBox x:Name="DetectorComboBox" ItemsSource="{Binding VM_DetectorsList}" HorizontalAlignment="Left" Margin="180,15,0,0" VerticalAlignment="Top" Width="130" Height="35"
+            <ComboBox x:Name="DetectorComboBox" ItemsSource="{Binding VM_DetectorsList}" HorizontalAlignment="Left" Margin="180,15,0,0" VerticalAlignment="Top" Width="130" Height="35"
                   SelectedValue="{Binding VM_CurrentDetector}"/>
-        <Button x:Name="DetectButton" Click="DetectButton_Click" Content="Detect Anomalies" HorizontalAlignment="Left" Margin="315,20,0,0" VerticalAlignment="Top" Width="155" IsEnabled="{Binding VM_IsDetectorOn}" Height="30"/>
-    </Grid>
+            <Button x:Name="DetectButton" Click="DetectButton_Click" Content="Detect Anomalies" HorizontalAlignment="Left" Margin="315,20,0,0" VerticalAlignment="Top" Width="155" IsEnabled="{Binding VM_IsDetectorOn}" Height="30"/>
+        </Grid>
+    </Viewbox>
 </UserControl>
