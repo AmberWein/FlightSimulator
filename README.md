@@ -57,6 +57,5 @@ first name+second name,number of line
 7. The simulation is on, feel free to check it out and use the different features!
 Notice: in any case you want to go back one page, you can press the "Back" button on your left hand side.
 
-## Additional Links:
-* 
-* 
+## UML diagram:
+![image](https://user-images.githubusercontent.com/63461543/114775428-f6135d80-9d79-11eb-817c-cee1d28668d7.png)
