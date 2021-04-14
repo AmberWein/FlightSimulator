@@ -36,7 +36,7 @@ namespace FlightSimulator.IO
         {
             this.headers = new ArrayList();
             // not sure - should be default, and change if given a specific path
-            this.xmlPath = FlightSimulatorModel.GetRelativePath("Folders", "playback_small.xml");
+            this.xmlPath = FlightSimulatorModel.GetRelativePath("Files", "playback_small.xml");
         }
 
 

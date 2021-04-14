@@ -127,7 +127,7 @@ namespace FlightSimulator.Models
             Frequency = xmlParser.GetFrequency();
             xmlParser.Parse();
             headersList = xmlParser.Headers;
-            string filePath = FlightSimulatorModel.GetRelativePath("Folders", "reg_flight.csv");
+            string filePath = FlightSimulatorModel.GetRelativePath("Files", "reg_flight.csv");
             csvParser = new CSVParser(filePath, headersList);
             csvParser.Parse();
             csvParser.CreateCSV("reg_flight_with_headers.csv");
