@@ -102,7 +102,7 @@ namespace FlightSimulator.Models
             }
         }
 
-        private ArrayList correlatedFeatures { get; set; }
+        private ArrayList correlatedFeatures;
         public ArrayList CorrelatedFeatures
         {
             get
@@ -112,6 +112,7 @@ namespace FlightSimulator.Models
             set
             {
                 correlatedFeatures = value;
+                NotifyPropertyChanged("CorrelatedFeatures");
             }
         }
 
@@ -129,7 +130,8 @@ namespace FlightSimulator.Models
             csvParser = new CSVParser("C:/Users/NicoleS/Downloads/reg_flight.csv", headersList);
             csvParser.Parse();
             csvParser.CreateCSV("reg_flight_with_headers.csv");
-            correlatedFeatures = new ArrayList();
+            CorrelatedFeatures = new ArrayList();
+       
             // also need to make correlation map
             //SetMostCorrelated();
         }

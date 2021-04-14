@@ -35,7 +35,7 @@ namespace FlightSimulator.IO
         {
             this.headers = new ArrayList();
             // not sure - should be default, and change if given a specific path
-            this.xmlPath = "C:/Program Files/FlightGear 2020.3.6/data/Protocol/playback_small.xml";
+            this.xmlPath = "C:/Users/user/source/repos/FlightSimulator/playback_small.xml";
         }
 
 
