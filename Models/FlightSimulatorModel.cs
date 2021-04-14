@@ -14,13 +14,12 @@ using System.Linq;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
-//using FlightSimulator.Annotations;
 
 
 //C:\Users\user\Desktop\reg_flight.csv
 namespace FlightSimulator.Models
 {
-    class FlightSimulatorModel : IFlightSimulatorModel
+    public class FlightSimulatorModel : IFlightSimulatorModel
     {
         //flight gear
         private float elevator;
@@ -177,20 +176,16 @@ namespace FlightSimulator.Models
             airSpeed = 0;
             frequency = 10; // default value
             dllMap = new Dictionary<string, string>();
-            string path = System.IO.Directory.GetCurrentDirectory();
-            //string filter = "*.dll";
             // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
-            //string dllFileName = GetRelativePath("C:\\Users\\17amb\\source\\repos\\FlightSimulator\\bin\\Debug\\plugins\\SimpleDetect.dll");
-            dllMap.Add("Simple", GetRelativePath("SimpleDetect.dll"));
-            //dllFileName = GetRelativePath("C:\\Users\\17amb\\source\\repos\\FlightSimulator\\bin\\Debug\\plugins\\CircularDetect.dll");
-            dllMap.Add("Circular", GetRelativePath("CircularDetect.dll"));
+            dllMap.Add("Simple", GetRelativePath("plugins","SimpleDetect.dll"));
+            dllMap.Add("Circular", GetRelativePath("plugins", "CircularDetect.dll"));
             detectorsList = new List<string>() { "Choose detector", "Simple", "Circular", "Add detector" };
             currentDetector = DetectorsList[0];
             isDetectorOn = false;
             getDetector = false;
         }
-
-        string GetParentPath(string path)
+        // return the parent folder of this folder, meaning FilghtSimulator's path
+        public static string GetParentPath(string path)
         {
             try
             {
@@ -214,10 +209,13 @@ namespace FlightSimulator.Models
             }
         }
 
-        string GetRelativePath(string fileName)
+        // return a relative path to a given file in a given folder
+        public static string GetRelativePath(string folderName, string fileName)
         {
             string relativePath = GetParentPath(fileName);
-            relativePath += "\\plugins\\" + fileName;
+            relativePath = GetParentPath(relativePath);
+            relativePath = GetParentPath(relativePath);
+            relativePath += "\\"+ folderName +"\\" + fileName;
             return relativePath;
         }
 

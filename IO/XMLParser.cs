@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightSimulator.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Xml;
 
 namespace FlightSimulator.IO
 {
-    class XMLParser
+    public class XMLParser
     {
         private string xmlPath;
         public string XmlPath
@@ -35,7 +36,7 @@ namespace FlightSimulator.IO
         {
             this.headers = new ArrayList();
             // not sure - should be default, and change if given a specific path
-            this.xmlPath = "C:/Users/17amb/source/repos/FlightSimulator/playback_small.xml";
+            this.xmlPath = FlightSimulatorModel.GetRelativePath("Folders", "playback_small.xml");
         }
 
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Globalization;
 using System;
+using FlightSimulator.Models;
 
 namespace FlightSimulator.IO
 {
@@ -88,7 +89,7 @@ namespace FlightSimulator.IO
 
         public override void Parse()
         {
-            var reader = new StreamReader(File.OpenRead("C:/Users/17amb/source/repos/FlightSimulator/reg_flight.csv"));
+            var reader = new StreamReader(File.OpenRead(FlightSimulatorModel.GetRelativePath("Folders", "reg_flight.csv")));
             int i = 0;
             int j;
 

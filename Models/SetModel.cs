@@ -127,7 +127,8 @@ namespace FlightSimulator.Models
             Frequency = xmlParser.GetFrequency();
             xmlParser.Parse();
             headersList = xmlParser.Headers;
-            csvParser = new CSVParser("C:/Users/NicoleS/Downloads/reg_flight.csv", headersList);
+            string filePath = FlightSimulatorModel.GetRelativePath("Folders", "reg_flight.csv");
+            csvParser = new CSVParser(filePath, headersList);
             csvParser.Parse();
             csvParser.CreateCSV("reg_flight_with_headers.csv");
             CorrelatedFeatures = new ArrayList();
@@ -200,14 +201,14 @@ namespace FlightSimulator.Models
                 foreach (string hl in this.HeadersList)
                 {
                     // ignore checking the given feature
-                    if (hl == featureName)
+                    if (String.Compare(hl,featureName) == 0)
                     {
                         continue;
                     }
                     else
                     {
-                        ArrayList currentFeatue = CsvParser.Map[hl];
-                        float currentCorrelation = Cov(givenFeatue, currentFeatue, headersList.Count);
+                        ArrayList currentFeature = CsvParser.Map[hl];
+                        float currentCorrelation = Cov(givenFeatue, currentFeature, CsvParser.Map[hl].Count);
                         // chech if we get higher correlation for the current feature,
                         // if so, then upate the values
                         if (mostCorrelatedValue <= currentCorrelation)
