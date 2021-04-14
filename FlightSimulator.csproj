@@ -328,6 +328,9 @@
     <Compile Include="Views\GraphsView.xaml.cs">
       <DependentUpon>GraphsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InsertCSVView.xaml.cs">
+      <DependentUpon>InsertCSVView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InsertDLLView.xaml.cs">
       <DependentUpon>InsertDLLView.xaml</DependentUpon>
     </Compile>
@@ -383,6 +386,10 @@
     <Page Include="Views\GraphsView.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Views\InsertCSVView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LetsStartPage.xaml">
       <SubType>Designer</SubType>
