@@ -13,27 +13,21 @@
             <ImageBrush ImageSource="Images/set_airplane.jpg"/>
         </Grid.Background>
 
-        <TextBox AcceptsReturn="True" TextWrapping="Wrap" Background="Transparent" BorderBrush="Transparent"
+        <TextBlock  TextWrapping="Wrap" Background="Transparent"
                  Text="Hello and welcome to our flight simulator!"
  FontSize="38" HorizontalAlignment="Center" Margin="42,44,39,348" Width="719"/>
-        <TextBox AcceptsReturn="True" TextWrapping="Wrap" Background="Transparent" BorderBrush="Transparent"
+        <TextBlock  TextWrapping="Wrap" Background="Transparent" 
                  Text="First, before we can get to work, let us learn a little more about your flight."
  FontSize="28" HorizontalAlignment="Center" Margin="42,126,39,245" Width="719"/>
-        <TextBox AcceptsReturn="True" TextWrapping="Wrap" Background="Transparent" BorderBrush="Transparent"
+        <TextBlock  TextWrapping="Wrap" Background="Transparent" 
                  Text="To do that, please insert a path to the required CSV file."
  FontSize="28" HorizontalAlignment="Center" Margin="42,206,39,200" Width="719"/>
+        <TextBox x:Name="pathBox"  FontSize="14" Height="30" Margin="0,270,0,149.6" HorizontalAlignment="Center" Width="300" BorderBrush="Black" BorderThickness="2"
+                      TextChanged="pathBox_TextChanged"/>
+        <TextBlock x:Name="invalidMessage" Text="path is invalid" TextAlignment="Center" Foreground="red" HorizontalAlignment="Center" Margin="365,315,362,114.6" Visibility="Hidden"/>
 
-        <TextBox x:Name="pathBox" Text="{Binding VM_CsvPath, Mode=TwoWay}" FontSize="14" Height="30" Margin="253,321,247,99" HorizontalAlignment="Center" Width="300" BorderBrush="Black" BorderThickness="1"
-                    />
-        <TextBlock x:Name="invalidMessage" Text="path is invalid" Foreground="red" Margin="355,5.4,-355,44.6" Grid.Row="3" Visibility="Hidden"/>
-        <Button FontSize="20" Margin="644,374,83,45">
-            <TextBlock>next</TextBlock>
-        </Button>
-        <Button FontSize="20" Margin="644,374,83,45">
-            <TextBlock><Run Text="next"/></TextBlock>
-        </Button>
-        <Button FontSize="20" Margin="97,374,630,45">
-            <TextBlock><Run Text="back"/></TextBlock>
-        </Button>
+
+
+
     </Grid>
 </Page>

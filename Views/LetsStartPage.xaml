@@ -13,23 +13,17 @@
             <ImageBrush ImageSource="Images/flying_airplane.jpg"/>
         </Grid.Background>
 
-        <TextBox AcceptsReturn="True" TextWrapping="Wrap" Background="Transparent" BorderBrush="Transparent"
+        <TextBlock TextWrapping="Wrap" Background="Transparent" 
                  Text="We are all set to go!"
  FontSize="38" HorizontalAlignment="Center" Margin="211,48,238,344" Width="351"/>
-        <TextBox AcceptsReturn="True" TextWrapping="Wrap" Background="Transparent" BorderBrush="Transparent"
+        <TextBlock TextWrapping="Wrap" Background="Transparent" 
                  Text="Are you ready to start flying?"
  FontSize="28" HorizontalAlignment="Center" Margin="59,120,192,251" Width="549"/>
-        <TextBox AcceptsReturn="True" TextWrapping="Wrap" Background="Transparent" BorderBrush="Transparent"
+        <TextBlock TextWrapping="Wrap" Background="Transparent" 
                  Text="Here we go, be careful not to crush."
  FontSize="28" HorizontalAlignment="Center" Margin="59,168,22,237" Width="719"/>
-        <TextBox AcceptsReturn="True" TextWrapping="Wrap" Background="Transparent" BorderBrush="Transparent"
-                 Text="Please make sure that the FlightGear application's configurations are all set and press Fly"
+        <TextBlock TextWrapping="Wrap" Background="Transparent" 
+                   Text="Please make sure that the FlightGear application's configurations are all set and press Fly"
  FontSize="28" HorizontalAlignment="Center" Margin="59,218,22,147" Width="719"/>
-        <Button FontSize="20" Margin="644,374,83,45">
-            <TextBlock><Run Text="next"/></TextBlock>
-        </Button>
-        <Button FontSize="20" Margin="97,374,630,45">
-            <TextBlock><Run Text="back"/></TextBlock>
-        </Button>
     </Grid>
 </Page>
