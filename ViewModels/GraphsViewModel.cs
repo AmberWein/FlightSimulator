@@ -63,6 +63,21 @@ namespace FlightSimulator.ViewModels
             {
                 model.Attributes = value;
                 onPropertyChanged("VM_Attributes");
+                
+
+            }
+        }
+        private ArrayList correlatedFeatures;
+        private string correlated_feature;
+
+
+        public ArrayList VM_CorrelatedFeatures
+        {
+            get { return model.CorrelatedFeatures; }
+            set
+            {
+                model.CorrelatedFeatures = value;
+                onPropertyChanged("VM_Attributes");
 
             }
         }
@@ -173,6 +188,16 @@ namespace FlightSimulator.ViewModels
         public void LoadFromStart()
 
         {
+            foreach (KeyValuePair<string, string> v in VM_CorrelatedFeatures)
+            {
+                if (v.Key == VM_ChosenAttribute)
+                {
+                    correlated_feature = v.Value;
+
+
+
+                }
+            }
             //clean previous
             lineSerie.Points.Clear();
             PlotModel.Series.Clear();

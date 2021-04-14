@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
@@ -143,7 +144,8 @@ namespace FlightSimulator.Models
                 Attributes = settings.HeadersList;
 
                 DataLines = settings.DataLines;
-               
+                CorrelatedFeatures = settings.CorrelatedFeatures;
+
 
             }
             else if (string.Compare(e.PropertyName, "HeadersList") == 0)
@@ -152,7 +154,7 @@ namespace FlightSimulator.Models
             }
             else if (string.Compare(e.PropertyName, "CorrelatedFeatures") == 0)
             {
-               // CorrelatedFeatures = settings.CorrelatedFeatures;
+                CorrelatedFeatures = settings.CorrelatedFeatures;
             }
         }
         // Constructor

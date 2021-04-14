@@ -51,7 +51,7 @@ namespace FlightSimulator.Models
                         CsvParser.CreateCSV("anomaly_flight_with_headers.csv");
                         DataMap = CsvParser.Map;
                         DataLines = CsvParser.Lines;
-                       // this.SetMostCorrelated();
+                       this.SetMostCorrelated();
                     }  
                 }
             }
