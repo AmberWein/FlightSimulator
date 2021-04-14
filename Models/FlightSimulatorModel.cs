@@ -181,7 +181,7 @@ namespace FlightSimulator.Models
             orientation = 0;
             altitude = 0;
             airSpeed = 0;
-            frequency = 10; // default value
+            frequency = set.Frequency; // default value
             dllMap = new Dictionary<string, string>();
             // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
             dllMap.Add("Simple", GetRelativePath("plugins","SimpleDetect.dll"));
