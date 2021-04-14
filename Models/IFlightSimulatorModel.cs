@@ -44,6 +44,11 @@ namespace FlightSimulator.Models
 
         ArrayList CorrelatedFeatures { get; set; }
 
+
+        Line linear_reg(ArrayList points, int size);
+
+        ArrayList fromFloatsToPoints(ArrayList a, ArrayList b);
+
         // properties for dll detector
         Dictionary<string, string> DllMap { get; set; }
         List<string> DetectorsList { get; set; }

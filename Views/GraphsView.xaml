@@ -29,7 +29,9 @@
         </Syncfusion:ComboBoxAdv>
         <oxy:PlotView x:Name ="Plot2" Model ="{Binding Path=PlotModelCorr}" Margin = "0,9.667,10,-227.333" Grid.Row = "3" Background ="BlueViolet"  Height="90" Grid.RowSpan = "4" ></oxy:PlotView>
 
-
+        
+    
+        <oxy:PlotView x:Name ="Plot3" Model ="{Binding Path=PlotModelReg}" Margin = "0,9.667,10,-227.333" Grid.Row = "3" Background ="BlueViolet"  Height="90" Grid.RowSpan = "4"></oxy:PlotView>
 
     </Grid>
 </UserControl>

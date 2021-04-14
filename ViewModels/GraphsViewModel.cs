@@ -22,7 +22,9 @@ namespace FlightSimulator.ViewModels
         private IFlightSimulatorModel model; // this is a try to hold only one model for all controllers!
         LineSeries lineSerie = new LineSeries();
         LineSeries lineSerie_c = new LineSeries();
-
+        LineSeries lineSerieReg = new LineSeries();
+        ScatterSeries scatterPoints = new ScatterSeries();
+        ScatterSeries recentPoints = new ScatterSeries();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -43,6 +45,8 @@ namespace FlightSimulator.ViewModels
             SetUpModel();
             PlotModelCorr = new PlotModel();
             SetUpModelCorr();
+            PlotModelReg = new PlotModel();
+            SetUpModelReg();
 
         }
      
@@ -66,6 +70,21 @@ namespace FlightSimulator.ViewModels
             set
             {
                 model.Attributes = value;
+                onPropertyChanged("VM_Attributes");
+                
+
+            }
+        }
+        private ArrayList correlatedFeatures;
+        string correlated_feature;
+
+
+        public ArrayList VM_CorrelatedFeatures
+        {
+            get { return model.CorrelatedFeatures; }
+            set
+            {
+                model.CorrelatedFeatures = value;
                 onPropertyChanged("VM_Attributes");
 
             }
@@ -128,7 +147,7 @@ namespace FlightSimulator.ViewModels
         //Set up the model for corralated features
         private void SetUpModelCorr()
         {
-            PlotModelCorr.LegendTitle = "Correlation";
+            PlotModelCorr.LegendTitle = "correlated feature";
             PlotModelCorr.LegendOrientation = LegendOrientation.Horizontal;
             PlotModelCorr.LegendPlacement = LegendPlacement.Outside;
             PlotModelCorr.LegendPosition = LegendPosition.LeftTop;
@@ -177,6 +196,15 @@ namespace FlightSimulator.ViewModels
         public void LoadFromStart()
 
         {
+            foreach (KeyValuePair<string, string> v in VM_CorrelatedFeatures)
+            {
+                if (v.Key == VM_ChosenAttribute)
+                {
+                    correlated_feature = v.Value;
+                    break;
+
+                }
+            }
             //clean previous
             lineSerie.Points.Clear();
             PlotModel.Series.Clear();
@@ -196,7 +224,10 @@ namespace FlightSimulator.ViewModels
                     for (double i = 0; i < model.Timer; i += 0.1)
                     {
                         Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * i)].ToString()));
-                        Y_c.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * i)].ToString()));
+                    if (correlated_feature != "") //not all attributes have corrlated features
+                    {
+                        Y_c.Add(float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * i)].ToString()));
+                    }
                     }
 
 
@@ -212,6 +243,8 @@ namespace FlightSimulator.ViewModels
                         }
                     }
                     PlotModel.InvalidatePlot(true);
+                if (correlated_feature != "") //not all attributes have corrlated features
+                {
                     foreach (var d in Y_c)
                     {
                         if (lineSerie_c != null)
@@ -223,9 +256,11 @@ namespace FlightSimulator.ViewModels
                             PlotModelCorr.Series.Add(lineSerie_c);
                         }
                     }
-                    PlotModelCorr.InvalidatePlot(true);
-
+                   
                 }
+
+                PlotModelCorr.InvalidatePlot(true);
+            }
             
         }
           //updating the model throughout the flight ob a regular basis
@@ -261,50 +296,125 @@ namespace FlightSimulator.ViewModels
 
            
                 List<float> Y = new List<float>();
-            Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(10.0 * model.Timer)].ToString()));
-                  foreach (var d in Y)
-                  {
-                      if (lineSerie_c != null)
-                      {
-                          lineSerie_c.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
-                      }
-                      else
-                      {
-                          PlotModelCorr.Series.Add(lineSerie_c);
-                      }
-                  }
-                  PlotModelCorr.InvalidatePlot(true);
+            if (correlated_feature != "")
+            {
+                Y.Add(float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()));
+                foreach (var d in Y)
+                {
+                    if (lineSerie_c != null)
+                    {
+                        lineSerie_c.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
+                    }
+                    else
+                    {
+                        PlotModelCorr.Series.Add(lineSerie_c);
+                    }
+                }
+                PlotModelCorr.InvalidatePlot(true);
+            }
                  
           }
 
 
-          public void LoadRegModel()
+        //updating the model throughout the flight ob a regular basis
+
+        public void UpdateModelReg()
+
+        {
+            PlotModelReg.InvalidatePlot(true);
+            foreach (KeyValuePair<string, string> v in VM_CorrelatedFeatures)
+            {
+                if (v.Key == VM_ChosenAttribute)
+                {
+                    correlated_feature = v.Value;
+                    break;
+
+                }
+            }
+            if (VM_ChosenAttribute != null && correlated_feature != null)
+            {
+
+
+                //last 30 seconds points - in red
+               
+          
+                PlotModelReg.Series.Add(recentPoints);
+
+                if (model.Timer > 30)
+                {
+                   
+                    //recent points
+                    for (double i = (model.Timer - 30); i < model.Timer;  i+= 0.1)
+                    {
+                        recentPoints.Points.Add(new ScatterPoint(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * model.Timer)].ToString()), float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()), 3));
+                    }
+                }
+                else
+                {  //all points are recent points
+                    for (double i = 0; i < model.Timer; i += 0.1)
+                    {
+                        recentPoints.Points.Add(new ScatterPoint(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency* model.Timer)].ToString()), float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()), 3));
+                    }
+
+
+                }
+
+                PlotModelReg.InvalidatePlot(true);
+              
+                
+            }
+
+
+        }
+
+
+        public void LoadRegModel()
           {
-            /*lineSerieReg.Points.Clear();
-            PlotModelReg.Series.Clear();
-            PlotModelReg = new PlotModel();
+            foreach (KeyValuePair<string, string> v in VM_CorrelatedFeatures)
+            {
+                if (v.Key == VM_ChosenAttribute)
+                {
+                    correlated_feature = v.Value;
+                    break;
 
-            var lineSerieReg = new LineSeries()
-              {
-                  Color = OxyColors.Red,
-                  StrokeThickness = 2
-              };*/
+                }
+            }
+            if (correlated_feature != "" && correlated_feature != null)
+            {
+                scatterPoints.Points.Clear();
+                lineSerieReg.Points.Clear();
+               
+                PlotModelReg.Series.Clear();
+
+                ArrayList points = model.fromFloatsToPoints(model.DataMap[VM_ChosenAttribute], model.DataMap[correlated_feature]);
+
+                Line reg_line = model.linear_reg(points, points.Count);
+
+                float Max_x = float.Parse(model.DataMap[VM_ChosenAttribute].ToArray().Max().ToString());
+                float Min_x = float.Parse(model.DataMap[VM_ChosenAttribute].ToArray().Min().ToString());
+                float y_hat_max = reg_line.y_hat(Max_x);
+                float y_hat_min = reg_line.y_hat(Min_x);
 
 
+                lineSerieReg.Points.Add(new DataPoint(Max_x, y_hat_max));
+                lineSerieReg.Points.Add(new DataPoint(Min_x, y_hat_min));
 
-            /*Line reg_line = model.linear_reg(new Point(DataMap[attrubute], DataMap[Corr]));
-             float X_Max = DataMap[attribute].max;
-            float X_Min = DataMap[attribute].max;
-            float Y_a = reg_line.f(X_Max);
-            float Y_b = reg_line.f(X_Min);
-            lineSerieReg.Add(new DataPoint(X_Max,Y_a)
-            lineSerieReg.Add(new DataPoint(X_Min,Y_b)
-
-
-            PlotModelReg.Series.Add(lineSerieReg);
-             */
+               /* var scatterPoints = new ScatterSeries
+                {
+                    MarkerType = MarkerType.Circle,
+                    MarkerFill = OxyColors.Gray
+                };*/
+                for (double i = 0; i < model.FinishTime-0.9; i+= 0.1)
+                {
+                    scatterPoints.Points.Add(new ScatterPoint(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * model.Timer)].ToString()), float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()), 3));
+                }
+                PlotModelReg.Series.Add(lineSerieReg);
+                PlotModelReg.Series.Add(scatterPoints);
+                PlotModelReg.InvalidatePlot(true);
+            }
+             //else write no corratlive attribute
             //scatter series copy from first load from start
-    
+
 
 
 

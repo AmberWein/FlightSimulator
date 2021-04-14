@@ -299,7 +299,9 @@
     <Compile Include="Models\IFlightSimulatorModel.cs" />
     <Compile Include="Models\IMediaPlayerModel.cs" />
     <Compile Include="Models\ISetModel.cs" />
+    <Compile Include="Models\Line.cs" />
     <Compile Include="Models\MediaPlayerModel.cs" />
+    <Compile Include="Models\Point.cs" />
     <Compile Include="Models\SetModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\DetectorViewModel.cs" />

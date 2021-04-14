@@ -4,6 +4,19 @@ using System.Collections;
 using System.Threading;
 using System.ComponentModel;
 using FlightSimulator.Communication;
+
+using OxyPlot;
+using OxyPlot.Series;
+using OxyPlot.Axes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Linq;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+
 //using FlightSimulator.Annotations;
 
 
@@ -135,7 +148,8 @@ namespace FlightSimulator.Models
                 Attributes = settings.HeadersList;
 
                 DataLines = settings.DataLines;
-               
+                CorrelatedFeatures = settings.CorrelatedFeatures;
+
 
             }
             else if (string.Compare(e.PropertyName, "HeadersList") == 0)
@@ -144,7 +158,7 @@ namespace FlightSimulator.Models
             }
             else if (string.Compare(e.PropertyName, "CorrelatedFeatures") == 0)
             {
-               // CorrelatedFeatures = settings.CorrelatedFeatures;
+                CorrelatedFeatures = settings.CorrelatedFeatures;
             }
         }
         // Constructor
@@ -482,6 +496,38 @@ namespace FlightSimulator.Models
         {
             return Program.IsValidDLL(path);
         }
+
+
+        //calculates linear regression given a list of points
+        public Line linear_reg(ArrayList points, int size)
+        {
+            ArrayList x = new ArrayList();
+            ArrayList y = new ArrayList();
+           foreach (Point  p in points)
+            {
+                x.Add(p.x);
+                y.Add(p.y);
+            }
+            float a = settings.Cov(x, y, size) / settings.Var(x, size);
+            float b = settings.Avg(y, size) - a*(settings.Avg(x, size));
+            Line l = new Line(a, b);
+            return l;
+        }
+
+
+        public ArrayList fromFloatsToPoints(ArrayList a, ArrayList b)
+        {
+            ArrayList points = new ArrayList();
+            for(int i = 0; i < a.Count- 1; i++)
+            {
+                points.Add(new Point(float.Parse(a[i].ToString()), float.Parse(b[i].ToString())));
+            }
+
+            return points;
+        }
+
+
+
 
     }
 }
