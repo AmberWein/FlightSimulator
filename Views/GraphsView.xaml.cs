@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,9 @@ using System.Collections.Generic;
 using System.Collections;
 using FlightSimulator.ViewModels;
 
+﻿using System.Windows.Controls;
+
+
 
 
 
@@ -43,12 +47,14 @@ namespace FlightSimulator.Views
     public partial class GraphsView : UserControl
 
     {
+
         //private Models.FlightSimulatorModel viewModel;
 
         private GraphsViewModel vm;
         private string chosenAttribute;
         List<string> attributes;
         // public ArrayList data { get; private set; }
+
         public GraphsView()
         {
             InitializeComponent();

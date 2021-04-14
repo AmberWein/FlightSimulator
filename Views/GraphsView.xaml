@@ -9,6 +9,7 @@
              mc:Ignorable="d" 
     
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid Height="260" VerticalAlignment="Bottom">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="81*"/>
@@ -52,13 +53,6 @@ ScatterHeight="15" ScatterWidth="15">
 
         <oxy:PlotView x:Name="PlotModelCorr" Model="{Binding Path= PlotModelCorr}" Margin="10,9.667,10,10" Grid.Row="2" Background="BlueViolet" Grid.ColumnSpan="3">
         </oxy:PlotView>
-
-
-
-
-
-
-
 
     </Grid>
 </UserControl>

@@ -1,5 +1,4 @@
-﻿using FlightSimulator.Models;
-using FlightSimulator.ViewModels;
+﻿using FlightSimulator.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -9,19 +8,19 @@ using System.Windows.Data;
 namespace FlightSimulator.Views
 {
     /// <summary>
-    /// Interaction logic for MediaPlayerView.xaml
+    /// Responsible for the view logic of the media player controller
     /// </summary>
     public partial class MediaPlayerView : UserControl
     {
         private MediaPlayerViewModel vm;
         List<double> speeds;
+        double timeStep = 5;
 
         public MediaPlayerView()
         {
             FillList();
             InitializeComponent();
-           // vm = new MediaPlayerViewModel(new MediaPlayerModel());
-            //DataContext = vm;
+            // set binding between the ComboBox's chosen value to the speeds list 
             Binding dict = new Binding
             {
                 Source = speeds
@@ -33,6 +32,7 @@ namespace FlightSimulator.Views
             this.vm = mediaVM;
         }
 
+        // initialize the speeds list
         private void FillList()
         {
             this.speeds = new List<double>();
@@ -54,29 +54,27 @@ namespace FlightSimulator.Views
         //{
         //    e.CanExecute = true;
         //}
+        // when backward button is pressed, the function reduced (if possible) the timer by a given timeStep value
         private void Backwards_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            //this.vm.VM_Timer -= 0.1;
-           // lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
-
-            if (vm.VM_Timer >= 1)
+            if (vm.VM_Timer >= this.timeStep)
             {
-                this.vm.VM_Timer-= 1;
+                this.vm.VM_Timer -= timeStep;
             }
-            else { this.vm.VM_Timer=0; }
-            //this.vm.VM_LineNumber -= 10;
-            
-            //this.vm.VM_Timer += 1;
-            //lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
+            else 
+            { 
+                this.vm.VM_Timer=0; 
+            }
+            // binding the current timer's change and show it in lblProgressStatus
             lblProgressStatus.Text = TimeSpan.FromSeconds(vm.VM_Timer).ToString(@"hh\:mm\:ss");
         }
+        // when play button is pressed, the function (if needed) makes the app plays
         private void Play_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            //  if (this.vm.VM_PlayingSpeed == 0)
-            //      this.vm.VM_PlayingSpeed = 1;
             if (!this.vm.VM_IsPlay)
                 this.vm.VM_IsPlay = true;
         }
+        // when stop button is pressed, the function (if needed) makes the app stops
         private void Stop_Media_Player_Click(object sender, RoutedEventArgs e)
         {
             if (this.vm.VM_IsPlay)
@@ -84,52 +82,28 @@ namespace FlightSimulator.Views
             if (this.vm.VM_Timer != 0)
                 this.vm.VM_Timer = 0;
             vm.VM_InitData();
-            //if (this.vm.VM_Timer != 0)
-              //  this.vm.VM_Timer = 0;
-
-         //   if (this.vm.VM_PlayingSpeed != 0)
-           //     this.vm.VM_PlayingSpeed = 0;
-
         }
+        // when pause button is pressed, the function (if needed) makes the app pauses
         private void Pause_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-         //   if (this.vm.VM_PlayingSpeed != 0)
-          //      this.vm.VM_PlayingSpeed = 0;
           if (this.vm.VM_IsPlay)
-                this.vm.VM_IsPlay = false;
-            
+                this.vm.VM_IsPlay = false;            
         }
+        // when forward button is pressed, the function reduced (if possible) the timer property by a given timeStep value
         private void Forward_Media_Player_Click(object sender, RoutedEventArgs e)
         {
-            // should check if not over time?
-            this.vm.VM_Timer += 1;
-            
-            //this.vm.VM_Timer += 1;
-            //lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
+            if ((this.vm.VM_Timer + this.timeStep) <= this.vm.VM_FinishTime)
+            this.vm.VM_Timer += this.timeStep;
+
+            // binding the current timer's change and show it in lblProgressStatus
             lblProgressStatus.Text = TimeSpan.FromSeconds(this.vm.VM_Timer).ToString(@"hh\:mm\:ss");
         }
 
-        private void Speed_Changed_Click(object sender, RoutedEventArgs e)
-        {
-            ListBoxItem speedBox = ((sender as ListBox).SelectedItem as ListBoxItem);
-            this.vm.VM_PlayingSpeed = Convert.ToDouble(speedBox.Content.ToString());
-        }
-
+        // when slider button is dragged, the function update the timer property accordingly
         private void Time_Changed_Click(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
-            this.vm.VM_Timer = (Convert.ToDouble(sliProgress.Value.ToString())); // why this?
+            this.vm.VM_Timer = (Convert.ToDouble(sliProgress.Value.ToString()));
         }
-
-        
     }
 }
-
-
- /*   private void Speed_Changed_Click(object sender, RoutedEventArgs e)
-    {
-        //this.vm.VM_Speed = Convert.ToDouble(Speed_Box.SelectedItem.);
-
-        ListBoxItem Speed_Box = ((sender as ListBox).SelectedItem as ListBoxItem);
-        this.vm.VM_Speed = Convert.ToDouble(Speed_Box.Content.ToString());
-    }*/

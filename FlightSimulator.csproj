@@ -302,15 +302,21 @@
     <Compile Include="Models\MediaPlayerModel.cs" />
     <Compile Include="Models\SetModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\DetectorViewModel.cs" />
     <Compile Include="ViewModels\FlightSimulatorViewModel.cs" />
     <Compile Include="ViewModels\GearControlViewModel.cs" />
     <Compile Include="ViewModels\GraphsViewModel.cs" />
     <Compile Include="NativeMethods.cs" />
-    <Compile Include="plugins\AnomalyDetector.cs" />
     <Compile Include="ViewModels\MediaPlayerViewModel.cs" />
     <Compile Include="ViewModels\SetViewModel.cs" />
     <Compile Include="Views\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetectorView.xaml.cs">
+      <DependentUpon>DetectorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DLLInsertWindow.xaml.cs">
+      <DependentUpon>DLLInsertWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FlightSimulatorView.xaml.cs">
       <DependentUpon>FlightSimulatorView.xaml</DependentUpon>
@@ -322,8 +328,20 @@
     <Compile Include="Views\GraphsView.xaml.cs">
       <DependentUpon>GraphsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InsertDLLView.xaml.cs">
+      <DependentUpon>InsertDLLView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LetsStartPage.xaml.cs">
+      <DependentUpon>LetsStartPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MediaPlayerView.xaml.cs">
       <DependentUpon>MediaPlayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OpeningPage.xaml.cs">
+      <DependentUpon>OpeningPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SetPage.xaml.cs">
+      <DependentUpon>SetPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SetView.xaml.cs">
       <DependentUpon>SetView.xaml</DependentUpon>
@@ -346,6 +364,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DetectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DLLInsertWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FlightSimulatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -358,7 +384,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\LetsStartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsertDLLView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MediaPlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OpeningPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SetPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -404,6 +446,8 @@
   <ItemGroup>
     <Analyzer Include="packages\Microsoft.CodeAnalysis.Analyzers.2.6.1\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="packages\Microsoft.CodeAnalysis.Analyzers.2.6.1\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+    <Content Include="plugins\CircularDetect.dll" />
+    <Content Include="plugins\SimpleDetect.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

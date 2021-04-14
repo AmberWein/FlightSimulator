@@ -38,8 +38,11 @@ namespace FlightSimulator.Views
             this.gear.SetVM(f.GearControlVM);
             this.graphs.DataContext =f.GraphsVM;
             this.graphs.SetVM(f.GraphsVM);
-            Loaded += StartSim;
+            this.detector.DataContext = f.DetectorVM;
+            this.detector.SetVM(f.DetectorVM);
 
+            Loaded += StartSim;
+            
         }
 
     }

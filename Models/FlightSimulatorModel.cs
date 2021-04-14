@@ -63,23 +63,40 @@ namespace FlightSimulator.Models
                 // this should only occur once, as csv file will be parsed within the SetModel
                 dataLines = value;
                 // 10 Hz means reading 10 lines in 1 second
-                FinishTime = 0.1 * (double)dataLines.Count;
+                FinishTime = ((double)dataLines.Count)/Frequency;
+            }
+        }
+        private double frequency;
+        public double Frequency
+        {
+            get { return frequency; }
+            set
+            {
+                if (value == 0)
+                {
+                    frequency = 10; // default value 10 Hz
+                }
+                else
+                {
+                    frequency = value;
+                }
+                // Notify?
             }
         }
         // indicates wheater simulator is on play mode.
         private bool isPlay;
-        public bool IsPlay 
+        public bool IsPlay
         {
-            get { return isPlay; } 
-            set 
+            get { return isPlay; }
+            set
             {
-                isPlay = value; 
+                isPlay = value;
                 // when set to true, start the flight in a new thread
                 if (isPlay)
                 {
                     new Thread(StartFlying).Start();
                 }
-            } 
+            }
         }
         private double playingSpeed;
         public double PlayingSpeed
@@ -88,7 +105,7 @@ namespace FlightSimulator.Models
             set
             {
                 // this is only controlled from View, no need to Notify
-                playingSpeed = value; 
+                playingSpeed = value;
             }
         }
 
@@ -96,32 +113,32 @@ namespace FlightSimulator.Models
         public double Timer
         {
             get { return timer; }
-            set { 
+            set {
                 timer = value;
                 NotifyPropertyChanged("Timer");
             }
         }
 
         private double finishTime;
-        public double FinishTime { 
-            get { return finishTime; } 
+        public double FinishTime {
+            get { return finishTime; }
             set
-            { 
-                finishTime = value; 
-                NotifyPropertyChanged("FinishTime"); 
+            {
+                finishTime = value;
+                NotifyPropertyChanged("FinishTime");
             }
         }
-        
+
 
         // make this model a listener to changes whitin settings. When the data is uploaded, get it.
-        public void SettingsChanged (Object sender, PropertyChangedEventArgs e) {
-            if(string.Compare(e.PropertyName,"DataMap")==0)
+        public void SettingsChanged(Object sender, PropertyChangedEventArgs e) {
+            if (string.Compare(e.PropertyName, "DataMap") == 0)
             {
                 DataMap = settings.DataMap;
                
 
             }
-            else if(string.Compare(e.PropertyName, "DataLines")==0)
+            else if (string.Compare(e.PropertyName, "DataLines") == 0)
             {
                 Attributes = settings.HeadersList;
 
@@ -144,7 +161,7 @@ namespace FlightSimulator.Models
             // initialize members
             dataMap = null;
             dataLines = null;
-            playingSpeed = 1;            
+            playingSpeed = 1;
             timer = 0;
             finishTime = 0;
             yaw = 0;
@@ -153,8 +170,15 @@ namespace FlightSimulator.Models
             orientation = 0;
             altitude = 0;
             airSpeed = 0;
-          
-        
+            frequency = 10; // default value
+            dllMap = new Dictionary<string, string>();
+           // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
+            dllMap.Add("Simple", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\SimpleDetect.dll");
+            dllMap.Add("Circular", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\CircularDetect.dll");
+            detectorsList = new List<string>() { "Choose detector", "Simple", "Circular", "Add detector" };
+            currentDetector = DetectorsList[0];
+            isDetectorOn = false;
+            getDetector = false;
         }
         // Dashboard properties
         private float yaw;
@@ -303,15 +327,18 @@ namespace FlightSimulator.Models
         // start updating data as the time passes
         public void StartFlying()
         {
-            int sleepingTime, lineNumber;
             
-           
+            DetectorsList = detectorsList;
+            CurrentDetector = DetectorsList[0];
+            int sleepingTime, lineNumber;
+
             /*int sign= client.Connect();
             if (sign !=1)
                 return;*/
-           while (isPlay)
+            while (isPlay)
             {
-                lineNumber = (int)(Timer * 10.0);
+                
+                lineNumber = (int)(Timer * Frequency);
                 sleepingTime = (int)(100 / PlayingSpeed);
                 // get current values for dashboard properties
                 Yaw =  float.Parse(DataMap["side-slip-deg"][lineNumber].ToString());
@@ -325,7 +352,7 @@ namespace FlightSimulator.Models
                 Aileron = float.Parse(DataMap["aileron"][lineNumber].ToString());
                 Elevator= float.Parse(DataMap["elevator"][lineNumber].ToString());
                 //client.Send(DataLines[lineNumber].ToString());
-                Timer += 0.1;
+                Timer += 1.0/Frequency;
                 // if we finished to read all lines
                 if (Timer >= FinishTime) //change to > ?
                 {
@@ -338,7 +365,75 @@ namespace FlightSimulator.Models
             }
         }
 
-
+        // Anomalies Detector Properties
+        private string currentDetector;
+        public string CurrentDetector
+        {
+            get { return currentDetector; }
+            set
+            {
+                IsDetectorOn = false;
+                currentDetector = value;
+                if (string.Compare(value, DetectorsList[0]) == 0)
+                {
+                    isDetectorOn = false;
+                    // something else?
+                    NotifyPropertyChanged("CurrentDetector");
+                    return;
+                }
+                if (!GetDetector && string.Compare(value, DetectorsList[DetectorsList.Count - 1]) == 0)
+                {
+                    currentDetector = DetectorsList[0];
+                    GetDetector = true;
+                }
+                else
+                {
+                    new Thread(GetAnomalies).Start();
+                    NotifyPropertyChanged("CurrentDetector");
+                }
+            }
+        }
+        private bool getDetector;
+        public bool GetDetector
+        {
+            get { return getDetector; }
+            set { getDetector = value; NotifyPropertyChanged("GetDetector"); }
+        }
+        public void GetAnomalies()
+        {
+            string dllPath;
+            DllMap.TryGetValue(CurrentDetector, out dllPath);
+            bool madeReport = Program.OperateDLL(dllPath);
+            if (madeReport)
+            {
+                IsDetectorOn = true;
+            }
+        }
+        private Dictionary<string, string> dllMap;
+        public Dictionary<string, string> DllMap
+        {
+            get { return dllMap; }
+            set
+            {
+                dllMap = value;
+            }
+        }
+        private List<string> detectorsList;
+        public List<string> DetectorsList
+        {
+            get { return detectorsList; }
+            set
+            {
+                detectorsList = new List<string>(value);
+                NotifyPropertyChanged("DetectorsList");
+            }
+        }
+        private bool isDetectorOn;
+        public bool IsDetectorOn { get { return isDetectorOn; } set { isDetectorOn = value; NotifyPropertyChanged("IsDetectorOn"); } }
+        public bool ValidateDLLPath(string path)
+        {
+            return Program.IsValidDLL(path);
+        }
 
     }
 }

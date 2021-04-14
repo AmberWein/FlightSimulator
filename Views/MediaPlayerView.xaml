@@ -4,14 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="800">
+             mc:Ignorable="d" d:DesignWidth="800" Height="142">
     <Border BorderBrush="LightGray"
         BorderThickness="1"
         Background="LightGray"
         CornerRadius="10">
         <StackPanel HorizontalAlignment="Center" Margin="0,-1,0,0">
-            <StackPanel Orientation="Horizontal" Margin="0,-1,0,0" Width="794">
+            <StackPanel Orientation="Horizontal" Margin="0,-1,0,-30" Width="794" Height="110">
                 <Button Width="39" Height="40" Margin="30,27,0,43" Click="Open_Media_Player_Click">
                     <Image Source="Images\open_button.png"></Image>
                 </Button>
@@ -41,19 +40,16 @@
                 </Button>
                 <Separator></Separator>
                 <TextBlock VerticalAlignment="Center" Margin="70,10,0,30" FontSize="24">Play speed</TextBlock>
+                <ComboBox x:Name="speedBox" VerticalAlignment="Center" Margin="10,38,10,49"
+                 SelectedValue="{Binding VM_PlayingSpeed}" Width="67" Height="23"/>
 
-                <ComboBox x:Name="speedBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="10, 5, 10, 5"
-                 SelectedValue="{Binding VM_PlayingSpeed}"/>
 
-
-                <StatusBarItem Margin="0,0,-246,0">
-
-                    <TextBlock x:Name="lblProgressStatus" HorizontalAlignment ="Center" Width="98" Height="50" RenderTransformOrigin="0.75,0.9" FontSize="24" ><Run Text="{Binding VM_Timer}"/></TextBlock>
+                <StatusBarItem Margin="0,24,-246,34" Width="176">
+                    <TextBlock x:Name="lblProgressStatus" HorizontalAlignment ="Center" Width="92" Height="30" RenderTransformOrigin="0.75,1" FontSize="24" ><Run Text="{Binding VM_Timer}"/></TextBlock>
 
                 </StatusBarItem>
             </StackPanel>
-
-            <StatusBar Grid.Row="2">
+            <StatusBar>
                 <StatusBar.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Grid>
@@ -66,9 +62,9 @@
                     </ItemsPanelTemplate>
                 </StatusBar.ItemsPanel>
 
-                <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" Width="807" Height="100" Margin="-6,2,0,348" RenderTransformOrigin="0.511,0.838" Background="LightGray" >
+                <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" Width="807" Height="60" Margin="-6,2,0,348" RenderTransformOrigin="0.511,0.838" Background="LightGray" >
                     <Slider x:Name="sliProgress" Minimum="0" Maximum="{Binding VM_FinishTime}" Value="{Binding VM_Timer}"
-                             Margin="156,0,100.6,0" Height="25" RenderTransformOrigin="0,3.5" ValueChanged="Time_Changed_Click" />
+                             Margin="156,0,101,0" Height="21" RenderTransformOrigin="0,3.5" ValueChanged="Time_Changed_Click" />
 
                 </StatusBarItem>
 

@@ -10,7 +10,7 @@ namespace FlightSimulator
 {
     class NativeMethods
     {
-        /*
+        
         [DllImport("kernel32.dll")]
         public static extern IntPtr LoadLibrary(string dllToLoad);
 
@@ -19,37 +19,69 @@ namespace FlightSimulator
 
         [DllImport("kernel32.dll")]
         public static extern bool FreeLibrary(IntPtr hModule);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void Func();
     }
 
     class Program
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int MultiplyByTen(int numberToMultiply);
+        private delegate IntPtr Create();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void Detect(IntPtr d);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void Free(IntPtr d);
 
-        static void Main(string[] args)
+        public static bool IsValidDLL(string path)
         {
-            IntPtr pDll = NativeMethods.LoadLibrary(@"PathToYourDll.DLL");
-            //oh dear, error handling here
-            //if (pDll == IntPtr.Zero)
-
-            IntPtr detectorAdress = NativeMethods.GetProcAddress(pDll, "Create");
-            //oh dear, error handling here
-            //if(pAddressOfFunctionToCall == IntPtr.Zero)
-
-            IntPtr detectAdress = NativeMethods.GetProcAddress(pDll, "detect");
-
-            detect d = (detect)Marshal.GetDelegateForFunctionPointer(detectorAdress, typeof(detect));
-
-            //int theResult = multiplyByTen(10);
-
-            bool result = NativeMethods.FreeLibrary(pDll);
-            //remaining code here
-
-            Console.WriteLine(theResult);
+            IntPtr pDll = NativeMethods.LoadLibrary(path);
+            if (pDll==IntPtr.Zero)
+            {
+                return false;
+            }
+            NativeMethods.FreeLibrary(pDll);
+            return true;
         }
-        */
+
+        //public static void OperateDLL(string path)
+        public static bool OperateDLL(string path)
+        {
+            IntPtr pDll = NativeMethods.LoadLibrary(path);
+            //oh dear, error handling here
+            if (pDll == IntPtr.Zero)
+            {
+                Console.WriteLine("Error in loading dll");
+            }
+
+            IntPtr CreateFuncAddress= NativeMethods.GetProcAddress(pDll, "Create");
+            //oh dear, error handling here
+            if (CreateFuncAddress == IntPtr.Zero)
+            {
+                Console.WriteLine("Error in loading create func");
+                // should print an error accured and exit the app
+            }
+            IntPtr DetectFuncAddress = NativeMethods.GetProcAddress(pDll, "Detect");
+            //oh dear, error handling here
+            if (CreateFuncAddress == IntPtr.Zero)
+            {
+                Console.WriteLine("Error in loading detect func");
+                // should print an error accured and exit the app
+            }
+            IntPtr FreeFuncAddress = NativeMethods.GetProcAddress(pDll, "Free");
+            //oh dear, error handling here
+            if (CreateFuncAddress == IntPtr.Zero)
+            {
+                Console.WriteLine("Error in loading free func");
+                // should print an error accured and exit the app
+            }
+            Create create = (Create)Marshal.GetDelegateForFunctionPointer(CreateFuncAddress, typeof(Create));
+            Detect detect = (Detect)Marshal.GetDelegateForFunctionPointer(DetectFuncAddress, typeof(Detect));
+            Free free = (Free)Marshal.GetDelegateForFunctionPointer(FreeFuncAddress, typeof(Free));
+
+            IntPtr p = create();
+            detect(p);
+            free(p);
+            
+            return NativeMethods.FreeLibrary(pDll);
+            //remaining code here
+        }
     }
 }

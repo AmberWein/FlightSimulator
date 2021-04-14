@@ -33,12 +33,24 @@ namespace FlightSimulator.Models
         // initialize all dashboard properties
         void InitDashboardData();
 
+
         // graphs properties
 
         string ChosenAttribute { set; get; }
 
         ArrayList Attributes { set; get; }
 
+        // properties for dll detector
+        Dictionary<string, string> DllMap { get; set; }
+        List<string> DetectorsList { get; set; }
+        string CurrentDetector { get; set; }
+        bool IsDetectorOn { get; set; }
+        //string InsertDLLPath { get; set; }
+        //string InsertDLLName { get; set; }
+
+        bool ValidateDLLPath(string path);
+
+        bool GetDetector { get; set; }
 
     }
 }
