@@ -423,9 +423,10 @@ namespace FlightSimulator.Models
             set
             {
                 IsDetectorOn = false;
-                currentDetector = value;
+                
                 if (string.Compare(value, DetectorsList[0]) == 0)
                 {
+                    currentDetector = value;
                     isDetectorOn = false;
                     // something else?
                     NotifyPropertyChanged("CurrentDetector");
@@ -438,6 +439,7 @@ namespace FlightSimulator.Models
                 }
                 else
                 {
+                    currentDetector = value;
                     new Thread(GetAnomalies).Start();
                     NotifyPropertyChanged("CurrentDetector");
                 }
