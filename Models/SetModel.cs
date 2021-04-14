@@ -8,7 +8,7 @@ namespace FlightSimulator.Models
 {
     class SetModel : ISetModel
     {
-        // INotifyPropertyChanged  implementations
+        // INotifyPropertyChanged implementations
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
         {
@@ -51,6 +51,7 @@ namespace FlightSimulator.Models
                         CsvParser.CreateCSV("anomaly_flight_with_headers.csv");
                         DataMap = CsvParser.Map;
                         DataLines = CsvParser.Lines;
+                        SetMostCorrelated();
                     }  
                 }
             }
@@ -101,7 +102,7 @@ namespace FlightSimulator.Models
             }
         }
 
-        private ArrayList correlatedFeatures { get; set; }
+        private ArrayList correlatedFeatures;
         public ArrayList CorrelatedFeatures
         {
             get
@@ -111,6 +112,7 @@ namespace FlightSimulator.Models
             set
             {
                 correlatedFeatures = value;
+                NotifyPropertyChanged("CorrelatedFeatures");
             }
         }
 
@@ -122,13 +124,22 @@ namespace FlightSimulator.Models
             dataLines = null;
             // parse xml for headers
             XMLParser xmlParser = new XMLParser();
-            Frequency = xmlParser.getFrequency();
+            Frequency = xmlParser.GetFrequency();
             xmlParser.Parse();
             headersList = xmlParser.Headers;
             csvParser = new CSVParser("C:/Users/NicoleS/Downloads/reg_flight.csv", headersList);
             csvParser.Parse();
             csvParser.CreateCSV("reg_flight_with_headers.csv");
+            CorrelatedFeatures = new ArrayList();
+       
             // also need to make correlation map
+            //SetMostCorrelated();
+        }
+
+        // set the map property according to the CSV parser's map
+        void setMap()
+        {
+
         }
 
         // correlation computin
@@ -183,9 +194,9 @@ namespace FlightSimulator.Models
         {
             float mostCorrelatedValue = 0;
             string mostCorrelatedName = "";
-            if (dataMap.ContainsKey(featureName))
+            if (CsvParser.Map.ContainsKey(featureName))
             {
-                ArrayList givenFeatue = dataMap[featureName];
+                ArrayList givenFeatue = CsvParser.Map[featureName];
                 // go over all the features and find the most correlative one
                 foreach (string hl in this.HeadersList)
                 {
@@ -196,11 +207,11 @@ namespace FlightSimulator.Models
                     }
                     else
                     {
-                        ArrayList currentFeatue = dataMap[hl];
+                        ArrayList currentFeatue = CsvParser.Map[hl];
                         float currentCorrelation = Cov(givenFeatue, currentFeatue, headersList.Count);
                         // chech if we get higher correlation for the current feature,
                         // if so, then upate the values
-                        if (mostCorrelatedValue < currentCorrelation)
+                        if (mostCorrelatedValue <= currentCorrelation)
                         {
                             mostCorrelatedValue = currentCorrelation;
                             mostCorrelatedName = hl;

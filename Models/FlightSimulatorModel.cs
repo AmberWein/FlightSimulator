@@ -143,11 +143,16 @@ namespace FlightSimulator.Models
                 Attributes = settings.HeadersList;
 
                 DataLines = settings.DataLines;
+               
 
             }
             else if (string.Compare(e.PropertyName, "HeadersList") == 0)
             {
                 Attributes = settings.HeadersList;
+            }
+            else if (string.Compare(e.PropertyName, "CorrelatedFeatures") == 0)
+            {
+               // CorrelatedFeatures = settings.CorrelatedFeatures;
             }
         }
         // Constructor
@@ -172,14 +177,50 @@ namespace FlightSimulator.Models
             airSpeed = 0;
             frequency = 10; // default value
             dllMap = new Dictionary<string, string>();
-           // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
-            dllMap.Add("Simple", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\SimpleDetect.dll");
-            dllMap.Add("Circular", "C:\\Users\\NicoleS\\source\\repos\\FlightSimulator\\plugins\\CircularDetect.dll");
+            string path = System.IO.Directory.GetCurrentDirectory();
+            //string filter = "*.dll";
+            // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
+            //string dllFileName = GetRelativePath("C:\\Users\\17amb\\source\\repos\\FlightSimulator\\bin\\Debug\\plugins\\SimpleDetect.dll");
+            dllMap.Add("Simple", GetRelativePath("SimpleDetect.dll"));
+            //dllFileName = GetRelativePath("C:\\Users\\17amb\\source\\repos\\FlightSimulator\\bin\\Debug\\plugins\\CircularDetect.dll");
+            dllMap.Add("Circular", GetRelativePath("CircularDetect.dll"));
             detectorsList = new List<string>() { "Choose detector", "Simple", "Circular", "Add detector" };
             currentDetector = DetectorsList[0];
             isDetectorOn = false;
             getDetector = false;
         }
+
+        string GetParentPath(string path)
+        {
+            try
+            {
+                System.IO.DirectoryInfo directoryInfo =
+                    System.IO.Directory.GetParent(path);
+
+                string parentFile = directoryInfo.FullName;
+                return parentFile;
+            }
+            catch (ArgumentNullException)
+            {
+                System.Console.WriteLine("Path is a null reference.");
+                return null;
+            }
+            catch (ArgumentException)
+            {
+                System.Console.WriteLine("Path is an empty string, " +
+                    "contains only white spaces, or " +
+                    "contains invalid characters.");
+                return null;
+            }
+        }
+
+        string GetRelativePath(string fileName)
+        {
+            string relativePath = GetParentPath(fileName);
+            relativePath += "\\plugins\\" + fileName;
+            return relativePath;
+        }
+
         // Dashboard properties
         private float yaw;
         public float Yaw
@@ -295,7 +336,7 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("Rudder");
             }
         }
-        //graph model
+        /****Graph Model*****/
 
         //the chosen atrribute from user to show graphs of
         string chosenAttribute;
@@ -306,6 +347,20 @@ namespace FlightSimulator.Models
             {
                 chosenAttribute = value;
                 NotifyPropertyChanged("ChosenAttribute");
+            }
+        }
+
+        //correlatef features for presenting graphs
+        private ArrayList correlatedFeatures { get; set; }
+        public ArrayList CorrelatedFeatures
+        {
+            get
+            {
+                return correlatedFeatures;
+            }
+            set
+            {
+                correlatedFeatures = value;
             }
         }
 

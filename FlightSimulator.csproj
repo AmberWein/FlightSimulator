@@ -385,7 +385,7 @@
     </Page>
     <Page Include="Views\GraphsView.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Views\InsertCSVView.xaml">
       <SubType>Designer</SubType>

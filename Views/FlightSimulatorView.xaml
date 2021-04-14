@@ -5,20 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FlightSimulator.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="857" d:DesignWidth="1371"
+      d:DesignHeight="1371" d:DesignWidth="1371"
       Title="FlightSimulatorView">
 
     <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="100" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <local:DashboardView x:Name="dash" Grid.Row="0" />
         <local:GraphsView x:Name="graphs" Grid.Row="2"/>
-        <local:MediaPlayerView x:Name="media" Grid.Row="2" Margin="0,1,0,-2.8"/>
+        <local:MediaPlayerView x:Name="media" Grid.Row="4" Margin="0,1,0,-2.8"/>
         <local:GearControlView x:Name="gear" Grid.Row="1" />
         <local:DetectorView x:Name="detector" Grid.Row="3"/>
     </Grid>

@@ -19,9 +19,6 @@ using OxyPlot.Annotations;
 using OxyPlot.Reporting;
 
 
-
-//using Syncfusion.UI.Xaml.Charts;
-
 using System.Collections.Generic;
 using System.Collections;
 using FlightSimulator.ViewModels;
@@ -30,6 +27,7 @@ using FlightSimulator.ViewModels;
 
 
 
+//        <oxy:PlotView x:Name="Plot2" Model="{Binding Path= PlotModelCorr}" Margin="0,9.667,10,-227.333" Grid.Row="3" Background="Blue" Height="90" Grid.RowSpan="4" ></oxy:PlotView>
 
 
 using System;
@@ -59,13 +57,20 @@ namespace FlightSimulator.Views
         {
             InitializeComponent();
            
-            CompositionTarget.Rendering += CompositionTargetRendering;
+                CompositionTarget.Rendering += CompositionTargetRendering;
+           
         }
 
         private void CompositionTargetRendering(object sender, EventArgs e)
         {
-            vm.UpdateModel();
-            vm.UpdateModelCorr();
+            if (vm.VM_ChosenAttribute != null)
+            {
+                vm.UpdateModel();
+           vm.UpdateModelCorr();
+            }
+
+
+            //      < oxy:PlotView x:Name = "Plot2" Model = "{Binding Path= PlotModelCorr}" Margin = "0,9.667,10,-227.333" Grid.Row = "3" Background = "Blue" Height = "90" Grid.RowSpan = "4" ></ oxy:PlotView >*/
         }
         public void SetVM(GraphsViewModel graphsVM)
         {
@@ -76,24 +81,22 @@ namespace FlightSimulator.Views
             {
                 Source = attributes
             };
-            atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);
-            SfChart chart = new SfChart() { Header = "Chart", Height = 200, Width = 200 };
-
-         
-            
+            atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);          
         }
     
     
         //fil list of attributes with info from viewModel
         private void FillList()
         {
-            if (vm == null) { }
-          
+            if (vm != null)
+            {
+
                 this.attributes = new List<String>();
                 foreach (var v in vm.VM_Attributes)
                 {
                     this.attributes.Add(v.ToString());
                 }
+            }
         }
 
 
@@ -101,7 +104,12 @@ namespace FlightSimulator.Views
 
         private void atrributesBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            vm.LoadFromStart();
+            if (vm.VM_ChosenAttribute != null)
+            {
+
+                vm.LoadFromStart();
+            }
+
            
         }
     }

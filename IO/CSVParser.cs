@@ -88,7 +88,7 @@ namespace FlightSimulator.IO
 
         public override void Parse()
         {
-            var reader = new StreamReader(File.OpenRead(filePath));
+            var reader = new StreamReader(File.OpenRead("C:/Users/17amb/source/repos/FlightSimulator/reg_flight.csv"));
             int i = 0;
             int j;
 

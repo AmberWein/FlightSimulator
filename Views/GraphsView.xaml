@@ -7,52 +7,29 @@
              xmlns:oxy="http://oxyplot.org/wpf"
              xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
              mc:Ignorable="d" 
-    
+            
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid Height="260" VerticalAlignment="Bottom">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="81*"/>
-            <ColumnDefinition Width="11*"/>
-            <ColumnDefinition Width="68*"/>
-        </Grid.ColumnDefinitions>
+     
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <syncfusion:ChartSeriesPanel Background="Blue" Margin="0,-125,0,0.667" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="3">
-            <syncfusion:ChartSeriesPanel.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </syncfusion:ChartSeriesPanel.RenderTransform>
-            <syncfusion:ScatterSeries Interior="#4A4A4A" Background="Green" XBindingPath="Year" Label="Series"
 
-ItemsSource="{Binding Levels}" YBindingPath="India"
-
-ScatterHeight="15" ScatterWidth="15">
-
-                <Syncfusion:ScatterSeries.Trendlines>
-
-                    <syncfusion:Trendline Label="Trend" />
-
-                </Syncfusion:ScatterSeries.Trendlines>
-
-            </syncfusion:ScatterSeries>
-        </syncfusion:ChartSeriesPanel>
-        <oxy:PlotView x:Name="Plot1" Model="{Binding Path= PlotModel}" Margin="0,9.667,10,-227.333" Grid.Row="2" Background="AliceBlue" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+        <oxy:PlotView x:Name="Plot1" Model="{Binding Path= PlotModel}" Grid.Row="5" Background="GreenYellow" Grid.RowSpan="6"  Height="90" ></oxy:PlotView>
         <Syncfusion:ComboBoxAdv x:Name="atrributesBox" VerticalAlignment="Top" Margin="70,-130,-50,0"
                 SelectedValue="{Binding VM_ChosenAttribute}" HorizontalAlignment="Left" Width="780" Height="20" Syncfusion:SkinManager.ActiveColorScheme="Purple" SelectionChanged="atrributesBox_SelectionChanged" Grid.ColumnSpan="3">
 
         </Syncfusion:ComboBoxAdv>
+        <oxy:PlotView x:Name ="Plot2" Model ="{Binding Path=PlotModelCorr}" Margin = "0,9.667,10,-227.333" Grid.Row = "3" Background ="BlueViolet"  Height="90" Grid.RowSpan = "4" ></oxy:PlotView>
 
-        <oxy:PlotView x:Name="PlotModelCorr" Model="{Binding Path= PlotModelCorr}" Margin="10,9.667,10,10" Grid.Row="2" Background="BlueViolet" Grid.ColumnSpan="3">
-        </oxy:PlotView>
+
 
     </Grid>
 </UserControl>

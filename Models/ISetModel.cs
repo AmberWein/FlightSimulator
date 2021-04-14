@@ -13,6 +13,7 @@ namespace FlightSimulator.Models
         Dictionary<string, ArrayList> DataMap { get; set; }
         ArrayList DataLines { get; set; }
         CSVParser CsvParser { get; }
+        
         ArrayList CorrelatedFeatures { get; set; }
         double Frequency { get; set; }
     }
