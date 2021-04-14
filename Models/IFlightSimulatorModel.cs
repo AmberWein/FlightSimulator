@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using OxyPlot;
+using OxyPlot.Annotations;
+using OxyPlot.Axes;
 
 namespace FlightSimulator.Models
 {
@@ -26,8 +29,17 @@ namespace FlightSimulator.Models
         float Rudder { set; get; }
         float Aileron { set; get; }
         float Elevator { set; get; }
+       
         // initialize all dashboard properties
         void InitDashboardData();
+
+
+        // graphs properties
+
+        string ChosenAttribute { set; get; }
+
+        ArrayList Attributes { set; get; }
+
         // properties for dll detector
         Dictionary<string, string> DllMap { get; set; }
         List<string> DetectorsList { get; set; }
@@ -38,8 +50,7 @@ namespace FlightSimulator.Models
 
         bool ValidateDLLPath(string path);
 
-
-
         bool GetDetector { get; set; }
+
     }
 }

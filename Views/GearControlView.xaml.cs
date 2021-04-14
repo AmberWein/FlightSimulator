@@ -11,12 +11,10 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class GearControlView : UserControl { 
           private GearControlViewModel vm;
-        private Point firstPoint = new Point();
 
         public GearControlView()
         {
             InitializeComponent();
-          //  DataContext = (Application.Current as App).ControlVM;
         }
 
         // Setting the control board view model

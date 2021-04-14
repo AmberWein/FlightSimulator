@@ -4,7 +4,20 @@ using System.Collections;
 using System.Threading;
 using System.ComponentModel;
 using FlightSimulator.Communication;
+using OxyPlot;
+using OxyPlot.Series;
+using OxyPlot.Axes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+//using FlightSimulator.Annotations;
 
+
+//C:\Users\user\Desktop\reg_flight.csv
 namespace FlightSimulator.Models
 {
     class FlightSimulatorModel : IFlightSimulatorModel
@@ -33,6 +46,13 @@ namespace FlightSimulator.Models
                 // this should only occur once, as csv file will be parsed within the SetModel
                 dataMap = value;
             }
+        }
+        private ArrayList attributes;
+
+        public ArrayList Attributes
+        {
+            get { return attributes; }
+            set { attributes = value; }
         }
         private ArrayList dataLines;
         public ArrayList DataLines
@@ -115,10 +135,19 @@ namespace FlightSimulator.Models
             if (string.Compare(e.PropertyName, "DataMap") == 0)
             {
                 DataMap = settings.DataMap;
+               
+
             }
             else if (string.Compare(e.PropertyName, "DataLines") == 0)
             {
+                Attributes = settings.HeadersList;
+
                 DataLines = settings.DataLines;
+
+            }
+            else if (string.Compare(e.PropertyName, "HeadersList") == 0)
+            {
+                Attributes = settings.HeadersList;
             }
         }
         // Constructor
@@ -266,7 +295,21 @@ namespace FlightSimulator.Models
                 NotifyPropertyChanged("Rudder");
             }
         }
-        
+        //graph model
+
+        //the chosen atrribute from user to show graphs of
+        string chosenAttribute;
+        public string ChosenAttribute
+        {
+            get { return chosenAttribute; }
+            set
+            {
+                chosenAttribute = value;
+                NotifyPropertyChanged("ChosenAttribute");
+            }
+        }
+
+
         // initialize dashboard data
         public void InitDashboardData()
         {
@@ -311,7 +354,7 @@ namespace FlightSimulator.Models
                 //client.Send(DataLines[lineNumber].ToString());
                 Timer += 1.0/Frequency;
                 // if we finished to read all lines
-                if (Timer >= FinishTime)
+                if (Timer >= FinishTime) //change to > ?
                 {
                     IsPlay = false;
                     InitDashboardData();
@@ -321,6 +364,7 @@ namespace FlightSimulator.Models
                 System.Threading.Thread.Sleep(sleepingTime);
             }
         }
+
         // Anomalies Detector Properties
         private string currentDetector;
         public string CurrentDetector
@@ -390,5 +434,6 @@ namespace FlightSimulator.Models
         {
             return Program.IsValidDLL(path);
         }
+
     }
 }
