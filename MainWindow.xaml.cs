@@ -42,6 +42,7 @@ namespace FlightSimulator
             set { flightSimVM = value; }
         }
         private bool isFirstPage;
+        private bool isFirstTime;
         //public MainWindow()
         /*public MainWindow(SetViewModel sVM, FlightSimulatorViewModel fVM)
         {
@@ -59,7 +60,7 @@ namespace FlightSimulator
         public MainWindow(SetViewModel sVM, FlightSimulatorViewModel fVM)
         {
             isFirstPage = true;
-
+            isFirstTime = true;
             setVM = sVM;//added 
             flightSimVM = fVM;//added
             pages = new List<Page>();
@@ -84,10 +85,11 @@ namespace FlightSimulator
                 NextButton.Content = "Next";
             }
             pgIndex++;
-            /*if (pgIndex == 1)
+            if (pgIndex == 1 && isFirstTime)
             {
+                isFirstTime = false;
                 NextButton.IsEnabled = false;
-            }*/
+            }
             // turn on back button
             if (!BackButton.IsEnabled)
             {

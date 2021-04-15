@@ -33,8 +33,8 @@
                 <TextBlock Text="Altimeter" Margin="0,0,0,10" FontSize="16" FontWeight="DemiBold"/>
             </syncfusion:SfCircularGauge.GaugeHeader>
             <syncfusion:SfCircularGauge.Scales>
-                <syncfusion:CircularScale StartValue="0" EndValue ="1000">
-                    <syncfusion:CircularScale.Pointers>
+                    <syncfusion:CircularScale RadiusFactor="1" RimStrokeThickness="6" StartValue="0" EndValue ="1000" Interval="200">
+                        <syncfusion:CircularScale.Pointers>
                         <syncfusion:CircularPointer PointerType="NeedlePointer" Value="{Binding VM_Altitude}"/>
                     </syncfusion:CircularScale.Pointers>
                 </syncfusion:CircularScale>
@@ -47,9 +47,9 @@
                 <TextBlock Text="Airspeed" Margin="0,0,0,10" FontSize="16" FontWeight="DemiBold"/>
             </syncfusion:SfCircularGauge.GaugeHeader>
             <syncfusion:SfCircularGauge.Scales>
-                    <syncfusion:CircularScale RimStroke="#FF937193">
-                    <syncfusion:CircularScale.Pointers>
-                        <syncfusion:CircularPointer Value="{Binding VM_AirSpeed}"/>
+                    <syncfusion:CircularScale RimStroke="#FF937193" RadiusFactor="1" RimStrokeThickness="6" Interval="20">
+                        <syncfusion:CircularScale.Pointers>
+                            <syncfusion:CircularPointer Value="{Binding VM_AirSpeed}"/>
                     </syncfusion:CircularScale.Pointers>
                 </syncfusion:CircularScale>
             </syncfusion:SfCircularGauge.Scales>
@@ -59,9 +59,10 @@
                                     Height="120" Grid.RowSpan="2" Width="270" Grid.Row="0" Grid.Column="2">
             <syncfusion:SfCircularGauge.Scales>
 
-                <syncfusion:CircularScale x:Name="OrientationScale" SweepAngle="360" StartAngle="270" ShowLastLabel="False" StartValue="0" EndValue="360" 
-                                          Interval="90" RimStroke="LightGray" MinorTicksPerInterval="1" 
+                    <syncfusion:CircularScale x:Name="OrientationScale" RadiusFactor="0.7" LabelPosition="Outside" SweepAngle="360" StartAngle="270" ShowLastLabel="False" StartValue="0" EndValue="360" 
+                                          Interval="90" RimStroke="DarkGray" MinorTicksPerInterval="1" RimStrokeThickness="6"
                                           LabelCreated="OrientaitionGauge_LabelCreated">
+                       
                     <syncfusion:CircularScale.Pointers>
                         <syncfusion:CircularPointer Value="{Binding VM_Orientation}"/>
                     </syncfusion:CircularScale.Pointers>

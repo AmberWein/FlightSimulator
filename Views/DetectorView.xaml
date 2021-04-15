@@ -11,7 +11,7 @@
         <Grid Height="200" >
             <ComboBox x:Name="DetectorComboBox" ItemsSource="{Binding VM_DetectorsList}" HorizontalAlignment="Center" Margin="78,0,72,18" VerticalAlignment="Bottom" Width="150" Height="30"
                   SelectedValue="{Binding VM_CurrentDetector}" Background="CadetBlue"/>
-            <Button Content="Detect Anomalies" Button.Background="CadetBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" FontSize="18" FontWeight="ExtraBold" FontStretch="UltraExpanded"  IsEnabled="{Binding VM_IsDetectorOn}" Height="90"/>
+            <Button x:Name="DetectButton" Click="DetectButton_Click" Content="Detect Anomalies" Button.Background="CadetBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" FontSize="18" FontWeight="ExtraBold" FontStretch="UltraExpanded"  IsEnabled="{Binding VM_IsDetectorOn}" Height="90"/>
 
 
         </Grid>

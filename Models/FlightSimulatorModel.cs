@@ -5,10 +5,6 @@ using System.Threading;
 using System.ComponentModel;
 using FlightSimulator.Communication;
 
-
-
-
-//C:\Users\user\Desktop\reg_flight.csv
 namespace FlightSimulator.Models
 {
     public class FlightSimulatorModel : IFlightSimulatorModel
@@ -169,7 +165,7 @@ namespace FlightSimulator.Models
             orientation = 0;
             altitude = 0;
             airSpeed = 0;
-            frequency = 10; // default value
+            frequency = set.Frequency; // default value
             dllMap = new Dictionary<string, string>();
             // dllMap.Add("Simple", "/plugins/SimpleDetect.dll");
             dllMap.Add("Simple", GetRelativePath("plugins","SimpleDetect.dll"));
@@ -380,9 +376,9 @@ namespace FlightSimulator.Models
             CurrentDetector = DetectorsList[0];
             int sleepingTime, lineNumber;
 
-            /*int sign= client.Connect();
+            int sign= client.Connect();
             if (sign !=1)
-                return;*/
+                return;
             while (isPlay)
             {
                 
@@ -399,7 +395,7 @@ namespace FlightSimulator.Models
                 Throttle = float.Parse(DataMap["throttle"][lineNumber].ToString());
                 Aileron = float.Parse(DataMap["aileron"][lineNumber].ToString());
                 Elevator= float.Parse(DataMap["elevator"][lineNumber].ToString());
-                //client.Send(DataLines[lineNumber].ToString());
+                client.Send(DataLines[lineNumber].ToString());
                 Timer += 1.0/Frequency;
                 // if we finished to read all lines
                 if (Timer >= FinishTime) //change to > ?
@@ -451,9 +447,17 @@ namespace FlightSimulator.Models
         }
         public void GetAnomalies()
         {
+            string p1 = GetParentPath("reg_flight_with_headers.csv");
+            p1 = p1.Replace("\\", "/");
+            string pathToLearn = p1 + "/reg_flight_with_headers.csv";
+
+            string p2 = GetParentPath("anomaly_flight_with_headers.csv");
+            p2 = p2.Replace("\\", "/");
+            string pathToDetect= p2 + "/anomaly_flight_with_headers.csv";
             string dllPath;
             DllMap.TryGetValue(CurrentDetector, out dllPath);
-            bool madeReport = Program.OperateDLL(dllPath);
+            //bool madeReport = Program.OperateDLL(dllPath, pathToLearn, pathToDetect);
+            bool madeReport = Program.OperateDLL(dllPath, pathToLearn, pathToDetect);
             if (madeReport)
             {
                 IsDetectorOn = true;

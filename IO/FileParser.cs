@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace FlightSimulator.IO
@@ -43,6 +45,27 @@ namespace FlightSimulator.IO
             // backup validity check
             if (IsValidPath(this.filePath) == false)
                 return;
+        }
+        //public static Dictionary<string, ArrayList> GetAnomalies(string path)
+        public static string GetAnomalies(string path)
+        {
+            string extension = System.IO.Path.GetExtension(path);
+            if (extension == null)
+                return ""; // meaning didn't happen
+            if (String.Compare(extension.ToLower(), ".txt") != 0)
+                return "";
+            string text = "";
+            string line;
+            var reader = new StreamReader(path);
+            while (!reader.EndOfStream)
+            {
+                line = reader.ReadLine();
+                text += line;
+                text += "\n";
+            }
+            return text;
+              reader.Dispose();
+
         }
     }
 }
