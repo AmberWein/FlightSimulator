@@ -39,10 +39,10 @@ Make sure to save it in FlightSimulator\Files folder.
 1. Visual Studio 2019
 2. Install FlightGear 2020.3.6 on your computer
 3. Recompile dll on your own native environment
-4. Import OxyPlot.Wpf in appropriate files to view and change the graphs.
-5. Import Syncfusion.SfGauge.WPF and Syncfusion.Licensing NuGet packages to present and make changes the dashboard and the graphs
+4. OxyPlot.Wpf NuGet package to change and the graphs.
+5. Syncfusion.SfGauge.WPF and Syncfusion.Licensing NuGet packages to present and make changes the dashboard and the graphs
 6. Execute the solution
-7. Visual Studio 2019
+7. Visual Studio 2019 or diffrent compatible IDE for C#
 8. The latest version of .Net framework 4.7.2
 9. In order to run a different dll from our built in dll's, make sure to implement the following methods:
 void Creat(), void Detect() and void Free().
