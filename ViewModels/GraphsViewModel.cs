@@ -352,7 +352,7 @@ namespace FlightSimulator.ViewModels
 
 
                 }
-\                PlotModelReg.Series.Add(recentPoints);
+                PlotModelReg.Series.Add(recentPoints);
                 PlotModelReg.InvalidatePlot(true);
             }
 
