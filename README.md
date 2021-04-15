@@ -9,11 +9,11 @@ Each one is for a different purpose:
 1. Media player- allows the user to control both the speed of the playback and the time reference. Meaning, play playback of the flight, pause it or stop the simulation, forward or backward the track and jump to a different point of time.
 2. Dashboard- displays some aspects of the flight such as the altimeter, airspeed, orientation of the flight and measures of pitch, roll and yaw.
 3. Graphs- allows the user to evaluate the different aspects of the flight:
- * a selected attribute from an attributes box
- * the most correlated attribute to the one we selected.
+ * displays a time series graph of a selected attribute from an attributes box, updated continuously during the flight
+ * a second time series graph displaying the data of most correlated attribute to the one we selected.
  * the linear regression between the two attributes from the first two graphs. 
- * anomalies from the flight in relation to the two attributes.
-4. Gear control- includind a joystick to inspect the direction that the plane is heading and sliders to visualize the changes of the throttle and rudder. 
+ * scatter series showing the most rescent two dimensional values of the regression we evaluated.
+4. Gear control- includind a joystick to inspect the direction that the plane is heading and sliders to visualize the changes of the throttle and rudder and a knob moving horizontally and verticly with changes of elevator and aileron values. 
 5. DLL controller- give an option to upload a dll anomaly detector to present anomalies
 
 ## Organization of the Project:
