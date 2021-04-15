@@ -44,10 +44,7 @@ Make sure to save it in FlightSimulator\Files folder.
 6. Execute the solution
 7. Visual Studio 2019
 8. In order to run a different dll from our built in dll's, make sure to implement the following methods:
-Make sure that the uploaded algorithm has a void Creat(), void Detect() and void Free() methods.
-You should also make an anomaly file report name "AnomalieReport.txt" in "FlightSimulator\bin\Debug" directory.
-This file needs to open with "Anomalies report:" line and shows each pair of feature as follow:
-first name+second name,number of line
+void Creat(), void Detect() and void Free().
 
 ## Manual:
 1. Download the repository.
@@ -57,7 +54,8 @@ first name+second name,number of line
 5. Make sure that the .dll file name is exactly the same as the class's name of the uploaded algorithm.
 6. Upload your CSV file and press the "Next" button.
 7. The simulation is on, feel free to check it out and use the different features!
-Notice: in any case you want to go back one page, you can press the "Back" button on your left hand side.
+Moreover, in any case you want to go back one page, you can press the "Back" button on your left hand side.
+Notice: please be patient after choosing an anomalies detector. It takes some time to analyze the data. You'll know were ready when the button becomes enabled !
 
 ## UML diagram:
 ![image](https://user-images.githubusercontent.com/63461543/114775428-f6135d80-9d79-11eb-817c-cee1d28668d7.png)
