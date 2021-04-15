@@ -7,6 +7,7 @@ using System.Collections;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using System.Threading;
 
 
 namespace FlightSimulator.ViewModels
@@ -27,12 +28,10 @@ namespace FlightSimulator.ViewModels
             this.model = m;
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
-                if (String.Compare(e.PropertyName, "Attributes") == 0)
-                {
-                    //
-                }
+
                 OnPropertyChanged("VM_" + e.PropertyName);
             };
+
             ///create and set the graphs
             PlotModel = new PlotModel();
             SetUpModel();
@@ -40,7 +39,29 @@ namespace FlightSimulator.ViewModels
             SetUpModelCorr();
             PlotModelReg = new PlotModel();
             SetUpModelReg();
+            model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
+            {
+                if (e.PropertyName == "Timer" && model.IsPlay == true)//we want to update graph for each sec passing. dont worry, we wont miss points - we have a loop to find all points sonce last update
+                {
+                    if (model.Timer == (int)model.Timer) //this is a start of second
+                    {
+                        UpdateModel();
+                        UpdateModelCorr();
+                    }
+                }
+            };
+             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
+             {
+                 if (e.PropertyName == "IsPlay")
+                {
+                    if (!(model.IsPlay)) //handle an event of user pressing stop: we want to clean graphs
+                    {
+                         VM_ChosenAttribute = null;
 
+                    }
+                }
+
+            };
         }
      
         private string chosenAttribute;
@@ -83,13 +104,8 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        public void onPropertyChanged(string propName)
-        {
-            if (PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
+        
+      
 
         private PlotModel plotModel;
         public PlotModel PlotModel
@@ -115,6 +131,13 @@ namespace FlightSimulator.ViewModels
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public void onPropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
         }
 
 
@@ -144,11 +167,7 @@ namespace FlightSimulator.ViewModels
             {
                 PlotModelCorr.Title = "Correlated Feature: Not Found";
             }
-            else
-            {
-                PlotModelCorr.Title = correlated_feature;
-
-            }
+           
            
             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "correlated feature" };
             PlotModelCorr.Axes.Add(valueAxis);
@@ -161,11 +180,7 @@ namespace FlightSimulator.ViewModels
             {
                 PlotModel.Title = "Choose Attribute to Display Graph";
             }
-            else
-            {
-                PlotModel.Title = VM_ChosenAttribute;
-
-            }
+          
             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = VM_ChosenAttribute };
              PlotModel.Axes.Add(valueAxis);
 
@@ -201,6 +216,9 @@ namespace FlightSimulator.ViewModels
             PlotModelCorr.Series.Clear();
 
 
+            PlotModel.Title = VM_ChosenAttribute;
+
+
             //add
             PlotModel.Series.Add(lineSerie);
             PlotModelCorr.Series.Add(lineSerie_c);
@@ -231,6 +249,8 @@ namespace FlightSimulator.ViewModels
                     PlotModel.InvalidatePlot(true);
                 if (correlated_feature != "") //not all attributes have corrlated features
                 {
+                    PlotModelCorr.Title = correlated_feature;
+
                     //add points to the corralated feature graph
                     foreach (var d in Y_c)
                     {
@@ -248,6 +268,7 @@ namespace FlightSimulator.ViewModels
 
                 PlotModelCorr.InvalidatePlot(true);
             }
+      
             
         }
           //updating the model throughout the flight ob a regular basis
@@ -255,27 +276,34 @@ namespace FlightSimulator.ViewModels
           public void UpdateModel()
 
           {
-            if (VM_ChosenAttribute != null)
-            {
-                List<float> Y = new List<float>();
-                //create the val of new point
-                Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * model.Timer)].ToString()));
-                foreach (var d in Y)
+          
+                if (VM_ChosenAttribute != null )
                 {
-                    if (lineSerie != null)
-                    {
-                        //add point to serie
-                        lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
-                    }
-                    else
-                    {
-                        PlotModel.Series.Add(lineSerie);
-                    }
+                    List<float> Y = new List<float>();
+                //create the val of new point
+                for (double i =  (model.Timer - 1.0); i <= model.Timer; i += 0.1) //(model.Timer - 1.0) is start of past sec since we last updated - find point since
+                {
+                    Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * i)].ToString()));
                 }
-                //apply the changes in series
-                PlotModel.InvalidatePlot(true);
-               
-            }
+                    foreach (var d in Y)
+                    {
+                        if (lineSerie != null)
+                        {
+                            //add point to serie
+                            lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
+                        }
+                        else
+                        {
+                            PlotModel.Series.Add(lineSerie);
+                        }
+                    }
+                    //apply the changes in series
+                    PlotModel.InvalidatePlot(true);
+                }
+                
+
+
+            
                 
               
           }
@@ -283,13 +311,19 @@ namespace FlightSimulator.ViewModels
           //updating the model of corralated attribute throughout the flight on a regular basis
           public void UpdateModelCorr()
 
-          {           
+          {
+            if (VM_ChosenAttribute != null)
+            {
                 List<float> Y = new List<float>();
             if (correlated_feature != "")
             {
-                //add current point to the series
-                Y.Add(float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()));
+                    for (double i = (model.Timer - 1.0); i <= model.Timer; i += 0.1) //(model.Timer - 1.0) is start of past sec since we last updated - find point since
+                    {
+                        //add current point to the series
+                        Y.Add(float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * i)].ToString()));
+                    }
                 foreach (var d in Y)
+
                 {
                     if (lineSerie_c != null)
                     {
@@ -303,7 +337,7 @@ namespace FlightSimulator.ViewModels
                 //apply the changes in series
                 PlotModelCorr.InvalidatePlot(true);
             }
-                 
+               }  
           }
 
 
@@ -393,6 +427,9 @@ namespace FlightSimulator.ViewModels
 
 
         }
+
+
+      
 
 
 

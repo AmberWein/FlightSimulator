@@ -101,7 +101,6 @@ namespace FlightSimulator.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-        //model.PropertyChanged += DashboardPropertyChange;
     }
     
 }

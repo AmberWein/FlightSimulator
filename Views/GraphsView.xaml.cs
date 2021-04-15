@@ -1,35 +1,11 @@
 
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-//using OxyPlot.Axes;
-using OxyPlot.Annotations;
-using OxyPlot.Reporting;
-
-
-using System.Collections.Generic;
-using System.Collections;
 using FlightSimulator.ViewModels;
-
-﻿using System.Windows.Controls;
-using System;
 using System.Diagnostics;
-using System.Windows;
-using System.Windows.Media;
-using Syncfusion.UI.Xaml.Charts;
-
 namespace FlightSimulator.Views
 {
     /// <summary>
@@ -78,9 +54,8 @@ namespace FlightSimulator.Views
             }
             if (vm.VM_ChosenAttribute != null)
             {
-                //prob need to do some threading
-               vm.UpdateModel();
-                 vm.UpdateModelCorr();
+                // vm.UpdateModelCorr();
+
                 //update every 5 sec
                 if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
                 {
@@ -123,8 +98,7 @@ namespace FlightSimulator.Views
         {
             if (vm.VM_ChosenAttribute != null)
             {
-
-                 vm.LoadFromStart();
+                vm.LoadFromStart();
                 vm.LoadRegModel();
             }
 

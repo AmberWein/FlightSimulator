@@ -5,10 +5,6 @@ using System.Threading;
 using System.ComponentModel;
 using FlightSimulator.Communication;
 
-//using FlightSimulator.Annotations;
-
-
-//C:\Users\user\Desktop\reg_flight.csv
 namespace FlightSimulator.Models
 {
     public class FlightSimulatorModel : IFlightSimulatorModel
