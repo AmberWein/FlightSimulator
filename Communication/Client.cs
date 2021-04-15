@@ -27,6 +27,8 @@ namespace FlightSimulator.Communication
         {
             try
             {
+                if (sender.Connected)
+                    return 1;
                 sender.Connect(localEndPoint);
                 if (sender.Connected)
                     return 1;
