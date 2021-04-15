@@ -5,17 +5,6 @@ using System.Threading;
 using System.ComponentModel;
 using FlightSimulator.Communication;
 
-using OxyPlot;
-using OxyPlot.Series;
-using OxyPlot.Axes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Linq;
-using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
 
 
 
