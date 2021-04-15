@@ -17,7 +17,7 @@ namespace FlightSimulator.Communication
         public Client()
         {
             ipAddress = IPAddress.Parse("127.0.0.1");
-            port = 5400;
+            port = 5404;
             localEndPoint = new IPEndPoint(ipAddress, port);
             // try?
             sender = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);

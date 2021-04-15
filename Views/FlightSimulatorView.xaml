@@ -5,27 +5,27 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FlightSimulator.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="900"
+      d:DesignHeight="630" d:DesignWidth="998"
       Title="FlightSimulatorView">
 
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="4"/>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="250"/>
-            <RowDefinition Height="200" />
-            <RowDefinition Height="400"/>
-
-            <RowDefinition Height="4"/>
+            <RowDefinition Height="170"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="115"/>
+            <RowDefinition Height="115"/>
+            <RowDefinition Height="180"/>
         </Grid.RowDefinitions>
-        <local:DashboardView x:Name="dash" Grid.Row="2" HorizontalAlignment="Left" Loaded="dash_Loaded" Width="400" />
-        <local:GraphsView x:Name="graphs" Grid.Row="3"/>
-        <local:MediaPlayerView x:Name="media" Grid.Row="4" VerticalAlignment="Bottom" Margin="10,0,-10,682" Loaded="media_Loaded"/>
-        <local:GearControlView x:Name="gear" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,0,99"/>
-        <local:DetectorView x:Name="detector" Grid.Row="3" Margin="100,26,-100,159"/>
-        <local:DetectorView HorizontalAlignment="Left" Height="125" Margin="210,66,0,0" Grid.Row="1" VerticalAlignment="Top" Width="210"/>
-        <local:MediaPlayerView HorizontalAlignment="Left" Margin="295,91,-135,0" Grid.Row="3" Grid.RowSpan="2" VerticalAlignment="Top"/>
-        <local:DetectorView HorizontalAlignment="Left" Margin="515,91,0,0" Grid.Row="1" VerticalAlignment="Top" Loaded="DetectorView_Loaded"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="630"/>
+            <ColumnDefinition Width="368"/>
+        </Grid.ColumnDefinitions>
+        <local:DashboardView x:Name="dash" Grid.RowSpan="2" Grid.Row="0" Grid.Column="0" />
+        <local:GraphsView x:Name="graphs" Grid.Row="2" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <local:MediaPlayerView x:Name="media" Grid.Row="5" Grid.ColumnSpan="2" />
+        <local:GearControlView x:Name="gear" Grid.Row="1" Grid.Column="1"/>
+        <local:DetectorView x:Name="detector" Grid.Row="0" Grid.Column="1"/>
     </Grid>
 </Page>

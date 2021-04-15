@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:FlightSimulator"
 		xmlns:Views="clr-namespace:FlightSimulator.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="900">
+        Title="MainWindow" Height="700" Width="1000">
     <Grid>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,0,-0.4,100.4"/>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0.4,10,0.4,60" Height="630" Width="998"/>
 
-        <Button x:Name="NextButton" Content="Start" Click="NextButton_Click" HorizontalAlignment="Left" Margin="1045,720,0,0" VerticalAlignment="Top" Width="95" Height="25" />
-        <Button x:Name="BackButton" Content="Back" Click="BackButton_Click" HorizontalAlignment="Left" Margin="60,710,0,0" VerticalAlignment="Top" Width="115" Height="25" Visibility="Hidden"/>
+        <Button x:Name="NextButton" Content="Start" Click="NextButton_Click" HorizontalAlignment="Left" Margin="815,620,0,0" VerticalAlignment="Top" Width="115" Height="25" />
+        <Button x:Name="BackButton" Content="Back" Click="BackButton_Click" HorizontalAlignment="Left" Margin="85,620,0,0" VerticalAlignment="Top" Width="115" Height="25" />
     </Grid>
 
 </Window>
