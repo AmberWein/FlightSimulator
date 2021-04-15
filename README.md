@@ -59,3 +59,4 @@ Notice: please be patient after choosing an anomalies detector. It takes some ti
 
 ## UML diagram:
 ![image](https://user-images.githubusercontent.com/63461543/114775428-f6135d80-9d79-11eb-817c-cee1d28668d7.png)
+![image](https://user-images.githubusercontent.com/55787064/114929298-46eb8a80-9e3c-11eb-84cc-3bebbdc15ecb.png)
