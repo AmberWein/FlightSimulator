@@ -39,7 +39,7 @@ namespace FlightSimulator.ViewModels
                 }
                 OnPropertyChanged("VM_" + e.PropertyName);
             };
-
+            ///create and set the graphs
             PlotModel = new PlotModel();
             SetUpModel();
             PlotModelCorr = new PlotModel();
@@ -84,7 +84,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 model.CorrelatedFeatures = value;
-                onPropertyChanged("VM_Attributes");
+                onPropertyChanged("VM_CorrelatedFeatures");
 
             }
         }
@@ -146,23 +146,43 @@ namespace FlightSimulator.ViewModels
         //Set up the model for corralated features
         private void SetUpModelCorr()
         {
+            if(correlated_feature == null || correlated_feature == "")
+            {
+                PlotModelCorr.Title = "Correlated Feature: Not Found";
+            }
+            else
+            {
+                PlotModelCorr.Title = correlated_feature;
+
+            }
            
             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "correlated feature" };
             PlotModelCorr.Axes.Add(valueAxis);
 
         }
+        //C:\Users\user\Desktop\reg_flight.csv
         private void SetUpModel()
         {
-            
-             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = VM_ChosenAttribute };
+            if (VM_ChosenAttribute == null)
+            {
+                PlotModel.Title = "Choose Attribute to Display Graph";
+            }
+            else
+            {
+                PlotModel.Title = VM_ChosenAttribute;
+
+            }
+            var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = VM_ChosenAttribute };
              PlotModel.Axes.Add(valueAxis);
 
         }
         //Set up the model for regression line
         private void SetUpModelReg()
         {
-           
-             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
+
+            PlotModelReg.Title = "Linear Regression";
+
+             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Y" };
              PlotModelReg.Axes.Add(valueAxis);
         }
 
@@ -170,6 +190,7 @@ namespace FlightSimulator.ViewModels
         public void LoadFromStart()
 
         {
+            //should do this calculation outside
             foreach (KeyValuePair<string, string> v in VM_CorrelatedFeatures)
             {
                 if (v.Key == VM_ChosenAttribute)
@@ -179,7 +200,7 @@ namespace FlightSimulator.ViewModels
 
                 }
             }
-            //clean previous
+            //clean previous feature graphs.user has chosen a fearture and we have to restart the graphs from the start
             lineSerie.Points.Clear();
             PlotModel.Series.Clear();
             lineSerie_c.Points.Clear();
@@ -216,6 +237,7 @@ namespace FlightSimulator.ViewModels
                     PlotModel.InvalidatePlot(true);
                 if (correlated_feature != "") //not all attributes have corrlated features
                 {
+                    //add points to the corralated feature graph
                     foreach (var d in Y_c)
                     {
                         if (lineSerie_c != null)
@@ -242,11 +264,13 @@ namespace FlightSimulator.ViewModels
             if (VM_ChosenAttribute != null)
             {
                 List<float> Y = new List<float>();
+                //create the val of new point
                 Y.Add(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * model.Timer)].ToString()));
                 foreach (var d in Y)
                 {
                     if (lineSerie != null)
                     {
+                        //add point to serie
                         lineSerie.Points.Add(new DataPoint(DateTimeAxis.ToDouble(model.Timer), d));
                     }
                     else
@@ -254,7 +278,9 @@ namespace FlightSimulator.ViewModels
                         PlotModel.Series.Add(lineSerie);
                     }
                 }
+                //apply the changes in series
                 PlotModel.InvalidatePlot(true);
+               
             }
                 
               
@@ -267,6 +293,7 @@ namespace FlightSimulator.ViewModels
                 List<float> Y = new List<float>();
             if (correlated_feature != "")
             {
+                //add current point to the series
                 Y.Add(float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()));
                 foreach (var d in Y)
                 {
@@ -279,6 +306,7 @@ namespace FlightSimulator.ViewModels
                         PlotModelCorr.Series.Add(lineSerie_c);
                     }
                 }
+                //apply the changes in series
                 PlotModelCorr.InvalidatePlot(true);
             }
                  
@@ -290,6 +318,7 @@ namespace FlightSimulator.ViewModels
         public void UpdateModelReg()
 
         {
+            //should do this calculation outside
             foreach (KeyValuePair<string, string> v in VM_CorrelatedFeatures)
             {
                 if (v.Key == VM_ChosenAttribute)
