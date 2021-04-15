@@ -27,10 +27,10 @@ Our project is organized in seven folders:
 7. Files- contains playback_small.xml and reg_flight.csv files
 
 ## Required files:
-1. reg_flight.csv - for a valid flight data.
-Make sure to save it in FlightSimulator\bin\Debug folder
+1. reg_flight_with.csv - for a valid flight data with headers.
+Make sure to save it in C:\Users\Public folder.
 2. anomaly_flight.csv - for an anomaly flight data.
-Make sure to save it in FlightSimulator\Files folder.
+Make sure to save it in C:\Users\Public folder.
 4. play_back.xml - contains names of different features.
 Make sure to save it in FlightSimulator\Files folder.
 6. Optional: add a dll file to FlightSimulator\plugins folder.
