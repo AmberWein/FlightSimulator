@@ -19,13 +19,13 @@
                 <RowDefinition Height="auto"/>
 
             </Grid.RowDefinitions>
-            <oxy:PlotView x:Name="Plot1" Model="{Binding Path= PlotModel}" Grid.Row="3" Background="#FF627292" HorizontalAlignment="Right"  Height="240" Width="300" Margin="0,32,-26,25.667" />
+            <oxy:PlotView x:Name="Plot1" Model="{Binding Path= PlotModel, Mode=OneTime}" Grid.Row="3" Background="#FF627292" HorizontalAlignment="Right"  Height="240" Width="300" Margin="0,32,-26,25.667" />
             <Syncfusion:ComboBoxAdv x:Name="atrributesBox" VerticalAlignment="Top" FontSize="30"
                 SelectedValue="{Binding VM_ChosenAttribute}" HorizontalAlignment="Stretch"  Width="800" Height="40" Syncfusion:SkinManager.ActiveColorScheme="Purple" SelectionChanged="atrributesBox_SelectionChanged" Grid.ColumnSpan="3">
 
             </Syncfusion:ComboBoxAdv>
-            <oxy:PlotView x:Name ="Plot2" Model ="{Binding Path=PlotModelCorr}"  Grid.Row = "3" Background ="CadetBlue"  HorizontalAlignment="Left"  Height="240" Width="300" Margin="-24,32,0,25.333" />
-            <oxy:PlotView x:Name ="Plot3" Model ="{Binding Path=PlotModelReg}" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Grid.Row = "3" Background ="LightSeaGreen"  Height="240" Width="300" Margin="300,0,300,25.667"/>
+            <oxy:PlotView x:Name ="Plot2" Model ="{Binding Path=PlotModelCorr,Mode=OneWay}"  Grid.Row = "3" Background ="CadetBlue"  HorizontalAlignment="Left"  Height="240" Width="300" Margin="-24,32,0,25.333" />
+            <oxy:PlotView x:Name ="Plot3" Model ="{Binding Path=PlotModelReg,Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Grid.Row = "3" Background ="LightSeaGreen"  Height="240" Width="300" Margin="300,0,300,25.667"/>
 
         </Grid>
     </Viewbox>

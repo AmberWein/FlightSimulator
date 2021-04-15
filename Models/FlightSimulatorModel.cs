@@ -17,7 +17,6 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 
-//using FlightSimulator.Annotations;
 
 
 //C:\Users\user\Desktop\reg_flight.csv

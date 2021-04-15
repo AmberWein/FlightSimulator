@@ -78,9 +78,8 @@ namespace FlightSimulator.Views
             }
             if (vm.VM_ChosenAttribute != null)
             {
-                //prob need to do some threading
-               vm.UpdateModel();
-                 vm.UpdateModelCorr();
+                // vm.UpdateModelCorr();
+
                 //update every 5 sec
                 if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
                 {
@@ -123,8 +122,7 @@ namespace FlightSimulator.Views
         {
             if (vm.VM_ChosenAttribute != null)
             {
-
-                 vm.LoadFromStart();
+                vm.LoadFromStart();
                 vm.LoadRegModel();
             }
 
