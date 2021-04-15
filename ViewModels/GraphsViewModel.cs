@@ -150,11 +150,7 @@ namespace FlightSimulator.ViewModels
             {
                 PlotModelCorr.Title = "Correlated Feature: Not Found";
             }
-            else
-            {
-                PlotModelCorr.Title = correlated_feature;
-
-            }
+           
            
             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "correlated feature" };
             PlotModelCorr.Axes.Add(valueAxis);
@@ -167,11 +163,7 @@ namespace FlightSimulator.ViewModels
             {
                 PlotModel.Title = "Choose Attribute to Display Graph";
             }
-            else
-            {
-                PlotModel.Title = VM_ChosenAttribute;
-
-            }
+          
             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = VM_ChosenAttribute };
              PlotModel.Axes.Add(valueAxis);
 
@@ -207,6 +199,9 @@ namespace FlightSimulator.ViewModels
             PlotModelCorr.Series.Clear();
 
 
+            PlotModel.Title = VM_ChosenAttribute;
+
+
             //add
             PlotModel.Series.Add(lineSerie);
             PlotModelCorr.Series.Add(lineSerie_c);
@@ -237,6 +232,8 @@ namespace FlightSimulator.ViewModels
                     PlotModel.InvalidatePlot(true);
                 if (correlated_feature != "") //not all attributes have corrlated features
                 {
+                    PlotModelCorr.Title = correlated_feature;
+
                     //add points to the corralated feature graph
                     foreach (var d in Y_c)
                     {
