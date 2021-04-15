@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="DLLInsertWindow" Height="240" Width="400">
     <Grid>
-        <local:InsertDLLView x:Name="insert" Margin="55,45,43.6,47"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <local:InsertDLLView x:Name="insert" Margin="55,45,43.6,47"/>
+        </ScrollViewer>
     </Grid>
 </Window>

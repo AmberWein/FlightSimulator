@@ -277,7 +277,7 @@ namespace FlightSimulator.ViewModels
 
           {
           
-                if (VM_ChosenAttribute != null )
+                if (VM_ChosenAttribute != null && model.IsPlay == true)
                 {
                     List<float> Y = new List<float>();
                 //create the val of new point
@@ -312,7 +312,7 @@ namespace FlightSimulator.ViewModels
           public void UpdateModelCorr()
 
           {
-            if (VM_ChosenAttribute != null)
+            if (VM_ChosenAttribute != null && model.IsPlay == true)
             {
                 List<float> Y = new List<float>();
             if (correlated_feature != "")
@@ -362,23 +362,23 @@ namespace FlightSimulator.ViewModels
                 PlotModelReg.Series.Remove(recentPoints);
                 
             }
-            if (VM_ChosenAttribute != null && correlated_feature != null)
+            if (VM_ChosenAttribute != null && correlated_feature != null && model.IsPlay == true)
             {
 
-                if (model.Timer > 90.0)
+                if (model.Timer > 30.0)
                 {
                    
                     //recent points
-                    for (double i = (model.Timer - 90.0); i < model.Timer;  i+= 0.1)
+                    for (double i = (model.Timer - 30.0); i < model.Timer;  i+= 0.1)
                     {
-                        recentPoints.Points.Add(new ScatterPoint(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * model.Timer)].ToString()), float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()), 3));
+                        recentPoints.Points.Add(new ScatterPoint(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency * i)].ToString()), float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()), 3));
                     }
                 }
                 else
                 {  //all points are recent points
                     for (double i = 0; i < model.Timer; i += 0.1)
                     {
-                        recentPoints.Points.Add(new ScatterPoint(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency* model.Timer)].ToString()), float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()), 3));
+                        recentPoints.Points.Add(new ScatterPoint(float.Parse(model.DataMap[VM_ChosenAttribute][(int)(model.Frequency*i)].ToString()), float.Parse(model.DataMap[correlated_feature][(int)(model.Frequency * model.Timer)].ToString()), 3));
                     }
 
 

@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
     <Grid Background="White">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <TextBlock x:Name="AnomaliesTextBlock" Text="" Foreground="Black"/>
+        </ScrollViewer>
     </Grid>
 </Window>
