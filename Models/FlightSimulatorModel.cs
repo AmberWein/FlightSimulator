@@ -452,13 +452,16 @@ namespace FlightSimulator.Models
         public void GetAnomalies()
         {
             string p1 = GetParentPath("reg_flight_with_headers.csv");
-            string pathToLearn = p1 + "\\reg_flight_with_headers.csv";
+            p1 = p1.Replace("\\", "/");
+            string pathToLearn = p1 + "/reg_flight_with_headers.csv";
+
             string p2 = GetParentPath("anomaly_flight_with_headers.csv");
-            string pathToDetect= p2 + "\\anomaly_flight_with_headers.csv";
+            p2 = p2.Replace("\\", "/");
+            string pathToDetect= p2 + "/anomaly_flight_with_headers.csv";
             string dllPath;
             DllMap.TryGetValue(CurrentDetector, out dllPath);
             //bool madeReport = Program.OperateDLL(dllPath, pathToLearn, pathToDetect);
-            bool madeReport = Program.OperateDLL(dllPath);
+            bool madeReport = Program.OperateDLL(dllPath, pathToLearn, pathToDetect);
             if (madeReport)
             {
                 IsDetectorOn = true;

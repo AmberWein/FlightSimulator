@@ -24,15 +24,17 @@ namespace FlightSimulator
     class Program
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate IntPtr Create();
+        private delegate IntPtr Create(string pathToLearn);
+        //private delegate IntPtr Create();
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void Detect(IntPtr d);
+        private delegate void Detect(IntPtr d, string pathToDetect);
+        //private delegate void Detect(IntPtr d);
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate void Free(IntPtr d);
 
-        public static bool IsValidDLL(string path)
+        public static bool IsValidDLL(string pathToDLL)
         {
-            IntPtr pDll = NativeMethods.LoadLibrary(path);
+            IntPtr pDll = NativeMethods.LoadLibrary(pathToDLL);
             if (pDll==IntPtr.Zero)
             {
                 return false;
@@ -42,9 +44,9 @@ namespace FlightSimulator
         }
 
         //public static void OperateDLL(string path)
-        public static bool OperateDLL(string path)
+        public static bool OperateDLL(string pathToDLL, string pathToLearn, string pathToDetect)
         {
-            IntPtr pDll = NativeMethods.LoadLibrary(path);
+            IntPtr pDll = NativeMethods.LoadLibrary(pathToDLL);
             //oh dear, error handling here
             if (pDll == IntPtr.Zero)
             {
@@ -76,8 +78,12 @@ namespace FlightSimulator
             Detect detect = (Detect)Marshal.GetDelegateForFunctionPointer(DetectFuncAddress, typeof(Detect));
             Free free = (Free)Marshal.GetDelegateForFunctionPointer(FreeFuncAddress, typeof(Free));
 
-            IntPtr p = create();
-            detect(p);
+            //IntPtr p = create(pathToLearn);
+            //IntPtr p = create("C:/Users/NicoleS/Downloads/reg_flight_with.csv");
+           IntPtr p = create("C:\\Users\\Public\\reg_flight_with.csv");
+            //detect(p, pathToDetect);
+            //detect(p, "C:/Users/NicoleS/Downloads/anomaly_flight.csv");
+            detect(p, "C:\\Users\\Public\\anomaly_flight.csv");
             free(p);
             
             return NativeMethods.FreeLibrary(pDll);
