@@ -17,12 +17,14 @@ Each one is for a different purpose:
 5. DLL controller- give an option to upload a dll anomaly detector to present anomalies
 
 ## Organization of the Project:
-Our project is organized in five folders:
+Our project is organized in seven folders:
 1. Models- contains all of the models.
 2. ViewModels- contains all of the view models.
 3. Views- contains all of the views including an Images folder for the media player.
 4. IO- contains all of the classes involve with parsing data from files and writing to them as well.
 5. plugins- contains dynamic link libraries.
+6. Communication- contains Client.cs that handels client-server communication
+7. Files- contains playback_small.xml and reg_flight.csv files
 
 ## Required files:
 1. reg_flight.csv - for a valid flight data.
