@@ -46,6 +46,6 @@ namespace FlightSimulator.Views
             
         }
 
-      
+       
     }
 }

@@ -7,84 +7,85 @@
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
 			 xmlns:controls="using:Syncfusion.UI.Xaml.Gauges"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="630">
+             d:DesignHeight="250" d:DesignWidth="700">
 
-    <Viewbox Width="630" Height="200">
-        <Grid Background="AntiqueWhite">
+    <Viewbox Width="695" Height="250">
+    <Grid>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="123*"/>
-                <RowDefinition Height="250*"/>
-                <RowDefinition Height="27*"/>
-                <RowDefinition Height="50*"/>
-            </Grid.RowDefinitions>
-            <syncfusion:SfCircularGauge x:Name="AltimeterGauge" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30,5,78.2,62.2" 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="123*"/>
+            <RowDefinition Height="250*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        <syncfusion:SfCircularGauge x:Name="AltimeterGauge" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30,5,78.2,62.2" 
                                     HeaderAlignment="Bottom" Grid.ColumnSpan="3" Grid.RowSpan="2">
-                <syncfusion:SfCircularGauge.GaugeHeader>
-                    <TextBlock Text="Altimeter" Margin="0,0,0,10" FontSize="16" FontWeight="DemiBold"/>
-                </syncfusion:SfCircularGauge.GaugeHeader>
-                <syncfusion:SfCircularGauge.Scales>
-                    <syncfusion:CircularScale StartValue="0" EndValue ="1000">
+            <syncfusion:SfCircularGauge.GaugeHeader>
+                <TextBlock Text="Altimeter" Margin="0,0,0,10" FontSize="16" FontWeight="DemiBold"/>
+            </syncfusion:SfCircularGauge.GaugeHeader>
+            <syncfusion:SfCircularGauge.Scales>
+                    <syncfusion:CircularScale RadiusFactor="1" RimStrokeThickness="6" StartValue="0" EndValue ="1000" Interval="200">
                         <syncfusion:CircularScale.Pointers>
-                            <syncfusion:CircularPointer PointerType="NeedlePointer" Value="{Binding VM_Altitude}"/>
-                        </syncfusion:CircularScale.Pointers>
-                    </syncfusion:CircularScale>
-                </syncfusion:SfCircularGauge.Scales>
-            </syncfusion:SfCircularGauge>
+                        <syncfusion:CircularPointer PointerType="NeedlePointer" Value="{Binding VM_Altitude}"/>
+                    </syncfusion:CircularScale.Pointers>
+                </syncfusion:CircularScale>
+            </syncfusion:SfCircularGauge.Scales>
+        </syncfusion:SfCircularGauge>
 
-            <syncfusion:SfCircularGauge x:Name="AirSpeedGauge" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="87.4,5,70.8,67.2" Grid.Row="0" Grid.Column="4"
+        <syncfusion:SfCircularGauge x:Name="AirSpeedGauge" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="87.4,5,70.8,67.2" Grid.Row="0" Grid.Column="4"
                                     Grid.RowSpan="2" HeaderAlignment="Bottom" Grid.ColumnSpan="3" >
-                <syncfusion:SfCircularGauge.GaugeHeader>
-                    <TextBlock Text="Airspeed" Margin="0,0,0,10" FontSize="16" FontWeight="DemiBold"/>
-                </syncfusion:SfCircularGauge.GaugeHeader>
-                <syncfusion:SfCircularGauge.Scales>
-                    <syncfusion:CircularScale RimStroke="Red">
+            <syncfusion:SfCircularGauge.GaugeHeader>
+                <TextBlock Text="Airspeed" Margin="0,0,0,10" FontSize="16" FontWeight="DemiBold"/>
+            </syncfusion:SfCircularGauge.GaugeHeader>
+            <syncfusion:SfCircularGauge.Scales>
+                    <syncfusion:CircularScale RimStroke="#FF937193" RadiusFactor="1" RimStrokeThickness="6" Interval="20">
                         <syncfusion:CircularScale.Pointers>
                             <syncfusion:CircularPointer Value="{Binding VM_AirSpeed}"/>
-                        </syncfusion:CircularScale.Pointers>
-                    </syncfusion:CircularScale>
-                </syncfusion:SfCircularGauge.Scales>
-            </syncfusion:SfCircularGauge>
+                    </syncfusion:CircularScale.Pointers>
+                </syncfusion:CircularScale>
+            </syncfusion:SfCircularGauge.Scales>
+        </syncfusion:SfCircularGauge>
 
-            <syncfusion:SfCircularGauge x:Name="OrientationGauge" HorizontalAlignment="Center" Margin="41.2,35,32,52.2" VerticalAlignment="Center" Grid.ColumnSpan="3"
+        <syncfusion:SfCircularGauge x:Name="OrientationGauge" HorizontalAlignment="Center" Margin="41.2,35,32,52.2" VerticalAlignment="Center" Grid.ColumnSpan="3"
                                     Height="120" Grid.RowSpan="2" Width="270" Grid.Row="0" Grid.Column="2">
-                <syncfusion:SfCircularGauge.Scales>
+            <syncfusion:SfCircularGauge.Scales>
 
-                    <syncfusion:CircularScale x:Name="OrientationScale" SweepAngle="360" StartAngle="270" ShowLastLabel="False" StartValue="0" EndValue="360" 
-                                          Interval="90" RimStroke="LightGray" MinorTicksPerInterval="1" 
+                    <syncfusion:CircularScale x:Name="OrientationScale" RadiusFactor="0.7" LabelPosition="Outside" SweepAngle="360" StartAngle="270" ShowLastLabel="False" StartValue="0" EndValue="360" 
+                                          Interval="90" RimStroke="DarkGray" MinorTicksPerInterval="1" RimStrokeThickness="6"
                                           LabelCreated="OrientaitionGauge_LabelCreated">
-                        <syncfusion:CircularScale.Pointers>
-                            <syncfusion:CircularPointer Value="{Binding VM_Orientation}"/>
-                        </syncfusion:CircularScale.Pointers>
-                    </syncfusion:CircularScale>
+                       
+                    <syncfusion:CircularScale.Pointers>
+                        <syncfusion:CircularPointer Value="{Binding VM_Orientation}"/>
+                    </syncfusion:CircularScale.Pointers>
+                </syncfusion:CircularScale>
 
-                </syncfusion:SfCircularGauge.Scales>
-            </syncfusion:SfCircularGauge>
+            </syncfusion:SfCircularGauge.Scales>
+        </syncfusion:SfCircularGauge>
 
 
-            <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3" Margin="6.2,14.8,22,14.4" Grid.RowSpan="2">
-                <TextBlock Text="Yaw" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Stretch" Width="75"/>
-                <TextBox x:Name="YawDataBox" Text="{Binding VM_Yaw}" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="240" />
-            </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3" Margin="6.2,14.8,22,14.4" Grid.RowSpan="2">
+                <TextBlock Text="Yaw" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Stretch" Width="75"/>
+                <TextBox x:Name="YawDataBox" Text="{Binding VM_Yaw}" TextWrapping="Wrap" FontSize="18" VerticalAlignment="Top" Height="32" Width="246" />
+        </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Margin="0,121,43.2,3.2" Grid.ColumnSpan="3">
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Center" Text="Roll" VerticalAlignment="Stretch" Width="75"/>
-                <TextBox x:Name="RollDataBox" Text="{Binding VM_Roll}" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="246" />
-            </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Margin="0,121,43.2,3.2" Grid.ColumnSpan="3">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="20" TextAlignment="Center" Text="Roll" FontWeight="Bold" VerticalAlignment="Stretch" Width="75" Margin="0,0,0,0.333"/>
+                <TextBox x:Name="RollDataBox" Text="{Binding VM_Roll}" TextWrapping="Wrap"  FontSize="18" VerticalAlignment="Top" Height="32" Width="246" />
+        </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="1" Margin="0.4,123,-0.2,1.2">
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" TextAlignment="Center" Text="Pitch" VerticalAlignment="Stretch" Width="68" Margin="0,0,0,0.2"/>
-                <TextBox x:Name="PitchDataBox" Text="{Binding VM_Pitch}" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="246" />
-            </StackPanel>
-        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="1" Margin="0.4,123,-0.2,1.2">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="20" TextAlignment="Center" Text="Pitch" FontWeight="Bold" VerticalAlignment="Stretch" Width="68" Margin="0,0,0,0.2"/>
+                <TextBox x:Name="PitchDataBox" Text="{Binding VM_Pitch}" TextWrapping="Wrap" FontSize="18" VerticalAlignment="Top" Height="32" Width="246" />
+        </StackPanel>
+    </Grid>
     </Viewbox>
 </UserControl>

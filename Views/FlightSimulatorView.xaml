@@ -5,27 +5,38 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FlightSimulator.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="630" d:DesignWidth="998"
+      d:DesignHeight="600" d:DesignWidth="1000"
       Title="FlightSimulatorView">
 
-    <Grid>
 
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/app_playing_background.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="170"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="115"/>
-            <RowDefinition Height="115"/>
-            <RowDefinition Height="180"/>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="630"/>
-            <ColumnDefinition Width="368"/>
+            <ColumnDefinition Width="15"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="15"></ColumnDefinition>
+
         </Grid.ColumnDefinitions>
-        <local:DashboardView x:Name="dash" Grid.RowSpan="2" Grid.Row="0" Grid.Column="0" />
-        <local:GraphsView x:Name="graphs" Grid.Row="2" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <local:MediaPlayerView x:Name="media" Grid.Row="5" Grid.ColumnSpan="2" />
-        <local:GearControlView x:Name="gear" Grid.Row="1" Grid.Column="1"/>
-        <local:DetectorView x:Name="detector" Grid.Row="0" Grid.Column="1"/>
+        <local:DashboardView x:Name="dash" Grid.ColumnSpan="4" Grid.RowSpan="4" Margin="0,-74,0.333,84"/>
+        <local:GraphsView x:Name="graphs" Grid.ColumnSpan="5" Grid.Row="3" Margin="15,6,0.333,4" Grid.RowSpan="3" />
+        <local:MediaPlayerView x:Name="media" Grid.Row="5" Grid.ColumnSpan="6" Margin="15,32,0.333,12"/>
+        <local:GearControlView x:Name="gear" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="1" />
+        <local:DetectorView x:Name="detector" Grid.Row="3"  Grid.Column="5"/>
     </Grid>
 </Page>

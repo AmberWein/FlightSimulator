@@ -30,7 +30,6 @@ using System.Windows;
 using System.Windows.Media;
 using Syncfusion.UI.Xaml.Charts;
 
-//C:\Users\user\Desktop\reg_flight.csv
 namespace FlightSimulator.Views
 {
     /// <summary>
@@ -79,8 +78,10 @@ namespace FlightSimulator.Views
             }
             if (vm.VM_ChosenAttribute != null)
             {
-                vm.UpdateModel();
+                //prob need to do some threading
+               vm.UpdateModel();
                  vm.UpdateModelCorr();
+                //update every 5 sec
                 if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
                 {
                     vm.UpdateModelReg();
@@ -89,29 +90,15 @@ namespace FlightSimulator.Views
 
                 }
             }
-
-
-
-            //if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 5000)
-            //{
-              //  vm.UpdateModelReg();
-                // vm.UpdateModel();
-                // vm.UpdateModelCorr();
-                //lastUpdateMilliSeconds = stopwatch.ElapsedMilliseconds;
-
-            //}
+            
+         
         }
 
         public void SetVM(GraphsViewModel graphsVM)
         {
 
             this.vm = graphsVM;
-            // FillList();
-            /*   Binding dict = new Binding
-               {
-                   Source = attributes
-               };
-               atrributesBox.SetBinding(ComboBox.ItemsSourceProperty, dict);          */
+            
         }
 
 
