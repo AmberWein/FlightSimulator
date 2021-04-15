@@ -457,7 +457,8 @@ namespace FlightSimulator.Models
             string pathToDetect= p2 + "\\anomaly_flight_with_headers.csv";
             string dllPath;
             DllMap.TryGetValue(CurrentDetector, out dllPath);
-            bool madeReport = Program.OperateDLL(dllPath, pathToLearn, pathToDetect);
+            //bool madeReport = Program.OperateDLL(dllPath, pathToLearn, pathToDetect);
+            bool madeReport = Program.OperateDLL(dllPath);
             if (madeReport)
             {
                 IsDetectorOn = true;
