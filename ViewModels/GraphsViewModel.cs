@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using FlightSimulator.Models;
-using System.Collections.ObjectModel;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;

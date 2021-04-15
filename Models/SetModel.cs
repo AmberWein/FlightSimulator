@@ -48,7 +48,7 @@ namespace FlightSimulator.Models
                         //CSVParser csvParser = new CSVParser(csvPath, HeadersList);
                         CsvParser.FilePath = value;
                         CsvParser.Parse();
-                        CsvParser.CreateCSV("anomaly_flight_with_headers.csv");
+                        CsvParser.CreateCSV("..\\..\\anomaly_flight_with_headers.csv");
                         DataMap = CsvParser.Map;
                         DataLines = CsvParser.Lines;
 
@@ -132,7 +132,8 @@ namespace FlightSimulator.Models
             string filePath = FlightSimulatorModel.GetRelativePath("Files", "reg_flight.csv");
             csvParser = new CSVParser(filePath, headersList);
             csvParser.Parse();
-            csvParser.CreateCSV("reg_flight_with_headers.csv");
+            //csvParser.CreateCSV("..\\..\\plugins\\reg_flight_with_headers.csv");
+            csvParser.CreateCSV("..\\..\\reg_flight_with_headers.csv");
             CorrelatedFeatures = new ArrayList();
        
             // also need to make correlation map

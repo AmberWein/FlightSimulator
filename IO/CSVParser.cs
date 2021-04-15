@@ -115,9 +115,12 @@ namespace FlightSimulator.IO
         // create a CSV file contains both headers and data
         public void CreateCSV(string fileName)
         {
+            
             //var filepath = fileName;
             using (StreamWriter writer = new StreamWriter(new FileStream(fileName,
             FileMode.Create, FileAccess.Write)))
+            //using (StreamWriter writer = new StreamWriter(new FileStream("..\\..\\plugins\\anomaly_try.csv",
+            //FileMode.Create, FileAccess.Write)))
             {
                 // write the first line of properties' name
                 foreach (string h in this.properties)
