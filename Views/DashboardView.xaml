@@ -7,10 +7,10 @@
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
 			 xmlns:controls="using:Syncfusion.UI.Xaml.Gauges"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="700">
+             d:DesignHeight="250" d:DesignWidth="700">
 
-    <Viewbox Width="695" Height="200">
-    <Grid Background="LightSlateGray">
+    <Viewbox Width="695" Height="250">
+    <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

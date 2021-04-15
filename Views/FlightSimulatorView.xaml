@@ -9,7 +9,11 @@
       Title="FlightSimulatorView">
 
 
+
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/app_playing_background.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -29,9 +33,9 @@
             <ColumnDefinition Width="15"></ColumnDefinition>
 
         </Grid.ColumnDefinitions>
-        <local:DashboardView x:Name="dash" Grid.ColumnSpan="4" Grid.RowSpan="4" Margin="0,-86,0.333,96"/>
-        <local:GraphsView x:Name="graphs" Grid.ColumnSpan="4" Grid.Column="1" Grid.Row="3" />
-        <local:MediaPlayerView x:Name="media" Grid.Row="5"  Grid.Column="1" Grid.ColumnSpan="5"/>
+        <local:DashboardView x:Name="dash" Grid.ColumnSpan="4" Grid.RowSpan="4" Margin="0,-74,0.333,84"/>
+        <local:GraphsView x:Name="graphs" Grid.ColumnSpan="5" Grid.Row="3" Margin="15,6,0.333,4" Grid.RowSpan="3" />
+        <local:MediaPlayerView x:Name="media" Grid.Row="5" Grid.ColumnSpan="6" Margin="15,32,0.333,12"/>
         <local:GearControlView x:Name="gear" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="1" />
         <local:DetectorView x:Name="detector" Grid.Row="3"  Grid.Column="5"/>
     </Grid>

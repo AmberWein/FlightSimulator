@@ -456,6 +456,7 @@
     <Analyzer Include="packages\Microsoft.CodeAnalysis.Analyzers.2.6.1\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
     <Content Include="plugins\CircularDetect.dll" />
     <Content Include="plugins\SimpleDetect.dll" />
+    <Resource Include="Views\Images\app_playing_background.jpg" />
     <Resource Include="Views\Images\airplane.jpg" />
     <Resource Include="Views\Images\flying_airplane.jpg" />
     <Resource Include="Views\Images\set_airplane.jpg" />

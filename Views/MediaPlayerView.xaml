@@ -6,69 +6,67 @@
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" d:DesignWidth="998" Height="125">
 
-    <Viewbox Height="120" Width="998">
+    <Viewbox Height="110" Width="998">
         <Border BorderBrush="LightGray"
         BorderThickness="1"
-        Background="LightSlateGray"
-        CornerRadius="10">
-        <StackPanel HorizontalAlignment="Center" Margin="0,-1,0,0">
-            <StackPanel Orientation="Horizontal" Margin="0,-1,0,-30" Width="794" Height="110">
-                <Separator Width="50" Background="Gray"></Separator>
-                <Button Width="38" Height="39" Margin="0,22,0,44" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Click="Backwards_Media_Player_Click">
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Button.RenderTransform>
-                    <Image Source="Images\forward_button.png"/>
-                </Button>
-                <Button Width="39" Height="39" Margin="0,22,0,44" VerticalAlignment="Bottom" Click="Play_Media_Player_Click">
-                    <Image Source="Images\play_button.jpg"/>
-                </Button>
-                <Button Width="39" Height="39" Margin="0,22,0,44" RenderTransformOrigin="0.551,0.038" VerticalAlignment="Bottom" Click="Pause_Media_Player_Click">
-                    <Image Source="Images\pause_button.png" Height="39"/>
-                </Button>
-                <Button Width="39" Height="40" RenderTransformOrigin="4.967,0.8" Margin="0,22,0,44" VerticalAlignment="Bottom" Click="Stop_Media_Player_Click">
-                    <Image Source="Images\stop_button.png" Height="36" Width="40"/>
-                </Button>
-                <Button Width="39" Height="40" Margin="0,22,0,40" Background="LightGray" Click="Forward_Media_Player_Click">
-                    <Image Source="Images\forward_button.png"/>
-                </Button>
-                <Separator></Separator>
-                <TextBlock VerticalAlignment="Center" Margin="70,10,0,30" FontSize="24">Play speed</TextBlock>
-                <ComboBox x:Name="speedBox" VerticalAlignment="Center" Margin="10,38,10,49"
-                 SelectedValue="{Binding VM_PlayingSpeed}" Width="67" Height="23"/>
+        Background="LightGray"
+        CornerRadius="35" Width="1133">
+            <StackPanel HorizontalAlignment="Center" Margin="90,20,0,0">
+                <StackPanel Orientation="Horizontal" Margin="0,-1,0,-30" Width="800" Height="110">
+                    <Separator Width="50" Background="Gray"></Separator>
+                    <Button Width="70" Height="70" Margin="0,0,0,44" RenderTransformOrigin="0.5,0.5" Click="Backwards_Media_Player_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                        <Image Source="Images\forward_button.png"/>
+                    </Button>
+                    <Button Width="70" Height="70" Margin="0,0,0,44" Click="Play_Media_Player_Click">
+                        <Image Source="Images\play_button.jpg"/>
+                    </Button>
+                    <Button Width="70" Height="70" Margin="0,0,0,44" RenderTransformOrigin="0.551,0.038" Click="Pause_Media_Player_Click">
+                        <Image Source="Images\pause_button.png"/>
+                    </Button>
+                    <Button Width="70" Height="70" Margin="0,0,0,44" Click="Stop_Media_Player_Click">
+                        <Image Source="Images\stop_button.png"/>
+                    </Button>
+                    <Button Width="70" Height="70" Margin="0,0,0,44" Background="LightGray" Click="Forward_Media_Player_Click">
+                        <Image Source="Images\forward_button.png"/>
+                    </Button>
+                    <Separator></Separator>
+                    <TextBlock VerticalAlignment="Center" Margin="70,25,5,44" FontSize="30" FontWeight="Bold">Play speed</TextBlock>
+                    <ComboBox x:Name="speedBox" VerticalAlignment="Center" Margin="7,25,6,40"
+                 SelectedValue="{Binding VM_PlayingSpeed}" FontSize="20" Width="67" Height="35"/>
+                    <StatusBarItem Margin="0,10,0,16" Width="176">
+                        <TextBlock x:Name="lblProgressStatus" HorizontalAlignment ="Center" Width="92" Height="30" FontSize="24" ><Run Text="{Binding VM_Timer}"/></TextBlock>
 
+                    </StatusBarItem>
+                </StackPanel>
+                <StatusBar>
+                    <StatusBar.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </StatusBar.ItemsPanel>
 
-                <StatusBarItem Margin="0,24,-246,34" Width="176">
-                    <TextBlock x:Name="lblProgressStatus" HorizontalAlignment ="Center" Width="92" Height="30" RenderTransformOrigin="0.75,1" FontSize="24" ><Run Text="{Binding VM_Timer}"/></TextBlock>
+                    <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" Width="807" Height="70"  RenderTransformOrigin="0.5,0.838" Background="LightGray" >
+                        <Slider x:Name="sliProgress" Minimum="0" Maximum="{Binding VM_FinishTime}" Value="{Binding VM_Timer}"
+                             Margin="20,0,20,0" Height="28" RenderTransformOrigin="0,3.5" ValueChanged="Time_Changed_Click" HorizontalContentAlignment="Stretch" />
 
-                </StatusBarItem>
+                    </StatusBarItem>
+
+                </StatusBar>
             </StackPanel>
-            <StatusBar>
-                <StatusBar.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                        </Grid>
-                    </ItemsPanelTemplate>
-                </StatusBar.ItemsPanel>
-
-                    <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" Width="807" Height="60"  RenderTransformOrigin="0.511,0.838" Background="LightSlateGray" >
-                    <Slider x:Name="sliProgress" Minimum="0" Maximum="{Binding VM_FinishTime}" Value="{Binding VM_Timer}"
-                             Margin="156,0,1,0" Height="21" RenderTransformOrigin="0,3.5" ValueChanged="Time_Changed_Click" />
-
-                </StatusBarItem>
-
-            </StatusBar>
-        </StackPanel>
-    </Border>
+        </Border>
     </Viewbox>
 </UserControl>
