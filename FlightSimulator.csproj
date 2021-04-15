@@ -292,7 +292,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Communication\Client.cs" />
-    <Compile Include="Data.cs" />
     <Compile Include="IO\XMLParser.cs" />
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\FlightSimulatorModel.cs" />
